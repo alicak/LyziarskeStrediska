@@ -20,18 +20,29 @@ public class DatabazovyStrediskaDao implements StrediskaDao{
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
     
+    /**
+     * Vrati zoznam vsetkych poloziek z tabulky strediska
+     */
     @Override
     public List<Stredisko> dajVsetky() {
-        return jdbcTemplate.query("SELECT * FROM skusobnaTabulka", mapovac);
+        return jdbcTemplate.query("SELECT * FROM strediska", mapovac);
     }
 
+    /**
+     * Ulozi nove / updatuje existujuce stredisko
+     */
     @Override
-    public void save(Stredisko stredisko) {
+    public void uloz(Stredisko stredisko) {
+        // TODO ukladanie novej polozky do databazy / update existujucej
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * Odstrani stredisko z databazy 
+     */
     @Override
     public void odstran(Stredisko stredisko) {
+        // TODO odstranenie polozky z databazy
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
