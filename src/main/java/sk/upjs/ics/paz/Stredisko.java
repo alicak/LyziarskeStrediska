@@ -1,6 +1,8 @@
 
 package sk.upjs.ics.paz;
 
+import java.math.BigDecimal;
+
 public class Stredisko {
     private Long id;
     private String nazov;
@@ -10,13 +12,13 @@ public class Stredisko {
     private int pocetVlekovVPrevadzke;
     private int pocetLanoviek;
     private int pocetLanoviekVPrevadzke;
-    private double cenaListkaDospely;
-    private double cenaListkaDieta;
-    private double cenaListkaStudent;
+    private BigDecimal cenaListkaDospely;
+    private BigDecimal cenaListkaDieta;
+    private BigDecimal cenaListkaStudent;
     private boolean daSaPozicatVystroj;
     private boolean daSaUbytovat;
-    private double gpsSirka;
-    private double gpsDlzka;
+    private BigDecimal gpsSirka;
+    private BigDecimal gpsDlzka;
     
 
     public String getNazov() {
@@ -83,27 +85,27 @@ public class Stredisko {
         this.pocetLanoviekVPrevadzke = pocetLanoviekVPrevadzke;
     }
 
-    public double getCenaListkaDospely() {
+    public BigDecimal getCenaListkaDospely() {
         return cenaListkaDospely;
     }
 
-    public void setCenaListkaDospely(double cenaListkaDospely) {
+    public void setCenaListkaDospely(BigDecimal cenaListkaDospely) {
         this.cenaListkaDospely = cenaListkaDospely;
     }
 
-    public double getCenaListkaDieta() {
+    public BigDecimal getCenaListkaDieta() {
         return cenaListkaDieta;
     }
 
-    public void setCenaListkaDieta(double cenaListkaDieta) {
+    public void setCenaListkaDieta(BigDecimal cenaListkaDieta) {
         this.cenaListkaDieta = cenaListkaDieta;
     }
 
-    public double getCenaListkaStudent() {
+    public BigDecimal getCenaListkaStudent() {
         return cenaListkaStudent;
     }
 
-    public void setCenaListkaStudent(double cenaListkaStudent) {
+    public void setCenaListkaStudent(BigDecimal cenaListkaStudent) {
         this.cenaListkaStudent = cenaListkaStudent;
     }
 
@@ -123,20 +125,20 @@ public class Stredisko {
         this.daSaUbytovat = daSaUbytovat;
     }
 
-    public double getGpsSirka() {
+    public BigDecimal getGpsSirka() {
         return gpsSirka;
     }
 
-    public void setGpsSirka(double gpsSirka) {
+    public void setGpsSirka(BigDecimal gpsSirka) {
         this.gpsSirka = gpsSirka;
     }
 
-    public double getGpsDlzka() {
+    public BigDecimal getGpsDlzka() {
         return gpsDlzka;
     }
     
-    public void setGpsDlzka(double gpsDlzka) {
+    public void setGpsDlzka(BigDecimal gpsDlzka) {
         this.gpsDlzka = gpsDlzka;
     }
-    
+
 }
