@@ -29,7 +29,7 @@ public class HlavnyForm extends javax.swing.JFrame {
         btnRychloFiltruj = new javax.swing.JButton();
         btnResetFiltra = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabLyziarskeStrediska = new javax.swing.JTable();
         btnZobrazDetail = new javax.swing.JButton();
         btnOdstran = new javax.swing.JButton();
         btnUprav = new javax.swing.JButton();
@@ -74,7 +74,7 @@ public class HlavnyForm extends javax.swing.JFrame {
 
         btnResetFiltra.setText("Reset");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabLyziarskeStrediska.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -85,7 +85,7 @@ public class HlavnyForm extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabLyziarskeStrediska);
 
         btnZobrazDetail.setText("Zobraz detail...");
         btnZobrazDetail.addActionListener(new java.awt.event.ActionListener() {
@@ -289,10 +289,10 @@ public class HlavnyForm extends javax.swing.JFrame {
     private javax.swing.JButton btnVyhladavaj;
     private javax.swing.JButton btnZobrazDetail;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblRychlyFilter;
     private javax.swing.JLabel lblTagline;
+    private javax.swing.JTable tabLyziarskeStrediska;
     private javax.swing.JTextField txtRychlyFilter;
     // End of variables declaration//GEN-END:variables
 }
