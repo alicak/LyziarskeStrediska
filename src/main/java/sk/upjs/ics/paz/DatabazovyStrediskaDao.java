@@ -119,6 +119,9 @@ public class DatabazovyStrediskaDao implements StrediskaDao {
                 stredisko.getId());
     }
 
+    /**
+     * Nacita z lokalneho suboru tabulku pre konkretneho uzivatela
+     */
     private void nacitajNazovTabulkyZoSuboru(File subor) {
         try (Scanner scanner = new Scanner(subor)) {
             idUzivatela = scanner.nextInt();
@@ -133,6 +136,10 @@ public class DatabazovyStrediskaDao implements StrediskaDao {
         }
     }
 
+    /**
+     * Zapise do lokalneho suboru udaje pre noveho pouzivatela a vytvori pre
+     * neho novu tabulku v databaze
+     */
     private void vytvorNovehoUzivatela(File subor) {
         try (PrintWriter pw = new PrintWriter(subor)) {
             idUzivatela = maxIdUzivatelov() + 1;
@@ -146,6 +153,9 @@ public class DatabazovyStrediskaDao implements StrediskaDao {
         }
     }
 
+    /**
+     * Pouzije docasnu tabulku (pre pripady, ze sa neda pouzit tabulka pouzivatela)
+     */
     private void pouzijTempDatabazu() {
         jdbcTemplate.execute("DROP Temp TABLE IF EXISTS");
         jdbcTemplate.execute("CREATE TABLE Temp LIKE strediska");
@@ -153,6 +163,9 @@ public class DatabazovyStrediskaDao implements StrediskaDao {
         tabulkaSKtorouPracujem = "Temp";
     }
 
+    /**
+     * ?????
+     */
     private boolean suDataVTabUzivatelia(int idUzivatela, int menoUzivatela) {
         String sql = "SELECT meno FROM uzivatelia WHERE id = ?";
         int meno = Integer.parseInt((String) jdbcTemplate.queryForObject(
@@ -161,16 +174,25 @@ public class DatabazovyStrediskaDao implements StrediskaDao {
         return meno == menoUzivatela;
     }
 
+    /**
+     * ?????
+     */
     private int maxIdUzivatelov() {
         String sql = "SELECT MAX(id) FROM uzivatelia";
         int total = jdbcTemplate.queryForInt(sql);
         return total;
     }
 
+    /**
+     * Prida do tabulky pouzivatelov noveho pouzivatela
+     */
     private void vlozDoTabulkyUzivatelia(int menoUzivatela) {
         jdbcTemplate.execute("INSERT INTO uzivatelia (meno) VALUES (" + menoUzivatela + ")");
     }
 
+    /**
+     * Vytvori novu tabulku pre strediska
+     */
     private void vytvorTabulku(String nazov) {
         jdbcTemplate.execute("CREATE TABLE " + nazov + " LIKE strediska");
         jdbcTemplate.execute("INSERT " + nazov + " SELECT * FROM strediska");
