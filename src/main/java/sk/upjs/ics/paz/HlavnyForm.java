@@ -3,9 +3,9 @@ package sk.upjs.ics.paz;
 
 public class HlavnyForm extends javax.swing.JFrame {
 
-    /**
-     * Creates new form HlavnyForm
-     */
+    // tovaren doda DAO objekt
+    private StrediskaDao strediskaDao = DaoFactory.INSTANCE.getStrediskaDao();
+    
     public HlavnyForm() {
         initComponents();
     }

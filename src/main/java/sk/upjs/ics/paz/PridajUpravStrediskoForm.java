@@ -19,17 +19,17 @@ public class PridajUpravStrediskoForm extends javax.swing.JDialog {
      * Konstruktor modalneho okna pre upravu existujuceho strediska
      */
     public PridajUpravStrediskoForm(Frame parent, Stredisko stredisko) {
-        // TODO nastavit titulok na "Úprava strediska"
         this(parent, true);
         this.stredisko = stredisko;
+        this.setTitle("Úprava strediska");
     }
 
     /**
      * Konstruktor modalneho okna pre pridanie noveho strediska
      */
     public PridajUpravStrediskoForm(Frame parent) {
-        // TODO nastavit titulok na "Pridanie nového strediska"
         this(parent, new Stredisko());
+        this.setTitle("Pridanie nového strediska");
     }
 
     /**
