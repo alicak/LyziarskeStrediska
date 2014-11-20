@@ -29,6 +29,25 @@ public class PridajUpravStrediskoForm extends javax.swing.JDialog {
         this(parent, true);
         this.stredisko = stredisko;
         this.setTitle("Úprava strediska");
+
+        this.txtNazov.setText(stredisko.getNazov());
+        this.txtVyskaSnehu.setText(Integer.toString(stredisko.getVyskaSnehu()));
+        // TODO otestovat, ci to funguje
+        this.cmbPodmienky.setSelectedItem(stredisko.getPodmienky());
+        this.txtPocetVlekovVPrevadzke.setText(Integer.toString(stredisko.getPocetVlekovVPrevadzke()));
+        this.txtPocetVlekov.setText(Integer.toString(stredisko.getPocetVlekov()));
+        this.txtPocetLanoviekVPrevadzke.setText(Integer.toString(stredisko.getPocetLanoviekVPrevadzke()));
+        this.txtPocetLanoviek.setText(Integer.toString(stredisko.getPocetLanoviek()));
+        // TODO odkomentovat, ked pridame premenne
+        // this.txtPocetTratiVPrevadzke.setText(Integer.toString(stredisko.getPocetTratiVPrevadzke()));
+        // this.txtPocetTrati.setText(Integer.toString(stredisko.getPocetTrati()));
+        this.chkPozicanieVystroje.setSelected(stredisko.isDaSaPozicatVystroj());
+        this.chkUbytovanie.setSelected(stredisko.isDaSaUbytovat());
+        this.txtGpsSirka.setText(stredisko.getGpsSirka().toString());
+        this.txtGpsDlzka.setText(stredisko.getGpsDlzka().toString());
+        this.txtListokDospely.setText(stredisko.getCenaListkaDospely().toString());
+        this.txtListokDieta.setText(stredisko.getCenaListkaDieta().toString());
+        this.txtListokStudent.setText(stredisko.getCenaListkaStudent().toString());
     }
 
     /**
@@ -72,7 +91,7 @@ public class PridajUpravStrediskoForm extends javax.swing.JDialog {
         lblLomka3 = new javax.swing.JLabel();
         txtPocetTrati = new javax.swing.JTextField();
         chkPozicanieVystroje = new javax.swing.JCheckBox();
-        chkMoznostUbytovania = new javax.swing.JCheckBox();
+        chkUbytovanie = new javax.swing.JCheckBox();
         lblCenyListkov = new javax.swing.JLabel();
         lblListokDospely = new javax.swing.JLabel();
         lblListokDieta = new javax.swing.JLabel();
@@ -125,8 +144,8 @@ public class PridajUpravStrediskoForm extends javax.swing.JDialog {
         chkPozicanieVystroje.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         chkPozicanieVystroje.setText("možnosť požičania výstroje");
 
-        chkMoznostUbytovania.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        chkMoznostUbytovania.setText("možnosť ubytovania");
+        chkUbytovanie.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        chkUbytovanie.setText("možnosť ubytovania");
 
         lblCenyListkov.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblCenyListkov.setText("Ceny lístkov");
@@ -213,7 +232,7 @@ public class PridajUpravStrediskoForm extends javax.swing.JDialog {
                         .addComponent(txtVyskaSnehu, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblCm))
-                    .addComponent(chkMoznostUbytovania)
+                    .addComponent(chkUbytovanie)
                     .addComponent(chkPozicanieVystroje))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -301,7 +320,7 @@ public class PridajUpravStrediskoForm extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addComponent(chkPozicanieVystroje)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(chkMoznostUbytovania))
+                        .addComponent(chkUbytovanie))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -340,7 +359,7 @@ public class PridajUpravStrediskoForm extends javax.swing.JDialog {
         // stredisko.setPocetTrati(new Integer(txtPocetTrati.getText()));
         // stredisko.setPocetTratiVPrevadzke(new Integer(txtPocetTratiVPrevadzke.getText()));
         stredisko.setDaSaPozicatVystroj(chkPozicanieVystroje.isSelected());
-        stredisko.setDaSaUbytovat(chkMoznostUbytovania.isSelected());
+        stredisko.setDaSaUbytovat(chkUbytovanie.isSelected());
         stredisko.setGpsSirka(new BigDecimal(txtGpsSirka.getText()));
         stredisko.setGpsDlzka(new BigDecimal(txtGpsDlzka.getText()));
         stredisko.setCenaListkaDospely(new BigDecimal(txtListokDospely.getText()));
@@ -396,8 +415,8 @@ public class PridajUpravStrediskoForm extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnStorno;
     private javax.swing.JButton btnUloz;
-    private javax.swing.JCheckBox chkMoznostUbytovania;
     private javax.swing.JCheckBox chkPozicanieVystroje;
+    private javax.swing.JCheckBox chkUbytovanie;
     private javax.swing.JComboBox cmbPodmienky;
     private javax.swing.JLabel lblCenyListkov;
     private javax.swing.JLabel lblCm;

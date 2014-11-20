@@ -90,7 +90,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lblCm" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="chkMoznostUbytovania" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="chkUbytovanie" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="chkPozicanieVystroje" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -198,7 +198,7 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="chkPozicanieVystroje" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="chkMoznostUbytovania" min="-2" max="-2" attributes="0"/>
+                      <Component id="chkUbytovanie" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
@@ -345,7 +345,7 @@
         <Property name="text" type="java.lang.String" value="mo&#x17e;nos&#x165; po&#x17e;i&#x10d;ania v&#xfd;stroje"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="chkMoznostUbytovania">
+    <Component class="javax.swing.JCheckBox" name="chkUbytovanie">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="11" style="1"/>
