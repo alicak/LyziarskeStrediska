@@ -1,10 +1,12 @@
-
 package sk.upjs.ics.paz;
 
 public class ZobrazDetailForm extends javax.swing.JDialog {
 
     /**
      * Creates new form ZobrazDetailForm
+     *
+     * @param parent rodicovske okno
+     * @param modal ci je okno modalne
      */
     public ZobrazDetailForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);

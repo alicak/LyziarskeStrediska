@@ -1,16 +1,17 @@
-
 package sk.upjs.ics.paz;
 
 public class VyhladavajForm extends javax.swing.JDialog {
 
     /**
      * Creates new form VyhladavanieForm
+     *
+     * @param parent rodicovske okno
+     * @param modal ci je okno modalne
      */
     public VyhladavajForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.

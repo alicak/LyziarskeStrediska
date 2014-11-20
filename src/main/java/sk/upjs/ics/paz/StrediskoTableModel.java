@@ -1,4 +1,3 @@
-
 package sk.upjs.ics.paz;
 
 import java.math.BigDecimal;
@@ -7,19 +6,19 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 public class StrediskoTableModel extends AbstractTableModel {
-    
+
     // zoznam stredisk, ktore chceme zobrazovat
     private List<Stredisko> zoznamStredisk = new LinkedList<>();
     private static final int POCET_STLPCOV = 3;
     private static final String[] NAZVY_STLPCOV = {"Názov", "Výška snehu", "Podmienky"};
     private static final Class[] TYPY_STLPCOV = {
-        String.class, 
-        BigDecimal.class, 
+        String.class,
+        BigDecimal.class,
         String.class
     };
 
     /**
-     * vrati pocet riadkov tabulky 
+     * @return pocet riadkov tabulky
      */
     @Override
     public int getRowCount() {
@@ -27,7 +26,7 @@ public class StrediskoTableModel extends AbstractTableModel {
     }
 
     /**
-     * vrati pocet stlpcov tabulky
+     * @return pocet stlpcov tabulky
      */
     @Override
     public int getColumnCount() {
@@ -35,7 +34,9 @@ public class StrediskoTableModel extends AbstractTableModel {
     }
 
     /**
-     * vrati hodnotu na danom riadku a stlpci
+     * @param rowIndex cislo riadka
+     * @param columnIndex cislo stlpca
+     * @return hodnota na danom riadku a stlpci
      */
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
@@ -50,6 +51,7 @@ public class StrediskoTableModel extends AbstractTableModel {
                 return vybraneStredisko.getPodmienky();
             default:
                 return "???";
-        }    }
-    
+        }
+    }
+
 }

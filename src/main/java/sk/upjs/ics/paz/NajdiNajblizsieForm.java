@@ -1,10 +1,12 @@
-
 package sk.upjs.ics.paz;
 
 public class NajdiNajblizsieForm extends javax.swing.JDialog {
 
     /**
      * Creates new form NajdiNajblizsieForm
+     *
+     * @param parent rodicovske okno
+     * @param modal ci je okno modalne
      */
     public NajdiNajblizsieForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);

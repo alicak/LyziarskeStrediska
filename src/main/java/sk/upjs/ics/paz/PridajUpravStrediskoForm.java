@@ -1,4 +1,3 @@
-
 package sk.upjs.ics.paz;
 
 import java.awt.Frame;
@@ -9,6 +8,8 @@ public class PridajUpravStrediskoForm extends javax.swing.JDialog {
 
     /**
      * Creates new form PridajUpravStrediskoForm
+     * @param parent rodicovske okno
+     * @param modal ci je okno modalne
      */
     public PridajUpravStrediskoForm(Frame parent, boolean modal) {
         super(parent, modal);
@@ -17,6 +18,8 @@ public class PridajUpravStrediskoForm extends javax.swing.JDialog {
 
     /**
      * Konstruktor modalneho okna pre upravu existujuceho strediska
+     * @param parent rodicovske okno
+     * @param stredisko stredisko, ktore upravujeme
      */
     public PridajUpravStrediskoForm(Frame parent, Stredisko stredisko) {
         this(parent, true);
@@ -26,6 +29,7 @@ public class PridajUpravStrediskoForm extends javax.swing.JDialog {
 
     /**
      * Konstruktor modalneho okna pre pridanie noveho strediska
+     * @param parent rodicovske stredisko
      */
     public PridajUpravStrediskoForm(Frame parent) {
         this(parent, new Stredisko());

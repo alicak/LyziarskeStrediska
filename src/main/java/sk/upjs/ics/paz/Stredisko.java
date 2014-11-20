@@ -1,9 +1,9 @@
-
 package sk.upjs.ics.paz;
 
 import java.math.BigDecimal;
 
 public class Stredisko {
+
     private Long id;
     private String nazov;
     private int vyskaSnehu;
@@ -19,7 +19,6 @@ public class Stredisko {
     private boolean daSaUbytovat;
     private BigDecimal gpsSirka;
     private BigDecimal gpsDlzka;
-    
 
     public String getNazov() {
         return nazov;
@@ -136,7 +135,7 @@ public class Stredisko {
     public BigDecimal getGpsDlzka() {
         return gpsDlzka;
     }
-    
+
     public void setGpsDlzka(BigDecimal gpsDlzka) {
         this.gpsDlzka = gpsDlzka;
     }

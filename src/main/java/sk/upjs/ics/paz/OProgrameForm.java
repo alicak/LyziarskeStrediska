@@ -1,11 +1,12 @@
-
 package sk.upjs.ics.paz;
-
 
 public class OProgrameForm extends javax.swing.JDialog {
 
     /**
      * Creates new form OProgrameForm
+     *
+     * @param parent rodicovske okno
+     * @param modal ci je okno modalne
      */
     public OProgrameForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);

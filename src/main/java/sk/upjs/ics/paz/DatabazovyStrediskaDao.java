@@ -13,8 +13,8 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 public class DatabazovyStrediskaDao implements StrediskaDao {
 
-    private JdbcTemplate jdbcTemplate;
-    private BeanPropertyRowMapper<Stredisko> mapovac = new BeanPropertyRowMapper<>(Stredisko.class);
+    private final JdbcTemplate jdbcTemplate;
+    private static final BeanPropertyRowMapper<Stredisko> mapovac = new BeanPropertyRowMapper<>(Stredisko.class);
     private String tabulkaSKtorouPracujem;
     private int idUzivatela;
     private int menoUzivatela;
@@ -36,7 +36,7 @@ public class DatabazovyStrediskaDao implements StrediskaDao {
     }
 
     /**
-     * Vrati zoznam vsetkych poloziek z tabulky strediska
+     * @return zoznam vsetkych poloziek z tabulky strediska
      */
     @Override
     public List<Stredisko> dajVsetky() {
@@ -45,11 +45,13 @@ public class DatabazovyStrediskaDao implements StrediskaDao {
 
     /**
      * Ulozi nove / updatuje existujuce stredisko
+     *
+     * @param stredisko stredisko, ktore chceme pridat
      */
     @Override
     public void uloz(Stredisko stredisko) {
         if (stredisko.getId() == null) {
-            Map<String, Object> hodnoty = new HashMap<String, Object>();
+            Map<String, Object> hodnoty = new HashMap<>();
             hodnoty.put("nazov", stredisko.getNazov());
             hodnoty.put("vyskaSnehu", stredisko.getVyskaSnehu());
             hodnoty.put("podmienky", stredisko.getPodmienky());
@@ -112,6 +114,8 @@ public class DatabazovyStrediskaDao implements StrediskaDao {
 
     /**
      * Odstrani stredisko z databazy
+     *
+     * @param stredisko stredisko, ktore odstranujeme
      */
     @Override
     public void odstran(Stredisko stredisko) {
@@ -127,7 +131,7 @@ public class DatabazovyStrediskaDao implements StrediskaDao {
             idUzivatela = scanner.nextInt();
             menoUzivatela = scanner.nextInt();
             //if (suDataVTabUzivatelia(idUzivatela, menoUzivatela)) {
-                tabulkaSKtorouPracujem = "tab" + idUzivatela + "_" + menoUzivatela;
+            tabulkaSKtorouPracujem = "tab" + idUzivatela + "_" + menoUzivatela;
             //} else {
             //    pouzijTempDatabazu();
             //}
@@ -154,7 +158,8 @@ public class DatabazovyStrediskaDao implements StrediskaDao {
     }
 
     /**
-     * Pouzije docasnu tabulku (pre pripady, ze sa neda pouzit tabulka pouzivatela)
+     * Pouzije docasnu tabulku (pre pripady, ze sa neda pouzit tabulka
+     * pouzivatela)
      */
     private void pouzijTempDatabazu() {
         jdbcTemplate.execute("DROP Temp TABLE IF EXISTS");
@@ -173,7 +178,6 @@ public class DatabazovyStrediskaDao implements StrediskaDao {
 //
 //        return meno == menoUzivatela;
 //    }
-
     /**
      * vrati maximalne id z existujucich
      */
