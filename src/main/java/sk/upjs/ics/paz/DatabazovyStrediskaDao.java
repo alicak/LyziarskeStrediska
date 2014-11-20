@@ -126,11 +126,11 @@ public class DatabazovyStrediskaDao implements StrediskaDao {
         try (Scanner scanner = new Scanner(subor)) {
             idUzivatela = scanner.nextInt();
             menoUzivatela = scanner.nextInt();
-            if (suDataVTabUzivatelia(idUzivatela, menoUzivatela)) {
+            //if (suDataVTabUzivatelia(idUzivatela, menoUzivatela)) {
                 tabulkaSKtorouPracujem = "tab" + idUzivatela + "_" + menoUzivatela;
-            } else {
-                pouzijTempDatabazu();
-            }
+            //} else {
+            //    pouzijTempDatabazu();
+            //}
         } catch (Exception e) {
             pouzijTempDatabazu();
         }
@@ -163,24 +163,24 @@ public class DatabazovyStrediskaDao implements StrediskaDao {
         tabulkaSKtorouPracujem = "Temp";
     }
 
-    /**
-     * ?????
-     */
-    private boolean suDataVTabUzivatelia(int idUzivatela, int menoUzivatela) {
-        String sql = "SELECT meno FROM uzivatelia WHERE id = ?";
-        int meno = Integer.parseInt((String) jdbcTemplate.queryForObject(
-                sql, new Object[]{idUzivatela}, String.class));
+//    /**
+//     * overi, ci uzivatel neprepisal subor so svojim menom a id
+//     */
+//    public boolean suDataVTabUzivatelia(int idUzivatela, int menoUzivatela) {
+//        String sql = "SELECT meno FROM uzivatelia WHERE id = ?";
+//        int meno = Integer.parseInt((String) jdbcTemplate.queryForObject(
+//                sql, new Object[]{idUzivatela}, String.class));
+//
+//        return meno == menoUzivatela;
+//    }
 
-        return meno == menoUzivatela;
-    }
-
     /**
-     * ?????
+     * vrati maximalne id z existujucich
      */
     private int maxIdUzivatelov() {
         String sql = "SELECT MAX(id) FROM uzivatelia";
-        int total = jdbcTemplate.queryForInt(sql);
-        return total;
+        int maxID = jdbcTemplate.queryForInt(sql);
+        return maxID;
     }
 
     /**
