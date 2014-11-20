@@ -23,13 +23,402 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="400" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblPocetVlekov" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblPocetLanoviek" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblPocetTrati" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="lblVPrevadzke" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                              <Component id="lblVsetky" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="txtPocetTratiVPrevadzke" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txtPocetLanoviekVPrevadzke" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txtPocetVlekovVPrevadzke" alignment="0" pref="60" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="lblLomka1" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="txtPocetVlekov" min="-2" pref="60" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="lblLomka2" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="txtPocetLanoviek" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="lblLomka3" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="txtPocetTrati" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblNazov" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblPodmienky" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                              <Component id="cmbPodmienky" min="-2" pref="134" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="txtNazov" min="-2" pref="134" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="lblVyskaSnehu" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="txtVyskaSnehu" min="-2" pref="116" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lblCm" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="chkMoznostUbytovania" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="chkPozicanieVystroje" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="lblGps" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblCenyListkov" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblListokDospely" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblListokDieta" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblListokStudent" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="txtListokDieta" min="-2" pref="74" max="-2" attributes="0"/>
+                                  <Component id="txtListokDospely" min="-2" pref="74" max="-2" attributes="0"/>
+                                  <Component id="txtListokStudent" min="-2" pref="74" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblSirka" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblDlzka" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="23" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="txtGpsSirka" pref="74" max="32767" attributes="0"/>
+                                  <Component id="txtGpsDlzka" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                      <Component id="btnUloz" min="-2" pref="83" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnStorno" min="-2" pref="77" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace pref="41" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="300" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblNazov" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtNazov" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblGps" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblVyskaSnehu" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtVyskaSnehu" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblCm" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblSirka" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtGpsSirka" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblPodmienky" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cmbPodmienky" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblDlzka" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtGpsDlzka" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblVPrevadzke" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblVsetky" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblCenyListkov" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblPocetVlekov" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtPocetVlekovVPrevadzke" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblLomka1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtPocetVlekov" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblListokDospely" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtListokDospely" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblPocetLanoviek" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtPocetLanoviekVPrevadzke" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblLomka2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtPocetLanoviek" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblListokDieta" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtListokDieta" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblPocetTrati" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtPocetTratiVPrevadzke" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblLomka3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtPocetTrati" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblListokStudent" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtListokStudent" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="chkPozicanieVystroje" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="chkMoznostUbytovania" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnUloz" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnStorno" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+              <EmptySpace pref="13" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="lblNazov">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="11" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="N&#xe1;zov:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblVyskaSnehu">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="11" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="V&#xfd;&#x161;ka snehu:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblPodmienky">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="11" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Podmienky:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtNazov">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNazovActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cmbPodmienky">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="6">
+            <StringItem index="0" value="nezadan&#xe9;"/>
+            <StringItem index="1" value="v&#xfd;born&#xe9;"/>
+            <StringItem index="2" value="ve&#x13e;mi dobr&#xe9;"/>
+            <StringItem index="3" value="dobr&#xe9;"/>
+            <StringItem index="4" value="obmedzen&#xe9;"/>
+            <StringItem index="5" value="nevyhovuj&#xfa;ce"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbPodmienkyActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtVyskaSnehu">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtVyskaSnehuActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblCm">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="cm"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblPocetVlekov">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="11" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Po&#x10d;et vlekov:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtPocetVlekovVPrevadzke">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPocetVlekovVPrevadzkeActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblLomka1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="/"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtPocetVlekov">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblVPrevadzke">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="v prev&#xe1;dzke"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblVsetky">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="v&#x161;etky"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblPocetLanoviek">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="11" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Po&#x10d;et lanoviek:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtPocetLanoviekVPrevadzke">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPocetLanoviekVPrevadzkeActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblLomka2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="/"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtPocetLanoviek">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblPocetTrati">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="11" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Po&#x10d;et trat&#xed;:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtPocetTratiVPrevadzke">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblLomka3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="/"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtPocetTrati">
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="chkPozicanieVystroje">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="11" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="mo&#x17e;nos&#x165; po&#x17e;i&#x10d;ania v&#xfd;stroje"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="chkMoznostUbytovania">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="11" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="mo&#x17e;nos&#x165; ubytovania"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblCenyListkov">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="11" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Ceny l&#xed;stkov"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblListokDospely">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Dospel&#xfd;:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblListokDieta">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Die&#x165;a:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblListokStudent">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#x160;tudent:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtListokDospely">
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtListokDieta">
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtListokStudent">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblGps">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="11" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="GPS s&#xfa;radnice"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblSirka">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#x160;&#xed;rka:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblDlzka">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="D&#x13a;&#x17e;ka:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtGpsSirka">
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtGpsDlzka">
+    </Component>
+    <Component class="javax.swing.JButton" name="btnUloz">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ulo&#x17e;"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUlozActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnStorno">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Storno"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStornoActionPerformed"/>
+      </Events>
+    </Component>
+  </SubComponents>
 </Form>

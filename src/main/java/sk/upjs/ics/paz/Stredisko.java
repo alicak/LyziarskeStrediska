@@ -12,6 +12,9 @@ public class Stredisko {
     private int pocetVlekovVPrevadzke;
     private int pocetLanoviek;
     private int pocetLanoviekVPrevadzke;
+    //TODO tieto premenne treba este pridat do databazy
+    //private int pocetTrati;
+    //private int pocetTratiVPrevadzke;
     private BigDecimal cenaListkaDospely;
     private BigDecimal cenaListkaDieta;
     private BigDecimal cenaListkaStudent;
@@ -83,6 +86,22 @@ public class Stredisko {
     public void setPocetLanoviekVPrevadzke(int pocetLanoviekVPrevadzke) {
         this.pocetLanoviekVPrevadzke = pocetLanoviekVPrevadzke;
     }
+    
+//    public int getPocetTrati() {
+//        return pocetTrati;
+//    }
+//    
+//    public int setPocetTrati(int pocetTrati) {
+//        this.pocetTrati = pocetTrati;
+//    }
+//    
+//    public int getPocetTratiVPrevadzke() {
+//        return pocetTratiVPrevadzke;
+//    }
+//    
+//    public int setPocetTratiVPrevadzke(int pocetTratiVPrevadzke) {
+//        this.pocetTratiVPrevadzke = pocetTratiVPrevadzke;
+//    }
 
     public BigDecimal getCenaListkaDospely() {
         return cenaListkaDospely;
