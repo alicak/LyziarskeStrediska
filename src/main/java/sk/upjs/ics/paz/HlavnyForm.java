@@ -4,6 +4,7 @@ public class HlavnyForm extends javax.swing.JFrame {
 
     // tovaren doda DAO objekt
     private final StrediskaDao strediskaDao = DaoFactory.INSTANCE.getStrediskaDao();
+    private int mojNajoblubenejsiInteger;
 
     public HlavnyForm() {
         initComponents();
