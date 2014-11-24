@@ -40,7 +40,7 @@ public class DatabazovyStrediskaDao implements StrediskaDao {
      */
     @Override
     public List<Stredisko> dajVsetky() {
-        return jdbcTemplate.query("SELECT * FROM ?", mapovac, tabulkaSKtorouPracujem);
+        return jdbcTemplate.query("SELECT * FROM " + tabulkaSKtorouPracujem, mapovac);
     }
 
     /**

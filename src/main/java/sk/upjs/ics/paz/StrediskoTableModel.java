@@ -16,6 +16,7 @@ public class StrediskoTableModel extends AbstractTableModel {
         BigDecimal.class,
         String.class
     };
+    private final StrediskaDao strediskaDao = DaoFactory.INSTANCE.getStrediskaDao();
 
     /**
      * @return pocet riadkov tabulky
@@ -52,6 +53,21 @@ public class StrediskoTableModel extends AbstractTableModel {
             default:
                 return "???";
         }
+    }
+
+    public void obnov() {
+        zoznamStredisk = strediskaDao.dajVsetky();
+        fireTableDataChanged();
+    }
+
+    @Override
+    public String getColumnName(int column) {
+        return NAZVY_STLPCOV[column];
+    }
+
+    @Override
+    public Class<?> getColumnClass(int columnIndex) {
+        return TYPY_STLPCOV[columnIndex];
     }
 
 }

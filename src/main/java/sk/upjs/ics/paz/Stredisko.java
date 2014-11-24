@@ -16,8 +16,8 @@ public class Stredisko {
     //private int pocetTrati;
     //private int pocetTratiVPrevadzke;
     private BigDecimal cenaListkaDospely;
-    private BigDecimal cenaListkaDieta;
     private BigDecimal cenaListkaStudent;
+    private BigDecimal cenaListkaDieta;
     private boolean daSaPozicatVystroj;
     private boolean daSaUbytovat;
     private BigDecimal gpsSirka;

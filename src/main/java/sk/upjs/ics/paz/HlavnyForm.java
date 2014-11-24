@@ -1,13 +1,20 @@
 package sk.upjs.ics.paz;
 
+import java.util.Comparator;
+import javax.swing.table.TableRowSorter;
+
 public class HlavnyForm extends javax.swing.JFrame {
 
     // tovaren doda DAO objekt
     private final StrediskaDao strediskaDao = DaoFactory.INSTANCE.getStrediskaDao();
-    private int mojNajoblubenejsiInteger;
 
+    private final StrediskoTableModel strediskaTableModel = new StrediskoTableModel();
+    
     public HlavnyForm() {
         initComponents();
+        
+        tabLyziarskeStrediska.getSelectionModel();
+        aktualizujZoznamStredisk();
     }
 
     /**
@@ -74,17 +81,7 @@ public class HlavnyForm extends javax.swing.JFrame {
 
         btnResetFiltra.setText("Reset");
 
-        tabLyziarskeStrediska.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3"
-            }
-        ));
+        tabLyziarskeStrediska.setModel(strediskaTableModel);
         jScrollPane1.setViewportView(tabLyziarskeStrediska);
 
         btnZobrazDetail.setText("Zobraz detail...");
@@ -278,6 +275,10 @@ public class HlavnyForm extends javax.swing.JFrame {
         });
     }
 
+    private void aktualizujZoznamStredisk() {
+        strediskaTableModel.obnov();
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNajdiNajblizsie;
     private javax.swing.JButton btnOPrograme;
@@ -295,4 +296,5 @@ public class HlavnyForm extends javax.swing.JFrame {
     private javax.swing.JTable tabLyziarskeStrediska;
     private javax.swing.JTextField txtRychlyFilter;
     // End of variables declaration//GEN-END:variables
+
 }
