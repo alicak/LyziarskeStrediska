@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
   </Properties>
@@ -239,9 +239,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtNazov">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNazovActionPerformed"/>
-      </Events>
+      <BindingProperties>
+        <BindingProperty name="name" source="txtNazov" sourcePath="N&#xe1;zov" target="txtNazov" targetPath="name" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
     </Component>
     <Component class="javax.swing.JComboBox" name="cmbPodmienky">
       <Properties>
@@ -256,14 +256,11 @@
           </StringArray>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbPodmienkyActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtVyskaSnehu">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtVyskaSnehuActionPerformed"/>
-      </Events>
+      <BindingProperties>
+        <BindingProperty name="name" source="txtVyskaSnehu" sourcePath="V&#xfd;&#x161;ka snehu" target="txtVyskaSnehu" targetPath="name" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblCm">
       <Properties>
@@ -279,9 +276,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtPocetVlekovVPrevadzke">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPocetVlekovVPrevadzkeActionPerformed"/>
-      </Events>
+      <BindingProperties>
+        <BindingProperty name="name" source="txtPocetVlekovVPrevadzke" sourcePath="Po&#x10d;et vlekov v prev&#xe1;dzke" target="txtPocetVlekovVPrevadzke" targetPath="name" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblLomka1">
       <Properties>
@@ -289,6 +286,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtPocetVlekov">
+      <BindingProperties>
+        <BindingProperty name="name" source="txtPocetVlekov" sourcePath="Po&#x10d;et vlekov" target="txtPocetVlekov" targetPath="name" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblVPrevadzke">
       <Properties>
@@ -309,9 +309,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtPocetLanoviekVPrevadzke">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPocetLanoviekVPrevadzkeActionPerformed"/>
-      </Events>
+      <BindingProperties>
+        <BindingProperty name="name" source="txtPocetLanoviek" sourcePath="Po&#x10d;et lanoviek v prev&#xe1;dzke" target="txtPocetLanoviekVPrevadzke" targetPath="name" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblLomka2">
       <Properties>
@@ -319,6 +319,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtPocetLanoviek">
+      <BindingProperties>
+        <BindingProperty name="name" source="txtPocetLanoviekVPrevadzke" sourcePath="Po&#x10d;et lanoviek v prev&#xe1;dzke" target="txtPocetLanoviek" targetPath="name" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblPocetTrati">
       <Properties>
@@ -329,6 +332,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtPocetTratiVPrevadzke">
+      <BindingProperties>
+        <BindingProperty name="name" source="lblPocetTrati" sourcePath="Po&#x10d;et trat&#xed; v prev&#xe1;dzke" target="txtPocetTratiVPrevadzke" targetPath="name" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblLomka3">
       <Properties>
@@ -336,6 +342,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtPocetTrati">
+      <BindingProperties>
+        <BindingProperty name="name" source="txtPocetTrati" sourcePath="Po&#x10d;et trat&#xed;" target="txtPocetTrati" targetPath="name" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="chkPozicanieVystroje">
       <Properties>
@@ -377,10 +386,19 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtListokDospely">
+      <BindingProperties>
+        <BindingProperty name="name" source="txtListokDospely" sourcePath="Cena l&#xed;stka - dospel&#xfd;" target="txtListokDospely" targetPath="name" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtListokDieta">
+      <BindingProperties>
+        <BindingProperty name="name" source="txtListokDieta" sourcePath="Cena l&#xed;stka - die&#x165;a" target="txtListokDieta" targetPath="name" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtListokStudent">
+      <BindingProperties>
+        <BindingProperty name="name" source="txtListokStudent" sourcePath="Cena l&#xed;stka - &#x161;tudent" target="txtListokStudent" targetPath="name" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblGps">
       <Properties>
@@ -401,8 +419,14 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtGpsSirka">
+      <BindingProperties>
+        <BindingProperty name="name" source="txtGpsSirka" sourcePath="GPS &#x161;&#xed;rka" target="txtGpsSirka" targetPath="name" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtGpsDlzka">
+      <BindingProperties>
+        <BindingProperty name="name" source="txtGpsDlzka" sourcePath="GPS d&#x13a;&#x17e;ka" target="txtGpsDlzka" targetPath="name" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
     </Component>
     <Component class="javax.swing.JButton" name="btnUloz">
       <Properties>

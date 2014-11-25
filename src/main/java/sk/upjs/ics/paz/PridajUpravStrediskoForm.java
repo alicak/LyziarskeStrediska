@@ -2,6 +2,8 @@ package sk.upjs.ics.paz;
 
 import java.awt.Frame;
 import java.math.BigDecimal;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 
 public class PridajUpravStrediskoForm extends javax.swing.JDialog {
 
@@ -56,8 +58,25 @@ public class PridajUpravStrediskoForm extends javax.swing.JDialog {
      * @param parent rodicovske stredisko
      */
     public PridajUpravStrediskoForm(Frame parent) {
-        this(parent, new Stredisko());
+        this(parent, true);
+        this.stredisko = new Stredisko();
         this.setTitle("Pridanie nového strediska");
+
+        this.txtNazov.setText("");
+        this.txtVyskaSnehu.setText("");
+        // TODO otestovat, ci to funguje
+        this.txtPocetVlekovVPrevadzke.setText("");
+        this.txtPocetVlekov.setText("");
+        this.txtPocetLanoviekVPrevadzke.setText("");
+        this.txtPocetLanoviek.setText("");
+        // TODO odkomentovat, ked pridame premenne
+        // this.txtPocetTratiVPrevadzke.setText(Integer.toString(stredisko.getPocetTratiVPrevadzke()));
+        // this.txtPocetTrati.setText(Integer.toString(stredisko.getPocetTrati()));
+        this.txtGpsSirka.setText("");
+        this.txtGpsDlzka.setText("");
+        this.txtListokDospely.setText("");
+        this.txtListokDieta.setText("");
+        this.txtListokStudent.setText("");
     }
 
     /**
@@ -68,6 +87,7 @@ public class PridajUpravStrediskoForm extends javax.swing.JDialog {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         lblNazov = new javax.swing.JLabel();
         lblVyskaSnehu = new javax.swing.JLabel();
@@ -118,14 +138,26 @@ public class PridajUpravStrediskoForm extends javax.swing.JDialog {
         lblPodmienky.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblPodmienky.setText("Podmienky:");
 
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, txtNazov, org.jdesktop.beansbinding.ELProperty.create("Názov"), txtNazov, org.jdesktop.beansbinding.BeanProperty.create("name"));
+        bindingGroup.addBinding(binding);
+
         cmbPodmienky.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "nezadané", "výborné", "veľmi dobré", "dobré", "obmedzené", "nevyhovujúce" }));
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, txtVyskaSnehu, org.jdesktop.beansbinding.ELProperty.create("Výška snehu"), txtVyskaSnehu, org.jdesktop.beansbinding.BeanProperty.create("name"));
+        bindingGroup.addBinding(binding);
 
         lblCm.setText("cm");
 
         lblPocetVlekov.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblPocetVlekov.setText("Počet vlekov:");
 
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, txtPocetVlekovVPrevadzke, org.jdesktop.beansbinding.ELProperty.create("Počet vlekov v prevádzke"), txtPocetVlekovVPrevadzke, org.jdesktop.beansbinding.BeanProperty.create("name"));
+        bindingGroup.addBinding(binding);
+
         lblLomka1.setText("/");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, txtPocetVlekov, org.jdesktop.beansbinding.ELProperty.create("Počet vlekov"), txtPocetVlekov, org.jdesktop.beansbinding.BeanProperty.create("name"));
+        bindingGroup.addBinding(binding);
 
         lblVPrevadzke.setText("v prevádzke");
 
@@ -134,12 +166,24 @@ public class PridajUpravStrediskoForm extends javax.swing.JDialog {
         lblPocetLanoviek.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblPocetLanoviek.setText("Počet lanoviek:");
 
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, txtPocetLanoviek, org.jdesktop.beansbinding.ELProperty.create("Počet lanoviek v prevádzke"), txtPocetLanoviekVPrevadzke, org.jdesktop.beansbinding.BeanProperty.create("name"));
+        bindingGroup.addBinding(binding);
+
         lblLomka2.setText("/");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, txtPocetLanoviekVPrevadzke, org.jdesktop.beansbinding.ELProperty.create("Počet lanoviek v prevádzke"), txtPocetLanoviek, org.jdesktop.beansbinding.BeanProperty.create("name"));
+        bindingGroup.addBinding(binding);
 
         lblPocetTrati.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblPocetTrati.setText("Počet tratí:");
 
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, lblPocetTrati, org.jdesktop.beansbinding.ELProperty.create("Počet tratí v prevádzke"), txtPocetTratiVPrevadzke, org.jdesktop.beansbinding.BeanProperty.create("name"));
+        bindingGroup.addBinding(binding);
+
         lblLomka3.setText("/");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, txtPocetTrati, org.jdesktop.beansbinding.ELProperty.create("Počet tratí"), txtPocetTrati, org.jdesktop.beansbinding.BeanProperty.create("name"));
+        bindingGroup.addBinding(binding);
 
         chkPozicanieVystroje.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         chkPozicanieVystroje.setText("možnosť požičania výstroje");
@@ -156,12 +200,27 @@ public class PridajUpravStrediskoForm extends javax.swing.JDialog {
 
         lblListokStudent.setText("Študent:");
 
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, txtListokDospely, org.jdesktop.beansbinding.ELProperty.create("Cena lístka - dospelý"), txtListokDospely, org.jdesktop.beansbinding.BeanProperty.create("name"));
+        bindingGroup.addBinding(binding);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, txtListokDieta, org.jdesktop.beansbinding.ELProperty.create("Cena lístka - dieťa"), txtListokDieta, org.jdesktop.beansbinding.BeanProperty.create("name"));
+        bindingGroup.addBinding(binding);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, txtListokStudent, org.jdesktop.beansbinding.ELProperty.create("Cena lístka - študent"), txtListokStudent, org.jdesktop.beansbinding.BeanProperty.create("name"));
+        bindingGroup.addBinding(binding);
+
         lblGps.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblGps.setText("GPS súradnice");
 
         lblSirka.setText("Šírka:");
 
         lblDlzka.setText("Dĺžka:");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, txtGpsSirka, org.jdesktop.beansbinding.ELProperty.create("GPS šírka"), txtGpsSirka, org.jdesktop.beansbinding.BeanProperty.create("name"));
+        bindingGroup.addBinding(binding);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, txtGpsDlzka, org.jdesktop.beansbinding.ELProperty.create("GPS dĺžka"), txtGpsDlzka, org.jdesktop.beansbinding.BeanProperty.create("name"));
+        bindingGroup.addBinding(binding);
 
         btnUloz.setText("Ulož");
         btnUloz.addActionListener(new java.awt.event.ActionListener() {
@@ -329,6 +388,8 @@ public class PridajUpravStrediskoForm extends javax.swing.JDialog {
                 .addContainerGap(13, Short.MAX_VALUE))
         );
 
+        bindingGroup.bind();
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -342,33 +403,119 @@ public class PridajUpravStrediskoForm extends javax.swing.JDialog {
     }//GEN-LAST:event_btnStornoActionPerformed
 
     /**
-     * Ulozi zmeny do strediska a zavrie okno
+     * Ulozi zmeny do strediska a zavrie okno. Pri vsetkych poliach overi, ci su
+     * vyplnene, a ci ciselne polia obsahuju iba povolene znaky
      *
      * @param evt
      */
     private void btnUlozActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUlozActionPerformed
-        // TODO overenie, ci su policka vyplnene, ak nie, tak tam dat nuly alebo nejake ine predvolene hodnoty
-        stredisko.setNazov(txtNazov.getText());
-        stredisko.setVyskaSnehu(new Integer(txtVyskaSnehu.getText()));
+        // Musi tam byt aj ten return, lebo inak si tie okna vyskakuju, ako chcu, niekedy aj tri za sebou
+        if (overVyplneniePola(txtNazov)) {
+            stredisko.setNazov(txtNazov.getText());
+        } else {
+            return;
+        }
+        if (overVyplneniePola(txtVyskaSnehu) && overCiJeVPoliCislo(txtVyskaSnehu)) {
+            stredisko.setVyskaSnehu(new Integer(txtVyskaSnehu.getText()));
+        } else {
+            return;
+        }
+
         stredisko.setPodmienky(cmbPodmienky.getSelectedItem().toString());
-        stredisko.setPocetVlekov(new Integer(txtPocetVlekov.getText()));
-        stredisko.setPocetVlekovVPrevadzke(new Integer(txtPocetVlekovVPrevadzke.getText()));
-        stredisko.setPocetLanoviek(new Integer(txtPocetLanoviek.getText()));
-        stredisko.setPocetLanoviekVPrevadzke(new Integer(txtPocetLanoviekVPrevadzke.getText()));
-        // TODO odkomentovat, ked dodame stlpce do tabulky 
+
+        if (overVyplneniePola(txtPocetVlekov) && overCiJeVPoliCislo(txtPocetVlekov)) {
+            stredisko.setPocetVlekov(new Integer(txtPocetVlekov.getText()));
+        } else {
+            return;
+        }
+
+        if (overCiJeVPoliCislo(txtPocetVlekovVPrevadzke) && overVyplneniePola(txtPocetVlekovVPrevadzke)) {
+            stredisko.setPocetVlekovVPrevadzke(new Integer(txtPocetVlekovVPrevadzke.getText()));
+        } else {
+            return;
+        }
+
+        if (overCiJeVPoliCislo(txtPocetLanoviek) && overVyplneniePola(txtPocetLanoviek)) {
+            stredisko.setPocetLanoviek(new Integer(txtPocetLanoviek.getText()));
+        } else {
+            return;
+        }
+
+        if (overCiJeVPoliCislo(txtPocetLanoviekVPrevadzke) && overVyplneniePola(txtPocetLanoviekVPrevadzke)) {
+            stredisko.setPocetLanoviekVPrevadzke(new Integer(txtPocetLanoviekVPrevadzke.getText()));
+        } else {
+            return;
+        }
+
+        // TODO odkomentovat, ked dodame stlpce do tabulky + pridat overenia
         // stredisko.setPocetTrati(new Integer(txtPocetTrati.getText()));
         // stredisko.setPocetTratiVPrevadzke(new Integer(txtPocetTratiVPrevadzke.getText()));
         stredisko.setDaSaPozicatVystroj(chkPozicanieVystroje.isSelected());
         stredisko.setDaSaUbytovat(chkUbytovanie.isSelected());
-        stredisko.setGpsSirka(new BigDecimal(txtGpsSirka.getText()));
-        stredisko.setGpsDlzka(new BigDecimal(txtGpsDlzka.getText()));
-        stredisko.setCenaListkaDospely(new BigDecimal(txtListokDospely.getText()));
-        stredisko.setCenaListkaDieta(new BigDecimal(txtListokDieta.getText()));
-        stredisko.setCenaListkaStudent(new BigDecimal(txtListokStudent.getText()));
+
+        if (overVyplneniePola(txtGpsSirka) && overCiJeVPoliCislo(txtGpsSirka)) {
+            stredisko.setGpsSirka(new BigDecimal(txtGpsSirka.getText()));
+        } else {
+            return;
+        }
+
+        if (overVyplneniePola(txtGpsDlzka) && overCiJeVPoliCislo(txtGpsDlzka)) {
+            stredisko.setGpsDlzka(new BigDecimal(txtGpsDlzka.getText()));
+        } else {
+            return;
+        }
+
+        if (overVyplneniePola(txtListokDospely) && overCiJeVPoliCislo(txtListokDospely)) {
+            stredisko.setCenaListkaDospely(new BigDecimal(txtListokDospely.getText()));
+        } else {
+            return;
+        }
+
+        if (overVyplneniePola(txtListokDieta) && overCiJeVPoliCislo(txtListokDieta)) {
+            stredisko.setCenaListkaDieta(new BigDecimal(txtListokDieta.getText()));
+        } else {
+            return;
+        }
+
+        if (overVyplneniePola(txtListokStudent) && overCiJeVPoliCislo(txtListokStudent)) {
+            stredisko.setCenaListkaStudent(new BigDecimal(txtListokStudent.getText()));
+        } else {
+            return;
+        }
 
         strediskaDao.uloz(stredisko);
         dispose();
     }//GEN-LAST:event_btnUlozActionPerformed
+
+    /**
+     * Overi, ci je dane pole vyplnene, ak nie, vyhodi o tom hlasku
+     *
+     * @param pole pole, ktore musi byt vyplnene
+     */
+    private boolean overVyplneniePola(javax.swing.JTextField pole) {
+        if (pole.getText().equals("")) {
+            String sprava = "Prosím vyplňte pole " + pole.getName();
+            String nadpis = "Chyba - nevyplnené pole";
+            JOptionPane.showMessageDialog(this, sprava, nadpis, ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Overi, ci su v poli zadane pripustne znaky pre cislo
+     *
+     * @param pole
+     */
+    private boolean overCiJeVPoliCislo(javax.swing.JTextField pole) {
+        if (!pole.getText().matches("[0-9\\.]+")) {
+            String sprava = "Zadali ste nesprávny formát čísla v poli " + pole.getName();
+            String nadpis = "Chyba - nesprávny vstup";
+            JOptionPane.showMessageDialog(this, sprava, nadpis, ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
 
     /**
      * @param args the command line arguments
@@ -450,5 +597,6 @@ public class PridajUpravStrediskoForm extends javax.swing.JDialog {
     private javax.swing.JTextField txtPocetVlekov;
     private javax.swing.JTextField txtPocetVlekovVPrevadzke;
     private javax.swing.JTextField txtVyskaSnehu;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,8 +1,5 @@
 package sk.upjs.ics.paz;
 
-import java.util.Comparator;
-import javax.swing.table.TableRowSorter;
-
 public class HlavnyForm extends javax.swing.JFrame {
 
     // tovaren doda DAO objekt
@@ -15,6 +12,8 @@ public class HlavnyForm extends javax.swing.JFrame {
         
         tabLyziarskeStrediska.getSelectionModel();
         aktualizujZoznamStredisk();
+        
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
     /**
