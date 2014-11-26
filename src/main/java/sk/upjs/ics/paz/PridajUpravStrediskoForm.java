@@ -40,9 +40,8 @@ public class PridajUpravStrediskoForm extends javax.swing.JDialog {
         this.txtPocetVlekov.setText(Integer.toString(stredisko.getPocetVlekov()));
         this.txtPocetLanoviekVPrevadzke.setText(Integer.toString(stredisko.getPocetLanoviekVPrevadzke()));
         this.txtPocetLanoviek.setText(Integer.toString(stredisko.getPocetLanoviek()));
-        // TODO odkomentovat, ked pridame premenne
-        // this.txtPocetTratiVPrevadzke.setText(Integer.toString(stredisko.getPocetTratiVPrevadzke()));
-        // this.txtPocetTrati.setText(Integer.toString(stredisko.getPocetTrati()));
+        this.txtPocetTratiVPrevadzke.setText(Integer.toString(stredisko.getPocetTratiVPrevadzke()));
+        this.txtPocetTrati.setText(Integer.toString(stredisko.getPocetTrati()));
         this.chkPozicanieVystroje.setSelected(stredisko.isDaSaPozicatVystroj());
         this.chkUbytovanie.setSelected(stredisko.isDaSaUbytovat());
         this.txtGpsSirka.setText(stredisko.getGpsSirka().toString());
@@ -61,22 +60,6 @@ public class PridajUpravStrediskoForm extends javax.swing.JDialog {
         this(parent, true);
         this.stredisko = new Stredisko();
         this.setTitle("Pridanie nového strediska");
-
-        this.txtNazov.setText("");
-        this.txtVyskaSnehu.setText("");
-        // TODO otestovat, ci to funguje
-        this.txtPocetVlekovVPrevadzke.setText("");
-        this.txtPocetVlekov.setText("");
-        this.txtPocetLanoviekVPrevadzke.setText("");
-        this.txtPocetLanoviek.setText("");
-        // TODO odkomentovat, ked pridame premenne
-        // this.txtPocetTratiVPrevadzke.setText(Integer.toString(stredisko.getPocetTratiVPrevadzke()));
-        // this.txtPocetTrati.setText(Integer.toString(stredisko.getPocetTrati()));
-        this.txtGpsSirka.setText("");
-        this.txtGpsDlzka.setText("");
-        this.txtListokDospely.setText("");
-        this.txtListokDieta.setText("");
-        this.txtListokStudent.setText("");
     }
 
     /**
@@ -447,9 +430,18 @@ public class PridajUpravStrediskoForm extends javax.swing.JDialog {
             return;
         }
 
-        // TODO odkomentovat, ked dodame stlpce do tabulky + pridat overenia
-        // stredisko.setPocetTrati(new Integer(txtPocetTrati.getText()));
-        // stredisko.setPocetTratiVPrevadzke(new Integer(txtPocetTratiVPrevadzke.getText()));
+        if (overCiJeVPoliCislo(txtPocetTrati) && overVyplneniePola(txtPocetTrati)) {
+            stredisko.setPocetTrati(new Integer(txtPocetTrati.getText()));
+        } else {
+            return;
+        }
+
+        if (overCiJeVPoliCislo(txtPocetTratiVPrevadzke) && overVyplneniePola(txtPocetTratiVPrevadzke)) {
+            stredisko.setPocetTratiVPrevadzke(new Integer(txtPocetTratiVPrevadzke.getText()));
+        } else {
+            return;
+        }
+
         stredisko.setDaSaPozicatVystroj(chkPozicanieVystroje.isSelected());
         stredisko.setDaSaUbytovat(chkUbytovanie.isSelected());
 

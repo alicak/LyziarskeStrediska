@@ -59,6 +59,8 @@ public class DatabazovyStrediskaDao implements StrediskaDao {
             hodnoty.put("pocetVlekovVPrevadzke", stredisko.getPocetVlekovVPrevadzke());
             hodnoty.put("pocetLanoviek", stredisko.getPocetLanoviek());
             hodnoty.put("pocetLanoviekVPrevadzke", stredisko.getPocetVlekovVPrevadzke());
+            hodnoty.put("pocetTrati", stredisko.getPocetTrati());
+            hodnoty.put("pocetTratiVPrevadzke", stredisko.getPocetTratiVPrevadzke());
             hodnoty.put("cenaListkaDospely", stredisko.getCenaListkaDospely());
             hodnoty.put("cenaListkaDieta", stredisko.getCenaListkaDieta());
             hodnoty.put("cenaListkaStudent", stredisko.getCenaListkaStudent());
@@ -83,6 +85,8 @@ public class DatabazovyStrediskaDao implements StrediskaDao {
                     + "pocetVlekovVPrevadzke = ?\n"
                     + "pocetLanoviek = ?,\n"
                     + "pocetLanoviekVPrevadzke = ?\n"
+                    + "pocetTrati = ?\n"
+                    + "pocetTratiVPrevadzke = ?\n"
                     + "cenaListkaDospely = ?,\n"
                     + "cenaListkaDieta = ?\n"
                     + "cenaListkaStudent = ?,\n"
@@ -101,6 +105,8 @@ public class DatabazovyStrediskaDao implements StrediskaDao {
                     stredisko.getPocetVlekovVPrevadzke(),
                     stredisko.getPocetLanoviek(),
                     stredisko.getPocetVlekovVPrevadzke(),
+                    stredisko.getPocetTrati(),
+                    stredisko.getPocetTratiVPrevadzke(),
                     stredisko.getCenaListkaDospely(),
                     stredisko.getCenaListkaDieta(),
                     stredisko.getCenaListkaStudent(),
