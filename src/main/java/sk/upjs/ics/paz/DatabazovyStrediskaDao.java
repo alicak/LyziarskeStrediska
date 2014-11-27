@@ -3,6 +3,7 @@ package sk.upjs.ics.paz;
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import java.io.File;
 import java.io.PrintWriter;
+import java.sql.Types;
 import java.util.HashMap;
 import org.springframework.jdbc.core.JdbcTemplate;
 import java.util.List;
@@ -77,44 +78,44 @@ public class DatabazovyStrediskaDao implements StrediskaDao {
             Number id = insert.executeAndReturnKey(hodnoty);
             stredisko.setId(id.longValue());
         } else {
-            String sql = "UPDATE ?\n"
+            String sql = "UPDATE " + tabulkaSKtorouPracujem + "\n"
                     + "SET nazov = ?,\n"
                     + "vyskaSnehu = ?,\n"
-                    + "podmienky = ?\n"
+                    + "podmienky = ?,\n"
                     + "pocetVlekov = ?,\n"
-                    + "pocetVlekovVPrevadzke = ?\n"
+                    + "pocetVlekovVPrevadzke = ?,\n"
                     + "pocetLanoviek = ?,\n"
-                    + "pocetLanoviekVPrevadzke = ?\n"
-                    + "pocetTrati = ?\n"
-                    + "pocetTratiVPrevadzke = ?\n"
+                    + "pocetLanoviekVPrevadzke = ?,\n"
+                    + "pocetTrati = ?,\n"
+                    + "pocetTratiVPrevadzke = ?,\n"
                     + "cenaListkaDospely = ?,\n"
-                    + "cenaListkaDieta = ?\n"
+                    + "cenaListkaDieta = ?,\n"
                     + "cenaListkaStudent = ?,\n"
-                    + "daSaPozicatVystroj = ?\n"
+                    + "daSaPozicatVystroj = ?,\n"
                     + "daSaUbytovat = ?,\n"
-                    + "gpsSirka = ?\n"
+                    + "gpsSirka = ?,\n"
                     + "gpsDlzka = ?\n"
                     + "WHERE id = ?";
 
-            jdbcTemplate.update(sql,
-                    tabulkaSKtorouPracujem,
-                    stredisko.getNazov(),
-                    stredisko.getVyskaSnehu(),
-                    stredisko.getPodmienky(),
-                    stredisko.getPocetVlekov(),
-                    stredisko.getPocetVlekovVPrevadzke(),
-                    stredisko.getPocetLanoviek(),
-                    stredisko.getPocetVlekovVPrevadzke(),
-                    stredisko.getPocetTrati(),
-                    stredisko.getPocetTratiVPrevadzke(),
-                    stredisko.getCenaListkaDospely(),
-                    stredisko.getCenaListkaDieta(),
-                    stredisko.getCenaListkaStudent(),
-                    stredisko.isDaSaPozicatVystroj(),
-                    stredisko.isDaSaUbytovat(),
-                    stredisko.getGpsSirka(),
-                    stredisko.getGpsDlzka(),
-                    stredisko.getId());
+            // viac parametrov sa zadava ako pole objektov
+            jdbcTemplate.update(sql, new Object[]{
+                stredisko.getNazov(),
+                stredisko.getVyskaSnehu(),
+                stredisko.getPodmienky(),
+                stredisko.getPocetVlekov(),
+                stredisko.getPocetVlekovVPrevadzke(),
+                stredisko.getPocetLanoviek(),
+                stredisko.getPocetVlekovVPrevadzke(),
+                stredisko.getPocetTrati(),
+                stredisko.getPocetTratiVPrevadzke(),
+                stredisko.getCenaListkaDospely(),
+                stredisko.getCenaListkaDieta(),
+                stredisko.getCenaListkaStudent(),
+                stredisko.isDaSaPozicatVystroj(),
+                stredisko.isDaSaUbytovat(),
+                stredisko.getGpsSirka(),
+                stredisko.getGpsDlzka(),
+                stredisko.getId()});
         }
     }
 
@@ -125,8 +126,11 @@ public class DatabazovyStrediskaDao implements StrediskaDao {
      */
     @Override
     public void odstran(Stredisko stredisko) {
-        jdbcTemplate.update("DELETE FROM ? WHERE id = ?", tabulkaSKtorouPracujem,
+        // jdbcTemplate.update("DELETE FROM ? WHERE id = ?", tabulkaSKtorouPracujem, stredisko.getId());
+        // meno tabulky nemoze vystupovat ako parameter v PreparedStatement, hadze to vynimky
+        jdbcTemplate.update("DELETE FROM " + tabulkaSKtorouPracujem + " WHERE id = ?",
                 stredisko.getId());
+
     }
 
     /**

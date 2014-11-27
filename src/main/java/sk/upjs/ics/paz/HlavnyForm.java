@@ -1,19 +1,46 @@
 package sk.upjs.ics.paz;
 
+import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 public class HlavnyForm extends javax.swing.JFrame {
 
     // tovaren doda DAO objekt
     private final StrediskaDao strediskaDao = DaoFactory.INSTANCE.getStrediskaDao();
 
     private final StrediskoTableModel strediskaTableModel = new StrediskoTableModel();
-    
+
     public HlavnyForm() {
         initComponents();
+
+        tabStrediska.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+            @Override
+            // pri zmene (vybratie/nevybratie strediska) aktivuje/deaktivuje tlacitka
+            public void valueChanged(ListSelectionEvent e) {
+                tabStrediskaSelectionValueChanged(e);
+            }
+        });
         
-        tabLyziarskeStrediska.getSelectionModel();
         aktualizujZoznamStredisk();
-        
+
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }
+    
+        private void tabStrediskaSelectionValueChanged(ListSelectionEvent e) {
+        if (!e.getValueIsAdjusting()) {
+            if (!tabStrediska.getSelectionModel().isSelectionEmpty()) {
+                btnZobrazDetail.setEnabled(true);
+                btnUprav.setEnabled(true);
+                btnOdstran.setEnabled(true);
+            }
+            else
+            {
+                btnZobrazDetail.setEnabled(false);
+                btnUprav.setEnabled(false);
+                btnOdstran.setEnabled(false);
+            }
+        }
     }
 
     /**
@@ -35,7 +62,7 @@ public class HlavnyForm extends javax.swing.JFrame {
         btnRychloFiltruj = new javax.swing.JButton();
         btnResetFiltra = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabLyziarskeStrediska = new javax.swing.JTable();
+        tabStrediska = new javax.swing.JTable();
         btnZobrazDetail = new javax.swing.JButton();
         btnOdstran = new javax.swing.JButton();
         btnUprav = new javax.swing.JButton();
@@ -80,10 +107,11 @@ public class HlavnyForm extends javax.swing.JFrame {
 
         btnResetFiltra.setText("Reset");
 
-        tabLyziarskeStrediska.setModel(strediskaTableModel);
-        jScrollPane1.setViewportView(tabLyziarskeStrediska);
+        tabStrediska.setModel(strediskaTableModel);
+        jScrollPane1.setViewportView(tabStrediska);
 
         btnZobrazDetail.setText("Zobraz detail...");
+        btnZobrazDetail.setEnabled(false);
         btnZobrazDetail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnZobrazDetailActionPerformed(evt);
@@ -91,6 +119,7 @@ public class HlavnyForm extends javax.swing.JFrame {
         });
 
         btnOdstran.setText("Odstráň");
+        btnOdstran.setEnabled(false);
         btnOdstran.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOdstranActionPerformed(evt);
@@ -98,6 +127,7 @@ public class HlavnyForm extends javax.swing.JFrame {
         });
 
         btnUprav.setText("Uprav...");
+        btnUprav.setEnabled(false);
         btnUprav.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUpravActionPerformed(evt);
@@ -203,6 +233,7 @@ public class HlavnyForm extends javax.swing.JFrame {
     private void btnPridajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPridajActionPerformed
         PridajUpravStrediskoForm pridajUpravStrediskoForm = new PridajUpravStrediskoForm(this);
         pridajUpravStrediskoForm.setVisible(true);
+        aktualizujZoznamStredisk();
     }//GEN-LAST:event_btnPridajActionPerformed
 
     /**
@@ -217,18 +248,37 @@ public class HlavnyForm extends javax.swing.JFrame {
      * Otvori modalne okno pre upravu vybraneho strediska
      */
     private void btnUpravActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpravActionPerformed
-        // TODO zistit z formulara, ktore stredisko bolo vybrane
-        Stredisko vybraneStredisko = null;
+        // vrati cislo riadka v aktualnom zosorteni
+        int vybranyRiadok = tabStrediska.getSelectedRow();
+        // vrati cislo riadka v modeli
+        int vybratyRiadokVModeli = tabStrediska.convertRowIndexToModel(vybranyRiadok);
+        // z cisla riadka v modeli viem zistit stredisko na danom riadku
+        Stredisko vybraneStredisko = strediskaTableModel.dajPodlaCislaRiadka(vybratyRiadokVModeli);
+        
         PridajUpravStrediskoForm pridajUpravStrediskoForm = new PridajUpravStrediskoForm(this, vybraneStredisko);
         pridajUpravStrediskoForm.setVisible(true);
+        aktualizujZoznamStredisk();
     }//GEN-LAST:event_btnUpravActionPerformed
 
     /**
      * Odstrani vybrane stredisko, predtym si vypyta potvrdenie
      */
     private void btnOdstranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOdstranActionPerformed
-        // TODO vypytat si potvrdenie pre odstranenie teplakov, odstranit a zavriet okno
-        // TODO zavriet okno, ak pouzivatel vybral "Storno"
+        int vybranyRiadok = tabStrediska.getSelectedRow();
+        int vybratyRiadokVModeli = tabStrediska.convertRowIndexToModel(vybranyRiadok);
+        Stredisko vybraneStredisko = strediskaTableModel.dajPodlaCislaRiadka(vybratyRiadokVModeli);
+        
+        int tlacidlo = JOptionPane.showConfirmDialog(
+                this,
+                "Naozaj chcete odstrániť vybrané stredisko?",
+                "Odstrániť stredisko",
+                JOptionPane.YES_NO_OPTION
+        );
+
+        if (tlacidlo == JOptionPane.YES_OPTION) {
+            strediskaDao.odstran(vybraneStredisko);
+            aktualizujZoznamStredisk();
+        }
     }//GEN-LAST:event_btnOdstranActionPerformed
 
     /**
@@ -292,7 +342,7 @@ public class HlavnyForm extends javax.swing.JFrame {
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblRychlyFilter;
     private javax.swing.JLabel lblTagline;
-    private javax.swing.JTable tabLyziarskeStrediska;
+    private javax.swing.JTable tabStrediska;
     private javax.swing.JTextField txtRychlyFilter;
     // End of variables declaration//GEN-END:variables
 

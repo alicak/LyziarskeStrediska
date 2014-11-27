@@ -55,19 +55,39 @@ public class StrediskoTableModel extends AbstractTableModel {
         }
     }
 
+    /**
+     * Aktualizuje zoznam teplakov
+     */
     public void obnov() {
         zoznamStredisk = strediskaDao.dajVsetky();
         fireTableDataChanged();
     }
 
+    /**
+     * @param column index stlpca
+     * @return nazov stlpca
+     */
     @Override
     public String getColumnName(int column) {
         return NAZVY_STLPCOV[column];
     }
 
+    /**
+     * @param columnIndex index stlpca
+     * @return trieda
+     */
     @Override
     public Class<?> getColumnClass(int columnIndex) {
         return TYPY_STLPCOV[columnIndex];
+    }
+    
+    /**
+     * @param riadok
+     * @return stredisko na danom riadku
+     */
+    public Stredisko dajPodlaCislaRiadka(int riadok)
+    {
+        return zoznamStredisk.get(riadok);
     }
 
 }
