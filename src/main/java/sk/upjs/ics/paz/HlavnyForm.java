@@ -3,42 +3,81 @@ package sk.upjs.ics.paz;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.TableRowSorter;
 
 public class HlavnyForm extends javax.swing.JFrame {
 
-    // tovaren doda DAO objekt
-    private final StrediskaDao strediskaDao = DaoFactory.INSTANCE.getStrediskaDao();
+    private static String meno = null;
+    private static String heslo = null;
+    private static StrediskaDao strediskaDao;
 
     private final StrediskoTableModel strediskaTableModel = new StrediskoTableModel();
 
+    private final TableRowSorter strediskaRowSorter = new TableRowSorter(strediskaTableModel);
+
+    private final StrediskaPodlaVsetkychStlpcovRowFilter strediskaPodlaVsetkychStlpcovRowFilter
+            = new StrediskaPodlaVsetkychStlpcovRowFilter();
+
     public HlavnyForm() {
         initComponents();
+        setStrediskaDao(DaoFactory.INSTANCE.getStrediskaDao(meno, heslo));
 
-        tabStrediska.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+        strediskaRowSorter.setRowFilter(strediskaPodlaVsetkychStlpcovRowFilter);
+
+        tabStrediska.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             // pri zmene (vybratie/nevybratie strediska) aktivuje/deaktivuje tlacitka
             public void valueChanged(ListSelectionEvent e) {
                 tabStrediskaSelectionValueChanged(e);
             }
         });
-        
+
         aktualizujZoznamStredisk();
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
-    
-        private void tabStrediskaSelectionValueChanged(ListSelectionEvent e) {
+
+    public static String getMeno() {
+        return meno;
+    }
+
+    public static String getHeslo() {
+        return heslo;
+    }
+
+    public static void setMeno(String meno) {
+        HlavnyForm.meno = meno;
+    }
+
+    public static void setHeslo(String heslo) {
+        HlavnyForm.heslo = heslo;
+    }
+
+    /**
+     *
+     * @param strediskaDao
+     */
+    public static void setStrediskaDao(StrediskaDao strediskaDao) {
+        HlavnyForm.strediskaDao = strediskaDao;
+    }
+
+    private void tabStrediskaSelectionValueChanged(ListSelectionEvent e) {
         if (!e.getValueIsAdjusting()) {
-            if (!tabStrediska.getSelectionModel().isSelectionEmpty()) {
-                btnZobrazDetail.setEnabled(true);
-                btnUprav.setEnabled(true);
-                btnOdstran.setEnabled(true);
-            }
-            else
-            {
+            if (strediskaDao.isPrihlaseny()) {
+                if (!tabStrediska.getSelectionModel().isSelectionEmpty()) {
+                    btnZobrazDetail.setEnabled(true);
+                    btnUprav.setEnabled(true);
+                    btnOdstran.setEnabled(true);
+                } else {
+                    btnZobrazDetail.setEnabled(false);
+                    btnUprav.setEnabled(false);
+                    btnOdstran.setEnabled(false);
+                }
+            } else {
                 btnZobrazDetail.setEnabled(false);
                 btnUprav.setEnabled(false);
                 btnOdstran.setEnabled(false);
+                btnPridaj.setEnabled(false);
             }
         }
     }
@@ -67,6 +106,8 @@ public class HlavnyForm extends javax.swing.JFrame {
         btnOdstran = new javax.swing.JButton();
         btnUprav = new javax.swing.JButton();
         lblRychlyFilter = new javax.swing.JLabel();
+        lblMenoUzivatela = new javax.swing.JLabel();
+        btnPrihlasenieOdhlasenie = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Lyžiarske strediská");
@@ -76,6 +117,7 @@ public class HlavnyForm extends javax.swing.JFrame {
         lblLogo.setText("miesto pre logo");
 
         btnPridaj.setText("Pridaj nové...");
+        btnPridaj.setEnabled(false);
         btnPridaj.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPridajActionPerformed(evt);
@@ -104,10 +146,26 @@ public class HlavnyForm extends javax.swing.JFrame {
         });
 
         btnRychloFiltruj.setText("Filtruj");
+        btnRychloFiltruj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRychloFiltrujActionPerformed(evt);
+            }
+        });
 
         btnResetFiltra.setText("Reset");
+        btnResetFiltra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetFiltraActionPerformed(evt);
+            }
+        });
 
         tabStrediska.setModel(strediskaTableModel);
+        tabStrediska.setRowSorter(strediskaRowSorter);
+        tabStrediska.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabStrediskaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabStrediska);
 
         btnZobrazDetail.setText("Zobraz detail...");
@@ -136,6 +194,15 @@ public class HlavnyForm extends javax.swing.JFrame {
 
         lblRychlyFilter.setText("Rýchly filter:");
 
+        lblMenoUzivatela.setText("Uzivatel: -");
+
+        btnPrihlasenieOdhlasenie.setText("Prihlas");
+        btnPrihlasenieOdhlasenie.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrihlasenieOdhlasenieActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -159,20 +226,29 @@ public class HlavnyForm extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(btnOdstran, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnUprav, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnZobrazDetail, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(btnVyhladavaj, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnNajdiNajblizsie, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnPridaj, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnOdstran, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnUprav, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnZobrazDetail, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(btnVyhladavaj, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnNajdiNajblizsie, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnPridaj, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(13, 13, 13)
+                                .addComponent(btnPrihlasenieOdhlasenie, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(lblTagline, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 147, Short.MAX_VALUE)
-                        .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(lblMenoUzivatela))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(43, 43, 43)
+                                .addComponent(lblTagline, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 147, Short.MAX_VALUE)
+                                .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(41, 41, 41))))
         );
         layout.setVerticalGroup(
@@ -182,12 +258,19 @@ public class HlavnyForm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTagline, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(53, 53, 53)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtRychlyFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRychloFiltruj)
-                    .addComponent(btnResetFiltra)
-                    .addComponent(lblRychlyFilter))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblMenoUzivatela)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtRychlyFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnRychloFiltruj)
+                            .addComponent(btnResetFiltra)
+                            .addComponent(lblRychlyFilter)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnPrihlasenieOdhlasenie)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
@@ -254,7 +337,7 @@ public class HlavnyForm extends javax.swing.JFrame {
         int vybratyRiadokVModeli = tabStrediska.convertRowIndexToModel(vybranyRiadok);
         // z cisla riadka v modeli viem zistit stredisko na danom riadku
         Stredisko vybraneStredisko = strediskaTableModel.dajPodlaCislaRiadka(vybratyRiadokVModeli);
-        
+
         PridajUpravStrediskoForm pridajUpravStrediskoForm = new PridajUpravStrediskoForm(this, vybraneStredisko);
         pridajUpravStrediskoForm.setVisible(true);
         aktualizujZoznamStredisk();
@@ -267,7 +350,7 @@ public class HlavnyForm extends javax.swing.JFrame {
         int vybranyRiadok = tabStrediska.getSelectedRow();
         int vybratyRiadokVModeli = tabStrediska.convertRowIndexToModel(vybranyRiadok);
         Stredisko vybraneStredisko = strediskaTableModel.dajPodlaCislaRiadka(vybratyRiadokVModeli);
-        
+
         int tlacidlo = JOptionPane.showConfirmDialog(
                 this,
                 "Naozaj chcete odstrániť vybrané stredisko?",
@@ -288,6 +371,53 @@ public class HlavnyForm extends javax.swing.JFrame {
         OProgrameForm oProgrameForm = new OProgrameForm(this, true);
         oProgrameForm.setVisible(true);
     }//GEN-LAST:event_btnOProgrameActionPerformed
+
+    private void btnPrihlasenieOdhlasenieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrihlasenieOdhlasenieActionPerformed
+        if (strediskaDao.isPrihlaseny()) {
+            strediskaDao = DaoFactory.INSTANCE.getStrediskaDao(null, null);
+
+            btnZobrazDetail.setEnabled(false);
+            btnUprav.setEnabled(false);
+            btnOdstran.setEnabled(false);
+            btnPridaj.setEnabled(false);
+
+            lblMenoUzivatela.setText("Užívateľ: -");
+
+            btnPrihlasenieOdhlasenie.setText("Prihlas");
+            return;
+        }
+        PrihlasovanieForm prihlasovanieForm = new PrihlasovanieForm(this, true);
+        prihlasovanieForm.setVisible(true);
+        aktualizujZoznamStredisk();
+        if (strediskaDao.isPrihlaseny()) {
+            btnPridaj.setEnabled(true);
+            lblMenoUzivatela.setText("Užívateľ: " + meno);
+            btnPrihlasenieOdhlasenie.setText("Odhlas");
+        }
+    }//GEN-LAST:event_btnPrihlasenieOdhlasenieActionPerformed
+
+    private void tabStrediskaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabStrediskaMouseClicked
+        if (evt.getClickCount() == 2) {
+            btnUprav.doClick();
+        }
+    }//GEN-LAST:event_tabStrediskaMouseClicked
+
+    private void btnRychloFiltrujActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRychloFiltrujActionPerformed
+        String filter = txtRychlyFilter.getText().trim().toUpperCase();
+        strediskaPodlaVsetkychStlpcovRowFilter.setHladanyVyraz(filter);
+
+        aktualizujZoznamStredisk();
+    }//GEN-LAST:event_btnRychloFiltrujActionPerformed
+
+    private void btnResetFiltraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetFiltraActionPerformed
+        strediskaPodlaVsetkychStlpcovRowFilter.setHladanyVyraz("");
+        
+        aktualizujZoznamStredisk();
+    }//GEN-LAST:event_btnResetFiltraActionPerformed
+
+    private void aktualizujZoznamStredisk() {
+        strediskaTableModel.obnov();
+    }
 
     /**
      * @param args the command line arguments
@@ -324,15 +454,12 @@ public class HlavnyForm extends javax.swing.JFrame {
         });
     }
 
-    private void aktualizujZoznamStredisk() {
-        strediskaTableModel.obnov();
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNajdiNajblizsie;
     private javax.swing.JButton btnOPrograme;
     private javax.swing.JButton btnOdstran;
     private javax.swing.JButton btnPridaj;
+    private javax.swing.JButton btnPrihlasenieOdhlasenie;
     private javax.swing.JButton btnResetFiltra;
     private javax.swing.JButton btnRychloFiltruj;
     private javax.swing.JButton btnUprav;
@@ -340,6 +467,7 @@ public class HlavnyForm extends javax.swing.JFrame {
     private javax.swing.JButton btnZobrazDetail;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblLogo;
+    private javax.swing.JLabel lblMenoUzivatela;
     private javax.swing.JLabel lblRychlyFilter;
     private javax.swing.JLabel lblTagline;
     private javax.swing.JTable tabStrediska;

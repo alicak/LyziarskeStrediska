@@ -46,24 +46,38 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="btnOdstran" alignment="0" max="32767" attributes="0"/>
-                              <Component id="btnUprav" alignment="0" max="32767" attributes="0"/>
-                              <Component id="btnZobrazDetail" alignment="0" pref="117" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="btnOdstran" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="btnUprav" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="btnZobrazDetail" alignment="0" pref="117" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="103" alignment="1" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="btnVyhladavaj" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="btnNajdiNajblizsie" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="btnPridaj" alignment="0" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
-                          <Group type="103" alignment="1" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="btnVyhladavaj" alignment="0" max="32767" attributes="0"/>
-                              <Component id="btnNajdiNajblizsie" alignment="0" max="32767" attributes="0"/>
-                              <Component id="btnPridaj" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                              <Component id="btnPrihlasenieOdhlasenie" min="-2" pref="75" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                      <Component id="lblTagline" min="-2" pref="212" max="-2" attributes="0"/>
-                      <EmptySpace pref="147" max="32767" attributes="0"/>
-                      <Component id="lblLogo" min="-2" pref="150" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="lblMenoUzivatela" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                              <Component id="lblTagline" min="-2" pref="212" max="-2" attributes="0"/>
+                              <EmptySpace pref="147" max="32767" attributes="0"/>
+                              <Component id="lblLogo" min="-2" pref="150" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                       <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -78,12 +92,22 @@
                   <Component id="lblTagline" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                   <Component id="lblLogo" alignment="3" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txtRychlyFilter" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnRychloFiltruj" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnResetFiltra" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblRychlyFilter" alignment="3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="lblMenoUzivatela" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtRychlyFilter" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnRychloFiltruj" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnResetFiltra" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblRychlyFilter" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnPrihlasenieOdhlasenie" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -123,6 +147,7 @@
     <Component class="javax.swing.JButton" name="btnPridaj">
       <Properties>
         <Property name="text" type="java.lang.String" value="Pridaj nov&#xe9;..."/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPridajActionPerformed"/>
@@ -158,11 +183,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Filtruj"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRychloFiltrujActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnResetFiltra">
       <Properties>
         <Property name="text" type="java.lang.String" value="Reset"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnResetFiltraActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
@@ -195,10 +226,16 @@
                 </Column>
               </TableColumnModel>
             </Property>
+            <Property name="rowSorter" type="javax.swing.RowSorter" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="strediskaRowSorter" type="code"/>
+            </Property>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tabStrediskaMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -233,6 +270,19 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="R&#xfd;chly filter:"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMenoUzivatela">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Uzivatel: -"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnPrihlasenieOdhlasenie">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Prihlas"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPrihlasenieOdhlasenieActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
