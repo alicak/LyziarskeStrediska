@@ -1,11 +1,73 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Menu class="javax.swing.JMenuBar" name="menubarHlavneMenu">
+      <SubComponents>
+        <Menu class="javax.swing.JMenu" name="menuStredisko">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Stredisko"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="menuitemPridaj">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Pridaj nov&#xe9;..."/>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuitemPridajActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="menuitemVyhladavaj">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Vyh&#x13e;ad&#xe1;vaj..."/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuitemVyhladavajActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="menuitemNajdiNajblizsie">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="N&#xe1;jdi najbli&#x17e;&#x161;ie..."/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuitemNajdiNajblizsieActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="menuUzivatel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="U&#x17e;&#xed;vate&#x13e;"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="menuitemPrihlasOdhlas">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Prihl&#xe1;s..."/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuitemPrihlasOdhlasActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="menuitemRegistruj">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Registruj..."/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuitemRegistrujActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+      </SubComponents>
+    </Menu>
+  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="title" type="java.lang.String" value="Ly&#x17e;iarske stredisk&#xe1;"/>
   </Properties>
   <SyntheticProperties>
+    <SyntheticProperty name="menuBar" type="java.lang.String" value="menubarHlavneMenu"/>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
@@ -45,23 +107,16 @@
                           </Group>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="btnOdstran" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="btnUprav" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="btnZobrazDetail" alignment="0" pref="117" max="32767" attributes="0"/>
-                              </Group>
-                              <Group type="103" alignment="1" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="btnVyhladavaj" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="btnNajdiNajblizsie" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="btnPridaj" alignment="0" max="32767" attributes="0"/>
-                              </Group>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="btnOdstran" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnUprav" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnZobrazDetail" alignment="0" pref="117" max="32767" attributes="0"/>
+                          <Group type="103" alignment="1" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="btnVyhladavaj" alignment="0" max="32767" attributes="0"/>
+                              <Component id="btnNajdiNajblizsie" alignment="0" max="32767" attributes="0"/>
+                              <Component id="btnPridaj" alignment="0" max="32767" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                              <Component id="btnPrihlasenieOdhlasenie" min="-2" pref="75" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="btnPrihlasenieOdhlasenie" alignment="1" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -278,7 +333,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnPrihlasenieOdhlasenie">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Prihlas"/>
+        <Property name="text" type="java.lang.String" value="Prihl&#xe1;s..."/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPrihlasenieOdhlasenieActionPerformed"/>

@@ -21,7 +21,7 @@ public class DatabazovyStrediskaDao implements StrediskaDao {
         MysqlDataSource dataSource = new MysqlDataSource();
         dataSource.setURL("jdbc:mysql://db4free.net:3306/paz1c2014ak");
         dataSource.setUser("alica");
-        dataSource.setPassword("");
+        dataSource.setPassword("fdacbeedk");
 
         jdbcTemplate = new JdbcTemplate(dataSource);
 

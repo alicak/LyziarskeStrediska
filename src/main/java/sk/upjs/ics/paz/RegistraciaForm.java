@@ -1,21 +1,17 @@
 package sk.upjs.ics.paz;
 
-import java.awt.Frame;
 import javax.swing.JOptionPane;
 
-public class PrihlasovanieForm extends javax.swing.JDialog {
+public class RegistraciaForm extends javax.swing.JDialog {
 
     /**
-     * Creates new form PrihlasovanieForm
-     *
-     * @param parent
-     * @param modal
+     * Creates new form RegistraciaForm
      */
-    public PrihlasovanieForm(Frame parent, boolean modal) {
+    public RegistraciaForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         
-        setTitle("Prihlásenie");
+        setTitle("Registrácia");
     }
 
     /**
@@ -27,15 +23,18 @@ public class PrihlasovanieForm extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnStorno = new javax.swing.JButton();
-        btnPrihlas = new javax.swing.JButton();
-        lblLogo = new javax.swing.JLabel();
-        lblMeno = new javax.swing.JLabel();
-        lblHeslo = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         txtMeno = new javax.swing.JTextField();
-        txtHeslo = new javax.swing.JPasswordField();
+        txtHeslo = new javax.swing.JTextField();
+        btnStorno = new javax.swing.JButton();
+        btnRegistruj = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jLabel1.setText("Meno:");
+
+        jLabel2.setText("Heslo:");
 
         btnStorno.setText("Storno");
         btnStorno.addActionListener(new java.awt.event.ActionListener() {
@@ -44,18 +43,12 @@ public class PrihlasovanieForm extends javax.swing.JDialog {
             }
         });
 
-        btnPrihlas.setText("Prihlás");
-        btnPrihlas.addActionListener(new java.awt.event.ActionListener() {
+        btnRegistruj.setText("Registruj");
+        btnRegistruj.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPrihlasActionPerformed(evt);
+                btnRegistrujActionPerformed(evt);
             }
         });
-
-        lblLogo.setText("miesto pre logo");
-
-        lblMeno.setText("Meno:");
-
-        lblHeslo.setText("Heslo:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -65,41 +58,35 @@ public class PrihlasovanieForm extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblHeslo)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtMeno))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtHeslo))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnPrihlas, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 150, Short.MAX_VALUE)
+                        .addComponent(btnRegistruj, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnStorno, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblLogo)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblMeno)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtMeno, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(btnStorno, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblLogo)
-                .addGap(43, 43, 43)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(68, 68, 68)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblMeno)
+                    .addComponent(jLabel1)
                     .addComponent(txtMeno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblHeslo)
+                    .addComponent(jLabel2)
                     .addComponent(txtHeslo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnPrihlas)
-                    .addComponent(btnStorno))
+                    .addComponent(btnStorno)
+                    .addComponent(btnRegistruj))
                 .addContainerGap())
         );
 
@@ -110,24 +97,15 @@ public class PrihlasovanieForm extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_btnStornoActionPerformed
 
-    private void btnPrihlasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrihlasActionPerformed
+    private void btnRegistrujActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrujActionPerformed
         String meno = txtMeno.getText();
-        String heslo = new String(txtHeslo.getPassword());
-        if (meno.equals("") || heslo.equals("")) {
+        String heslo = txtHeslo.getText();
+                if (meno.equals("") || heslo.equals("")) {
             JOptionPane.showMessageDialog(this, "Zadajte používateľské meno aj heslo!");
             return;
         }
-
-        try {
-            HlavnyForm.setStrediskaDao(DaoFactory.INSTANCE.getStrediskaDao(meno, heslo));
-            HlavnyForm.setMeno(meno);
-            HlavnyForm.setHeslo(heslo);
-            dispose();
-        } catch (Error e) {
-            JOptionPane.showMessageDialog(this, "Zlé používateľské meno alebo heslo!");
-        }
-
-    }//GEN-LAST:event_btnPrihlasActionPerformed
+        // TODO dorobit registraciu
+    }//GEN-LAST:event_btnRegistrujActionPerformed
 
     /**
      * @param args the command line arguments
@@ -146,20 +124,20 @@ public class PrihlasovanieForm extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PrihlasovanieForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistraciaForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PrihlasovanieForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistraciaForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PrihlasovanieForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistraciaForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PrihlasovanieForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistraciaForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                PrihlasovanieForm dialog = new PrihlasovanieForm(new javax.swing.JFrame(), true);
+                RegistraciaForm dialog = new RegistraciaForm(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -172,12 +150,11 @@ public class PrihlasovanieForm extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnPrihlas;
+    private javax.swing.JButton btnRegistruj;
     private javax.swing.JButton btnStorno;
-    private javax.swing.JLabel lblHeslo;
-    private javax.swing.JLabel lblLogo;
-    private javax.swing.JLabel lblMeno;
-    private javax.swing.JPasswordField txtHeslo;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JTextField txtHeslo;
     private javax.swing.JTextField txtMeno;
     // End of variables declaration//GEN-END:variables
 }

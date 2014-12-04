@@ -10,13 +10,15 @@ public class StrediskaPodlaVsetkychStlpcovRowFilter extends RowFilter {
         this.hladanyVyraz = hladanyVyraz;
     }
 
+    /**
+     * @param entry riadok so strediskom
+     * @return true, ak nazov strediska na danom riadku obsahuje hladany string
+     */
     @Override
     public boolean include(Entry entry) {
-        for (int i = 0; i < 3; i++) {
-            String string = entry.getStringValue(i).toUpperCase();
-            if (string.contains(hladanyVyraz)) {
-                return true;
-            }
+        String string = entry.getStringValue(0).toUpperCase();
+        if (string.contains(hladanyVyraz)) {
+            return true;
         }
         return false;
     }
