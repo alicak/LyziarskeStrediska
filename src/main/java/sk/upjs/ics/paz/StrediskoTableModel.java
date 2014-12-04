@@ -16,7 +16,8 @@ public class StrediskoTableModel extends AbstractTableModel {
         BigDecimal.class,
         String.class
     };
-    private final StrediskaDao strediskaDao = DaoFactory.INSTANCE.getStrediskaDao(HlavnyForm.getMeno(), HlavnyForm.getHeslo());
+    private Pouzivatel pouzivatel = Factory.INSTANCE.getPouzivatel();
+    private final StrediskaDao strediskaDao = Factory.INSTANCE.getStrediskaDao(pouzivatel);
 
     /**
      * @return pocet riadkov tabulky

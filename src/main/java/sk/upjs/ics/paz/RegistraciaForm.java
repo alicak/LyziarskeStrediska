@@ -4,13 +4,15 @@ import javax.swing.JOptionPane;
 
 public class RegistraciaForm extends javax.swing.JDialog {
 
+    private PouzivateliaDao pouzivateliaDao = Factory.INSTANCE.getPouzivatelDao();
+
     /**
      * Creates new form RegistraciaForm
      */
     public RegistraciaForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         setTitle("Registrácia");
     }
 
@@ -26,9 +28,10 @@ public class RegistraciaForm extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtMeno = new javax.swing.JTextField();
-        txtHeslo = new javax.swing.JTextField();
         btnStorno = new javax.swing.JButton();
         btnRegistruj = new javax.swing.JButton();
+        lblLogo = new javax.swing.JLabel();
+        txtHeslo = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -50,6 +53,8 @@ public class RegistraciaForm extends javax.swing.JDialog {
             }
         });
 
+        lblLogo.setText("miesto pre logo");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -61,21 +66,26 @@ public class RegistraciaForm extends javax.swing.JDialog {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtMeno))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtHeslo))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 150, Short.MAX_VALUE)
+                        .addGap(0, 146, Short.MAX_VALUE)
                         .addComponent(btnRegistruj, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnStorno, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnStorno, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblLogo)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtHeslo)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(68, 68, 68)
+                .addContainerGap()
+                .addComponent(lblLogo)
+                .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtMeno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -83,7 +93,7 @@ public class RegistraciaForm extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtHeslo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnStorno)
                     .addComponent(btnRegistruj))
@@ -99,12 +109,18 @@ public class RegistraciaForm extends javax.swing.JDialog {
 
     private void btnRegistrujActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrujActionPerformed
         String meno = txtMeno.getText();
-        String heslo = txtHeslo.getText();
-                if (meno.equals("") || heslo.equals("")) {
+        String heslo = new String(txtHeslo.getPassword());
+        if (meno.equals("") || heslo.equals("")) {
             JOptionPane.showMessageDialog(this, "Zadajte používateľské meno aj heslo!");
             return;
         }
-        // TODO dorobit registraciu
+
+        if (pouzivateliaDao.existujePouzivatel(meno)) {
+            JOptionPane.showMessageDialog(this, "Používateľ s menom " + meno + " už existuje!");
+        } else {
+            pouzivateliaDao.registruj(meno, heslo);
+            dispose();
+        }
     }//GEN-LAST:event_btnRegistrujActionPerformed
 
     /**
@@ -154,7 +170,8 @@ public class RegistraciaForm extends javax.swing.JDialog {
     private javax.swing.JButton btnStorno;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField txtHeslo;
+    private javax.swing.JLabel lblLogo;
+    private javax.swing.JPasswordField txtHeslo;
     private javax.swing.JTextField txtMeno;
     // End of variables declaration//GEN-END:variables
 }

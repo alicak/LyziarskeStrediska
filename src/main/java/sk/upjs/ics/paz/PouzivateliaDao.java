@@ -2,8 +2,8 @@ package sk.upjs.ics.paz;
 
 public interface PouzivateliaDao {
     
-    boolean isPrihlaseny();
-    void registruj();
-    void existujePouzivatelSMenom();
+    Pouzivatel dajUzivatela(String meno, String heslo);
+    void registruj(String meno, String heslo);
+    boolean existujePouzivatel(String meno);
     
 }

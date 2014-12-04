@@ -8,7 +8,8 @@ import static javax.swing.JOptionPane.ERROR_MESSAGE;
 public class PridajUpravStrediskoForm extends javax.swing.JDialog {
 
     private Stredisko stredisko;
-    private static StrediskaDao strediskaDao = DaoFactory.INSTANCE.getStrediskaDao(HlavnyForm.getMeno(), HlavnyForm.getHeslo());
+    private Pouzivatel pouzivatel = Factory.INSTANCE.getPouzivatel();
+    private StrediskaDao strediskaDao = Factory.INSTANCE.getStrediskaDao(pouzivatel);
 
     /**
      * Creates new form PridajUpravStrediskoForm

@@ -9,6 +9,4 @@ public interface StrediskaDao {
     void uloz(Stredisko stredisko);
 
     void odstran(Stredisko stredisko);
-    
-    boolean isPrihlaseny();
 }

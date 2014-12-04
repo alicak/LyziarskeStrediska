@@ -5,6 +5,8 @@ import javax.swing.JOptionPane;
 
 public class PrihlasovanieForm extends javax.swing.JDialog {
 
+    private final PouzivateliaDao pouzivateliaDao = Factory.INSTANCE.getPouzivatelDao();
+
     /**
      * Creates new form PrihlasovanieForm
      *
@@ -14,7 +16,7 @@ public class PrihlasovanieForm extends javax.swing.JDialog {
     public PrihlasovanieForm(Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         setTitle("Prihlásenie");
     }
 
@@ -64,23 +66,22 @@ public class PrihlasovanieForm extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblHeslo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtHeslo))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnPrihlas, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnStorno, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblLogo)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblMeno)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtMeno, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(lblHeslo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtHeslo))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblLogo)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblMeno)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtMeno)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -96,7 +97,7 @@ public class PrihlasovanieForm extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblHeslo)
                     .addComponent(txtHeslo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnPrihlas)
                     .addComponent(btnStorno))
@@ -118,13 +119,12 @@ public class PrihlasovanieForm extends javax.swing.JDialog {
             return;
         }
 
-        try {
-            HlavnyForm.setStrediskaDao(DaoFactory.INSTANCE.getStrediskaDao(meno, heslo));
-            HlavnyForm.setMeno(meno);
-            HlavnyForm.setHeslo(heslo);
-            dispose();
-        } catch (Error e) {
+        Pouzivatel pouzivatel = pouzivateliaDao.dajUzivatela(meno, heslo);
+        if (pouzivatel == null) {
             JOptionPane.showMessageDialog(this, "Zlé používateľské meno alebo heslo!");
+        } else {
+            Factory.INSTANCE.setPouzivatel(pouzivatel);
+            dispose();
         }
 
     }//GEN-LAST:event_btnPrihlasActionPerformed

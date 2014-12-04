@@ -1,12 +1,10 @@
 package sk.upjs.ics.paz;
 
-import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import java.util.HashMap;
 import org.springframework.jdbc.core.JdbcTemplate;
 import java.util.List;
 import java.util.Map;
 import org.springframework.dao.DataAccessException;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
@@ -14,28 +12,17 @@ public class DatabazovyStrediskaDao implements StrediskaDao {
 
     private final JdbcTemplate jdbcTemplate;
     private static final BeanPropertyRowMapper<Stredisko> mapovac = new BeanPropertyRowMapper<>(Stredisko.class);
-    private String tabulkaSKtorouPracujem;
-    private boolean prihlaseny = false;
+    private final String tabulkaSKtorouPracujem;
 
-    public DatabazovyStrediskaDao(String meno, String heslo) {
-        MysqlDataSource dataSource = new MysqlDataSource();
-        dataSource.setURL("jdbc:mysql://db4free.net:3306/paz1c2014ak");
-        dataSource.setUser("alica");
-        dataSource.setPassword("fdacbeedk");
+    public DatabazovyStrediskaDao(Pouzivatel pouzivatel, JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
 
-        jdbcTemplate = new JdbcTemplate(dataSource);
-
-        if (meno == null && heslo == null) {
+        if (pouzivatel == null) {
             tabulkaSKtorouPracujem = "strediska";
             return;
         }
 
-        if (!korektneMenoAHeslo(meno, heslo)) {
-            throw new Error("Zle meno alebo heslo!");
-        } else {
-            tabulkaSKtorouPracujem = dajTabulku(meno);
-            prihlaseny = true;
-        }
+        tabulkaSKtorouPracujem = pouzivatel.getNazovTabulky();
     }
 
     /**
@@ -151,46 +138,6 @@ public class DatabazovyStrediskaDao implements StrediskaDao {
         jdbcTemplate.update("DELETE FROM " + tabulkaSKtorouPracujem + " WHERE id = ?",
                 stredisko.getId());
 
-    }
-
-    /**
-     *
-     * @return Vrati, ci uzivatel je alebo nie je prihlaseny.
-     */
-    @Override
-    public boolean isPrihlaseny() {
-        return prihlaseny;
-    }
-
-    /**
-     * Overi, ci je zadane spravne meno a heslo
-     *
-     * @param meno prihlasovacie meno
-     * @param heslo prihasovacie heslo
-     * @return true ak je zadane korektne meno a heslo
-     */
-    public boolean korektneMenoAHeslo(String meno, String heslo) {
-        String hesloZTabulky;
-        try {
-            String sql = "SELECT Heslo FROM Uzivatelia WHERE meno = ?";
-            hesloZTabulky = (String) jdbcTemplate.queryForObject(
-                    sql, new Object[]{meno}, String.class);
-        } catch (EmptyResultDataAccessException e) {
-            return false;
-        }
-
-        return hesloZTabulky.equals(heslo);
-    }
-
-    /**
-     *
-     * @param meno meno uzivatela, ktoreho tabulka sa ma vratit
-     * @return vrati nazov tabulky pre zadaneho uzivatela
-     */
-    private String dajTabulku(String meno) {
-        String sql = "SELECT Tabulka FROM Uzivatelia WHERE meno = ?";
-        return (String) jdbcTemplate.queryForObject(
-                sql, new Object[]{meno}, String.class);
     }
 
 }

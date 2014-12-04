@@ -7,9 +7,7 @@ import javax.swing.table.TableRowSorter;
 
 public class HlavnyForm extends javax.swing.JFrame {
 
-    private static String meno = null;
-    private static String heslo = null;
-    private static StrediskaDao strediskaDao;
+    private StrediskaDao strediskaDao;
 
     private final StrediskoTableModel strediskaTableModel = new StrediskoTableModel();
 
@@ -18,9 +16,11 @@ public class HlavnyForm extends javax.swing.JFrame {
     private final StrediskaPodlaVsetkychStlpcovRowFilter strediskaPodlaVsetkychStlpcovRowFilter
             = new StrediskaPodlaVsetkychStlpcovRowFilter();
 
+    private Pouzivatel pouzivatel;
+
     public HlavnyForm() {
         initComponents();
-        setStrediskaDao(DaoFactory.INSTANCE.getStrediskaDao(meno, heslo));
+        strediskaDao = Factory.INSTANCE.getStrediskaDao(pouzivatel);
 
         strediskaRowSorter.setRowFilter(strediskaPodlaVsetkychStlpcovRowFilter);
 
@@ -37,44 +37,17 @@ public class HlavnyForm extends javax.swing.JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
-    public static String getMeno() {
-        return meno;
-    }
-
-    public static String getHeslo() {
-        return heslo;
-    }
-
-    public static void setMeno(String meno) {
-        HlavnyForm.meno = meno;
-    }
-
-    public static void setHeslo(String heslo) {
-        HlavnyForm.heslo = heslo;
-    }
-
-    /**
-     *
-     * @param strediskaDao
-     */
-    public static void setStrediskaDao(StrediskaDao strediskaDao) {
-        HlavnyForm.strediskaDao = strediskaDao;
-    }
-
     private void tabStrediskaSelectionValueChanged(ListSelectionEvent e) {
         if (!e.getValueIsAdjusting()) {
-            if (strediskaDao.isPrihlaseny()) {
+            if (pouzivatel != null) {
                 if (!tabStrediska.getSelectionModel().isSelectionEmpty()) {
-                    btnZobrazDetail.setEnabled(true);
                     btnUprav.setEnabled(true);
                     btnOdstran.setEnabled(true);
                 } else {
-                    btnZobrazDetail.setEnabled(false);
                     btnUprav.setEnabled(false);
                     btnOdstran.setEnabled(false);
                 }
             } else {
-                btnZobrazDetail.setEnabled(false);
                 btnUprav.setEnabled(false);
                 btnOdstran.setEnabled(false);
                 btnPridaj.setEnabled(false);
@@ -177,7 +150,6 @@ public class HlavnyForm extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tabStrediska);
 
         btnZobrazDetail.setText("Zobraz detail...");
-        btnZobrazDetail.setEnabled(false);
         btnZobrazDetail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnZobrazDetailActionPerformed(evt);
@@ -202,7 +174,7 @@ public class HlavnyForm extends javax.swing.JFrame {
 
         lblRychlyFilter.setText("Rýchly filter:");
 
-        lblMenoUzivatela.setText("Uzivatel: -");
+        lblMenoUzivatela.setText("Užívateľ: -");
 
         btnPrihlasenieOdhlasenie.setText("Prihlás...");
         btnPrihlasenieOdhlasenie.addActionListener(new java.awt.event.ActionListener() {
@@ -288,10 +260,9 @@ public class HlavnyForm extends javax.swing.JFrame {
                             .addComponent(btnOdstran, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnUprav, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnZobrazDetail, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(btnVyhladavaj, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnNajdiNajblizsie, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnPridaj, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnVyhladavaj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnNajdiNajblizsie, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnPridaj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnPrihlasenieOdhlasenie, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
@@ -464,18 +435,8 @@ public class HlavnyForm extends javax.swing.JFrame {
      */
     private void prihlasOdhlasAction() {
         // ak je pouzivatel prihlaseny, tak sa odhlasi
-        if (strediskaDao.isPrihlaseny()) {
-            strediskaDao = DaoFactory.INSTANCE.getStrediskaDao(null, null);
-
-            btnZobrazDetail.setEnabled(false);
-            btnUprav.setEnabled(false);
-            btnOdstran.setEnabled(false);
-            btnPridaj.setEnabled(false);
-            menuitemPridaj.setEnabled(false);
-
-            lblMenoUzivatela.setText("Užívateľ: -");
-            btnPrihlasenieOdhlasenie.setText("Prihlás...");
-            menuitemPrihlasOdhlas.setText("Prihlás...");
+        if (pouzivatel != null) {
+            odhlas();
             return;
         }
         // ak nebol prihlaseny, tak sa prihlasi, 
@@ -483,25 +444,52 @@ public class HlavnyForm extends javax.swing.JFrame {
         PrihlasovanieForm prihlasovanieForm = new PrihlasovanieForm(this, true);
         prihlasovanieForm.setVisible(true);
         aktualizujZoznamStredisk();
-        if (strediskaDao.isPrihlaseny()) {
+        prihlas();
+    }
+
+    /**
+     * Prihlasi uzivatela
+     */
+    private void prihlas() {
+        pouzivatel = Factory.INSTANCE.getPouzivatel();
+        if (pouzivatel != null) {
             btnPridaj.setEnabled(true);
             btnUprav.setEnabled(true);
             btnOdstran.setEnabled(true);
             menuitemPridaj.setEnabled(true);
 
-            lblMenoUzivatela.setText("Užívateľ: " + meno);
+            lblMenoUzivatela.setText("Užívateľ: " + pouzivatel.getMeno());
             btnPrihlasenieOdhlasenie.setText("Odhlás");
             menuitemPrihlasOdhlas.setText("Odhlás");
         }
     }
 
     /**
+     * Odhlasi pouzivatela
+     */
+    private void odhlas() {
+        pouzivatel = null;
+        Factory.INSTANCE.setPouzivatel(pouzivatel);
+        strediskaDao = Factory.INSTANCE.getNovyStrediskaDao(pouzivatel);
+        
+        btnUprav.setEnabled(false);
+        btnOdstran.setEnabled(false);
+        btnPridaj.setEnabled(false);
+        menuitemPridaj.setEnabled(false);
+        
+        lblMenoUzivatela.setText("Užívateľ: -");
+        btnPrihlasenieOdhlasenie.setText("Prihlás...");
+        menuitemPrihlasOdhlas.setText("Prihlás...");
+    }
+
+    /**
      * Pri dvojkliku na stredisko v tabulke sa spusti jeho uprava
-     * @param evt 
+     *
+     * @param evt
      */
     private void tabStrediskaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabStrediskaMouseClicked
         if (evt.getClickCount() == 2) {
-            btnUprav.doClick();
+            btnZobrazDetail.doClick();
         }
     }//GEN-LAST:event_tabStrediskaMouseClicked
 
@@ -541,12 +529,11 @@ public class HlavnyForm extends javax.swing.JFrame {
     /**
      * Otvori okno s registraciou noveho pouzivatela
      */
-    private void registrujAction()
-    {
+    private void registrujAction() {
         RegistraciaForm registraciaForm = new RegistraciaForm(this, true);
         registraciaForm.setVisible(true);
     }
-    
+
     private void aktualizujZoznamStredisk() {
         strediskaTableModel.obnov();
     }
