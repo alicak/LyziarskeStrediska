@@ -24,13 +24,198 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="400" max="32767" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblNazov" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblPodmienky" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblVyskaSnehu" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblGpsDlzka" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblGpsSuradnice" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblGpsSirka" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblParametre" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblPocetVlekov" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblPocetLanoviek" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblPocetTrati" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="37" max="32767" attributes="0"/>
+                      <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblCenaDieta" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblCeny" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblCenaDospely" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblCenaStudent" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblUbytovanie" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblPozicanieVystroje" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblSluzby" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="300" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="lblNazov" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="lblVyskaSnehu" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="lblPodmienky" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="lblParametre" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lblPocetVlekov" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lblPocetLanoviek" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lblPocetTrati" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="lblGpsSuradnice" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lblGpsSirka" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lblGpsDlzka" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="lblCeny" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lblCenaDospely" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lblCenaDieta" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lblCenaStudent" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="lblSluzby" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lblPozicanieVystroje" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lblUbytovanie" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="lblNazov">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="14" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="N&#xe1;zov strediska"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblVyskaSnehu">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="V&#xfd;&#x161;ka snehu"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblPodmienky">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Podmienky"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblPocetVlekov">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Po&#x10d;et vlekov (v prev&#xe1;dzke/v&#x161;etk&#xfd;ch)"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblPocetLanoviek">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Po&#x10d;et lanoviek"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblPocetTrati">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Po&#x10d;et trat&#xed;"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblCeny">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="11" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Ceny l&#xed;stkov"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblCenaDospely">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Dospel&#xfd;"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblCenaDieta">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Die&#x165;a"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblCenaStudent">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#x160;tudent"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblGpsSuradnice">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="11" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="GPS s&#xfa;radnice"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JSeparator" name="jSeparator1">
+      <Properties>
+        <Property name="orientation" type="int" value="1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblGpsSirka">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="GPS &#x161;&#xed;rka"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblGpsDlzka">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="GPS d&#x13a;&#x17e;ka"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblPozicanieVystroje">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="mo&#x17e;nos&#x165; po&#x17e;i&#x10d;ania v&#xfd;stroje"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblUbytovanie">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="mo&#x17e;nos&#x165; ubytovania"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblParametre">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="11" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Parametre (v prev&#xe1;dzke/v&#x161;etky)"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblSluzby">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="11" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Slu&#x17e;by"/>
+      </Properties>
+    </Component>
+  </SubComponents>
 </Form>

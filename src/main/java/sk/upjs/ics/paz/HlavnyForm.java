@@ -353,7 +353,8 @@ public class HlavnyForm extends javax.swing.JFrame {
      * Otvori modalne okno s detailami vybraneho strediska
      */
     private void zobrazDetailStrediskaAction() {
-        ZobrazDetailForm zobrazDetailForm = new ZobrazDetailForm(this, true);
+        Stredisko vybraneStredisko = dajStrediskoZTabulky();
+        ZobrazDetailForm zobrazDetailForm = new ZobrazDetailForm(this, vybraneStredisko);
         zobrazDetailForm.setVisible(true);
     }
 
@@ -365,6 +366,13 @@ public class HlavnyForm extends javax.swing.JFrame {
      * Otvori modalne okno pre upravu vybraneho strediska
      */
     private void upravStrediskoAction() {
+        Stredisko vybraneStredisko = dajStrediskoZTabulky();
+        PridajUpravStrediskoForm pridajUpravStrediskoForm = new PridajUpravStrediskoForm(this, vybraneStredisko);
+        pridajUpravStrediskoForm.setVisible(true);
+        aktualizujZoznamStredisk();
+    }
+
+    private Stredisko dajStrediskoZTabulky() {
         // vrati cislo riadka v aktualnom zosorteni
         int vybranyRiadok = tabStrediska.getSelectedRow();
         // vrati cislo riadka v modeli
@@ -372,9 +380,7 @@ public class HlavnyForm extends javax.swing.JFrame {
         // z cisla riadka v modeli viem zistit stredisko na danom riadku
         Stredisko vybraneStredisko = strediskaTableModel.dajPodlaCislaRiadka(vybratyRiadokVModeli);
 
-        PridajUpravStrediskoForm pridajUpravStrediskoForm = new PridajUpravStrediskoForm(this, vybraneStredisko);
-        pridajUpravStrediskoForm.setVisible(true);
-        aktualizujZoznamStredisk();
+        return vybraneStredisko;
     }
 
     private void btnOdstranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOdstranActionPerformed
@@ -455,12 +461,12 @@ public class HlavnyForm extends javax.swing.JFrame {
         pouzivatel = null;
         Factory.INSTANCE.setPouzivatel(pouzivatel);
         strediskaDao = Factory.INSTANCE.getNovyStrediskaDao(pouzivatel);
-        
+
         btnUprav.setEnabled(false);
         btnOdstran.setEnabled(false);
         btnPridaj.setEnabled(false);
         menuitemPridaj.setEnabled(false);
-        
+
         lblMenoUzivatela.setText("Užívateľ: neprihlásený");
         btnPrihlasenieOdhlasenie.setText("Prihlás...");
         menuitemPrihlasOdhlas.setText("Prihlás...");
@@ -530,7 +536,7 @@ public class HlavnyForm extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+        /* Set the Windows look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
