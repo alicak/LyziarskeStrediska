@@ -20,6 +20,7 @@ public class HlavnyForm extends javax.swing.JFrame {
 
     public HlavnyForm() {
         initComponents();
+        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo.png"))); // NOI18N
         strediskaDao = Factory.INSTANCE.getStrediskaDao(pouzivatel);
 
         strediskaRowSorter.setRowFilter(strediskaPodlaVsetkychStlpcovRowFilter);
@@ -64,12 +65,10 @@ public class HlavnyForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblTagline = new javax.swing.JLabel();
         lblLogo = new javax.swing.JLabel();
         btnPridaj = new javax.swing.JButton();
         btnVyhladavaj = new javax.swing.JButton();
         btnNajdiNajblizsie = new javax.swing.JButton();
-        btnOPrograme = new javax.swing.JButton();
         txtRychlyFilter = new javax.swing.JTextField();
         btnRychloFiltruj = new javax.swing.JButton();
         btnResetFiltra = new javax.swing.JButton();
@@ -81,6 +80,7 @@ public class HlavnyForm extends javax.swing.JFrame {
         lblRychlyFilter = new javax.swing.JLabel();
         lblMenoUzivatela = new javax.swing.JLabel();
         btnPrihlasenieOdhlasenie = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
         menubarHlavneMenu = new javax.swing.JMenuBar();
         menuStredisko = new javax.swing.JMenu();
         menuitemPridaj = new javax.swing.JMenuItem();
@@ -89,13 +89,12 @@ public class HlavnyForm extends javax.swing.JFrame {
         menuUzivatel = new javax.swing.JMenu();
         menuitemPrihlasOdhlas = new javax.swing.JMenuItem();
         menuitemRegistruj = new javax.swing.JMenuItem();
+        menuOPrograme = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Lyžiarske strediská");
 
-        lblTagline.setText("miesto pre tagline");
-
-        lblLogo.setText("miesto pre logo");
+        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo.png"))); // NOI18N
 
         btnPridaj.setText("Pridaj nové...");
         btnPridaj.setEnabled(false);
@@ -116,13 +115,6 @@ public class HlavnyForm extends javax.swing.JFrame {
         btnNajdiNajblizsie.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNajdiNajblizsieActionPerformed(evt);
-            }
-        });
-
-        btnOPrograme.setText("O programe...");
-        btnOPrograme.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOProgrameActionPerformed(evt);
             }
         });
 
@@ -174,7 +166,7 @@ public class HlavnyForm extends javax.swing.JFrame {
 
         lblRychlyFilter.setText("Rýchly filter:");
 
-        lblMenoUzivatela.setText("Užívateľ: -");
+        lblMenoUzivatela.setText("Užívateľ: neprihlásený");
 
         btnPrihlasenieOdhlasenie.setText("Prihlás...");
         btnPrihlasenieOdhlasenie.addActionListener(new java.awt.event.ActionListener() {
@@ -232,89 +224,85 @@ public class HlavnyForm extends javax.swing.JFrame {
 
         menubarHlavneMenu.add(menuUzivatel);
 
+        menuOPrograme.setText("O programe...");
+        menuOPrograme.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuOProgrameMouseClicked(evt);
+            }
+        });
+        menubarHlavneMenu.add(menuOPrograme);
+
         setJMenuBar(menubarHlavneMenu);
+        menubarHlavneMenu.getAccessibleContext().setAccessibleName("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblRychlyFilter)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtRychlyFilter)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnRychloFiltruj, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnResetFiltra)
+                        .addGap(136, 136, 136))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(lblRychlyFilter)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtRychlyFilter)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnRychloFiltruj)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnResetFiltra))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnOPrograme, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnOdstran, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnUprav, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnZobrazDetail, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
-                            .addComponent(btnVyhladavaj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnNajdiNajblizsie, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnPridaj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnPrihlasenieOdhlasenie, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(lblMenoUzivatela))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(43, 43, 43)
-                                .addComponent(lblTagline, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 147, Short.MAX_VALUE)
-                                .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(41, 41, 41))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnOdstran, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnUprav, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnZobrazDetail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnVyhladavaj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnNajdiNajblizsie, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnPridaj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnPrihlasenieOdhlasenie, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(2, 2, 2))
+                            .addComponent(lblMenoUzivatela, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())))
+            .addComponent(jSeparator1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(3, 3, 3)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTagline, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblMenoUzivatela)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtRychlyFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnRychloFiltruj)
-                            .addComponent(btnResetFiltra)
-                            .addComponent(lblRychlyFilter)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnPrihlasenieOdhlasenie)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(txtRychlyFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRychloFiltruj)
+                    .addComponent(btnResetFiltra)
+                    .addComponent(lblRychlyFilter))
+                .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblMenoUzivatela)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnPrihlasenieOdhlasenie)
+                        .addGap(18, 18, 18)
                         .addComponent(btnZobrazDetail)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnUprav)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnOdstran)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(btnPridaj)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnVyhladavaj)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnNajdiNajblizsie))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnOPrograme)
-                .addContainerGap())
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -414,10 +402,6 @@ public class HlavnyForm extends javax.swing.JFrame {
         }
     }
 
-    private void btnOProgrameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOProgrameActionPerformed
-        oProgrameAction();
-    }//GEN-LAST:event_btnOProgrameActionPerformed
-
     /**
      * Otvori okno s info o programe
      */
@@ -477,7 +461,7 @@ public class HlavnyForm extends javax.swing.JFrame {
         btnPridaj.setEnabled(false);
         menuitemPridaj.setEnabled(false);
         
-        lblMenoUzivatela.setText("Užívateľ: -");
+        lblMenoUzivatela.setText("Užívateľ: neprihlásený");
         btnPrihlasenieOdhlasenie.setText("Prihlás...");
         menuitemPrihlasOdhlas.setText("Prihlás...");
     }
@@ -526,6 +510,10 @@ public class HlavnyForm extends javax.swing.JFrame {
         registrujAction();
     }//GEN-LAST:event_menuitemRegistrujActionPerformed
 
+    private void menuOProgrameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuOProgrameMouseClicked
+        oProgrameAction();
+    }//GEN-LAST:event_menuOProgrameMouseClicked
+
     /**
      * Otvori okno s registraciou noveho pouzivatela
      */
@@ -549,7 +537,7 @@ public class HlavnyForm extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -575,7 +563,6 @@ public class HlavnyForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNajdiNajblizsie;
-    private javax.swing.JButton btnOPrograme;
     private javax.swing.JButton btnOdstran;
     private javax.swing.JButton btnPridaj;
     private javax.swing.JButton btnPrihlasenieOdhlasenie;
@@ -585,10 +572,11 @@ public class HlavnyForm extends javax.swing.JFrame {
     private javax.swing.JButton btnVyhladavaj;
     private javax.swing.JButton btnZobrazDetail;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblMenoUzivatela;
     private javax.swing.JLabel lblRychlyFilter;
-    private javax.swing.JLabel lblTagline;
+    private javax.swing.JMenu menuOPrograme;
     private javax.swing.JMenu menuStredisko;
     private javax.swing.JMenu menuUzivatel;
     private javax.swing.JMenuBar menubarHlavneMenu;

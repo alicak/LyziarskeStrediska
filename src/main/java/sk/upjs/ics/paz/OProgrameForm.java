@@ -22,18 +22,46 @@ public class OProgrameForm extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblLogo = new javax.swing.JLabel();
+        lblCopyright = new javax.swing.JLabel();
+        lblNazov = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("O programe");
+
+        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo o programe.png"))); // NOI18N
+
+        lblCopyright.setText("© 2014 Martin Glova a Alica Kačengová");
+
+        lblNazov.setText("Lyžiarske strediská 1.0");
+
+        jLabel1.setText("Ústav informatiky, Prírodovedecká fakulta UPJŠ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblLogo)
+                    .addComponent(lblNazov)
+                    .addComponent(lblCopyright)
+                    .addComponent(jLabel1)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblLogo)
+                .addGap(18, 18, 18)
+                .addComponent(lblNazov)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblCopyright)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -82,5 +110,9 @@ public class OProgrameForm extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lblCopyright;
+    private javax.swing.JLabel lblLogo;
+    private javax.swing.JLabel lblNazov;
     // End of variables declaration//GEN-END:variables
 }

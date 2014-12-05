@@ -31,11 +31,11 @@ public class PrihlasovanieForm extends javax.swing.JDialog {
 
         btnStorno = new javax.swing.JButton();
         btnPrihlas = new javax.swing.JButton();
-        lblLogo = new javax.swing.JLabel();
         lblMeno = new javax.swing.JLabel();
         lblHeslo = new javax.swing.JLabel();
         txtMeno = new javax.swing.JTextField();
         txtHeslo = new javax.swing.JPasswordField();
+        lblLogo3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -53,11 +53,11 @@ public class PrihlasovanieForm extends javax.swing.JDialog {
             }
         });
 
-        lblLogo.setText("miesto pre logo");
-
         lblMeno.setText("Meno:");
 
         lblHeslo.setText("Heslo:");
+
+        lblLogo3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo male.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -68,40 +68,40 @@ public class PrihlasovanieForm extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnPrihlas, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnStorno, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblHeslo)
+                        .addComponent(btnPrihlas)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtHeslo))
+                        .addComponent(btnStorno))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblLogo)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblMeno)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblMeno)
+                            .addComponent(lblHeslo))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtMeno)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtHeslo)
+                            .addComponent(txtMeno)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblLogo3)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblLogo)
-                .addGap(43, 43, 43)
+                .addComponent(lblLogo3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblMeno)
                     .addComponent(txtMeno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblHeslo)
                     .addComponent(txtHeslo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnPrihlas)
                     .addComponent(btnStorno))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -175,7 +175,7 @@ public class PrihlasovanieForm extends javax.swing.JDialog {
     private javax.swing.JButton btnPrihlas;
     private javax.swing.JButton btnStorno;
     private javax.swing.JLabel lblHeslo;
-    private javax.swing.JLabel lblLogo;
+    private javax.swing.JLabel lblLogo3;
     private javax.swing.JLabel lblMeno;
     private javax.swing.JPasswordField txtHeslo;
     private javax.swing.JTextField txtMeno;
