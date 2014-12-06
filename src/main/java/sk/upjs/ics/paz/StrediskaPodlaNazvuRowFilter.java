@@ -2,7 +2,7 @@ package sk.upjs.ics.paz;
 
 import javax.swing.RowFilter;
 
-public class StrediskaPodlaVsetkychStlpcovRowFilter extends RowFilter {
+public class StrediskaPodlaNazvuRowFilter extends RowFilter {
 
     private String hladanyVyraz = "";
 

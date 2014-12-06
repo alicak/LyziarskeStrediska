@@ -1,5 +1,7 @@
 package sk.upjs.ics.paz;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import org.springframework.jdbc.core.JdbcTemplate;
 import java.util.List;
@@ -140,4 +142,46 @@ public class DatabazovyStrediskaDao implements StrediskaDao {
 
     }
 
+    /**
+     * Vrati zoznam stredisk nachadzajucich sa v danom okruhu
+     *
+     * @param sirka zemepisna sirka miesta
+     * @param sirka zemepisna dlzka miesta
+     * @param okruh polomer okruhu v kilometroch
+     * @return
+     */
+    public List<Stredisko> najdiStrediskaVOkruhu(BigDecimal sirka, BigDecimal dlzka, double okruh) {
+        List<Stredisko> vysledok = new ArrayList<>();
+        for (Stredisko s : dajVsetky()) {
+            if (vzdialenostMedziMiestami(sirka.doubleValue(), 
+                    dlzka.doubleValue(), 
+                    s.getGpsSirka().doubleValue(), 
+                    s.getGpsDlzka().doubleValue()) 
+                    <= okruh) {
+                vysledok.add(s);
+            }
+        }
+        return vysledok;
+    }
+
+    /**
+     * Na zaklade suradnic vypocita vzdialenost medzi dvoma miestami
+     *
+     * @param lat1 sirka miesta1
+     * @param lon1 dlzka miesta1
+     * @param lat2 sirka miesta2
+     * @param lon2 dlzka miesta2
+     * @return vzdialenost medzi miestom1 a miestom2
+     */
+    private double vzdialenostMedziMiestami(double lat1, double lon1, double lat2, double lon2) {
+        double R = 6372.8; // In kilometers
+        double dLat = Math.toRadians(lat2 - lat1);
+        double dLon = Math.toRadians(lon2 - lon1);
+        lat1 = Math.toRadians(lat1);
+        lat2 = Math.toRadians(lat2);
+
+        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
+        double c = 2 * Math.asin(Math.sqrt(a));
+        return R * c;
+    }
 }

@@ -57,10 +57,20 @@ public class StrediskoTableModel extends AbstractTableModel {
     }
 
     /**
-     * Aktualizuje zoznam teplakov
+     * Aktualizuje zoznam stredisk
      */
     public void obnov() {
         zoznamStredisk = strediskaDao.dajVsetky();
+        fireTableDataChanged();
+    }
+    
+    /**
+     * Zobrazi v tabulke zoznam, ktory zadame
+     * @param zoznam 
+     */
+    public void zobrazZadanyZoznam(List<Stredisko> zoznam)
+    {
+        zoznamStredisk = zoznam;
         fireTableDataChanged();
     }
 

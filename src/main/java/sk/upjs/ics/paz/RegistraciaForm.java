@@ -1,5 +1,6 @@
 package sk.upjs.ics.paz;
 
+import java.math.BigDecimal;
 import javax.swing.JOptionPane;
 
 public class RegistraciaForm extends javax.swing.JDialog {
@@ -32,11 +33,18 @@ public class RegistraciaForm extends javax.swing.JDialog {
         btnRegistruj = new javax.swing.JButton();
         txtHeslo = new javax.swing.JPasswordField();
         lblLogo2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txtSirka = new javax.swing.JTextField();
+        txtDlzka = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setText("Meno:");
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("Heslo:");
 
         btnStorno.setText("Storno");
@@ -55,6 +63,12 @@ public class RegistraciaForm extends javax.swing.JDialog {
 
         lblLogo2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo male.png"))); // NOI18N
 
+        jLabel3.setText("Zadajte svoju polohu (nepovinné):");
+
+        jLabel4.setText("Šírka:");
+
+        jLabel5.setText("Dĺžka:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -62,6 +76,19 @@ public class RegistraciaForm extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnRegistruj)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnStorno))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(16, 16, 16)
+                        .addComponent(txtDlzka))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtSirka))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -71,12 +98,9 @@ public class RegistraciaForm extends javax.swing.JDialog {
                             .addComponent(txtHeslo)
                             .addComponent(txtMeno)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnRegistruj)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnStorno))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblLogo2)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblLogo2)
+                            .addComponent(jLabel3))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -85,7 +109,7 @@ public class RegistraciaForm extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblLogo2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtMeno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -93,11 +117,21 @@ public class RegistraciaForm extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtHeslo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtSirka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtDlzka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnStorno)
                     .addComponent(btnRegistruj))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -110,15 +144,33 @@ public class RegistraciaForm extends javax.swing.JDialog {
     private void btnRegistrujActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrujActionPerformed
         String meno = txtMeno.getText();
         String heslo = new String(txtHeslo.getPassword());
+
         if (meno.equals("") || heslo.equals("")) {
             JOptionPane.showMessageDialog(this, "Zadajte používateľské meno aj heslo!");
             return;
         }
 
+        String sirka = txtSirka.getText();
+        String dlzka = txtDlzka.getText();
+        BigDecimal gpsSirka = null;
+        BigDecimal gpsDlzka = null;
+
+        // ak su polia prazdne, vynimku neodchytavame, lebo su nepovinne
+        // ale nemoze byt jedno prazdne a jedno vyplnene - to odchytime
+        if (!sirka.isEmpty() && !dlzka.isEmpty()) {
+            try {
+                gpsSirka = new BigDecimal(sirka);
+                gpsDlzka = new BigDecimal(dlzka);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Zadali ste nesprávny formát zemepisnej polohy.");
+                return;
+            }
+        }
+
         if (pouzivateliaDao.existujePouzivatel(meno)) {
             JOptionPane.showMessageDialog(this, "Používateľ s menom " + meno + " už existuje!");
         } else {
-            pouzivateliaDao.registruj(meno, heslo);
+            pouzivateliaDao.registruj(meno, heslo, gpsSirka, gpsDlzka);
             dispose();
         }
     }//GEN-LAST:event_btnRegistrujActionPerformed
@@ -170,8 +222,13 @@ public class RegistraciaForm extends javax.swing.JDialog {
     private javax.swing.JButton btnStorno;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel lblLogo2;
+    private javax.swing.JTextField txtDlzka;
     private javax.swing.JPasswordField txtHeslo;
     private javax.swing.JTextField txtMeno;
+    private javax.swing.JTextField txtSirka;
     // End of variables declaration//GEN-END:variables
 }

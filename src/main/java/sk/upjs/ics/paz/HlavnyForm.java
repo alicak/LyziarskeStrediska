@@ -13,9 +13,9 @@ public class HlavnyForm extends javax.swing.JFrame {
 
     private final TableRowSorter strediskaRowSorter = new TableRowSorter(strediskaTableModel);
 
-    private final StrediskaPodlaVsetkychStlpcovRowFilter strediskaPodlaVsetkychStlpcovRowFilter
-            = new StrediskaPodlaVsetkychStlpcovRowFilter();
-
+    private final StrediskaPodlaNazvuRowFilter strediskaPodlaVsetkychStlpcovRowFilter
+            = new StrediskaPodlaNazvuRowFilter();
+    
     private Pouzivatel pouzivatel;
 
     public HlavnyForm() {
@@ -40,18 +40,16 @@ public class HlavnyForm extends javax.swing.JFrame {
 
     private void tabStrediskaSelectionValueChanged(ListSelectionEvent e) {
         if (!e.getValueIsAdjusting()) {
-            if (pouzivatel != null) {
-                if (!tabStrediska.getSelectionModel().isSelectionEmpty()) {
+            if (!tabStrediska.getSelectionModel().isSelectionEmpty()) {
+                btnZobrazDetail.setEnabled(true);
+                if (pouzivatel != null) {
                     btnUprav.setEnabled(true);
                     btnOdstran.setEnabled(true);
-                } else {
-                    btnUprav.setEnabled(false);
-                    btnOdstran.setEnabled(false);
                 }
             } else {
+                btnZobrazDetail.setEnabled(false);
                 btnUprav.setEnabled(false);
                 btnOdstran.setEnabled(false);
-                btnPridaj.setEnabled(false);
             }
         }
     }
@@ -142,6 +140,7 @@ public class HlavnyForm extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tabStrediska);
 
         btnZobrazDetail.setText("Zobraz detail...");
+        btnZobrazDetail.setEnabled(false);
         btnZobrazDetail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnZobrazDetailActionPerformed(evt);
@@ -443,10 +442,9 @@ public class HlavnyForm extends javax.swing.JFrame {
     private void prihlas() {
         pouzivatel = Factory.INSTANCE.getPouzivatel();
         if (pouzivatel != null) {
-            btnPridaj.setEnabled(true);
-            btnUprav.setEnabled(true);
-            btnOdstran.setEnabled(true);
             menuitemPridaj.setEnabled(true);
+            btnPridaj.setEnabled(true);
+            tabStrediska.clearSelection();
 
             lblMenoUzivatela.setText("Užívateľ: " + pouzivatel.getMeno());
             btnPrihlasenieOdhlasenie.setText("Odhlás");
@@ -462,10 +460,9 @@ public class HlavnyForm extends javax.swing.JFrame {
         Factory.INSTANCE.setPouzivatel(pouzivatel);
         strediskaDao = Factory.INSTANCE.getNovyStrediskaDao(pouzivatel);
 
-        btnUprav.setEnabled(false);
-        btnOdstran.setEnabled(false);
+        menuitemPridaj.setEnabled(false);  
         btnPridaj.setEnabled(false);
-        menuitemPridaj.setEnabled(false);
+        tabStrediska.clearSelection();
 
         lblMenoUzivatela.setText("Užívateľ: neprihlásený");
         btnPrihlasenieOdhlasenie.setText("Prihlás...");

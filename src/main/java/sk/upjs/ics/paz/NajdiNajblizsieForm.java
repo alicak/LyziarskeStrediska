@@ -2,6 +2,8 @@ package sk.upjs.ics.paz;
 
 public class NajdiNajblizsieForm extends javax.swing.JDialog {
 
+    private Pouzivatel pouzivatel = Factory.INSTANCE.getPouzivatel();
+
     /**
      * Creates new form NajdiNajblizsieForm
      *
@@ -11,6 +13,14 @@ public class NajdiNajblizsieForm extends javax.swing.JDialog {
     public NajdiNajblizsieForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+ 
+        // ak ma pouzivatel zadane suradnice, tak sa nacitaju
+        if (pouzivatel != null) {
+            if (pouzivatel.getGpsDlzka() != null && pouzivatel.getGpsSirka() != null) {
+                txtDlzka.setText(pouzivatel.getGpsDlzka().toString());
+                txtSirka.setText(pouzivatel.getGpsSirka().toString());
+            }
+        }
     }
 
     /**
@@ -22,22 +32,111 @@ public class NajdiNajblizsieForm extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        txtSirka = new javax.swing.JTextField();
+        txtDlzka = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        txtOkruh = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        btnNajdi = new javax.swing.JButton();
+        btnStorno = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Nájdi najbližšie stredisko");
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel1.setText("Zadajte svoju polohu:");
+
+        jLabel2.setText("Šírka:");
+
+        jLabel3.setText("Dĺžka:");
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel4.setText("V akom okruhu chcete vyhľadávať?");
+
+        jLabel5.setText("kilometrov");
+
+        btnNajdi.setText("Nájdi");
+        btnNajdi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNajdiActionPerformed(evt);
+            }
+        });
+
+        btnStorno.setText("Storno");
+        btnStorno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStornoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtSirka, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDlzka, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel4)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtOkruh, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(73, 73, 73)
+                        .addComponent(btnNajdi)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnStorno)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtSirka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtDlzka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtOkruh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnStorno)
+                    .addComponent(btnNajdi))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnStornoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStornoActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnStornoActionPerformed
+
+    private void btnNajdiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNajdiActionPerformed
+        double okruh = Double.parseDouble(txtOkruh.getText());
+        // TODO dorobit to
+    }//GEN-LAST:event_btnNajdiActionPerformed
 
     /**
      * @param args the command line arguments
@@ -82,5 +181,15 @@ public class NajdiNajblizsieForm extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnNajdi;
+    private javax.swing.JButton btnStorno;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JTextField txtDlzka;
+    private javax.swing.JTextField txtOkruh;
+    private javax.swing.JTextField txtSirka;
     // End of variables declaration//GEN-END:variables
 }

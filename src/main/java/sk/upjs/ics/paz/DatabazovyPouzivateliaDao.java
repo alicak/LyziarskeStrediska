@@ -1,5 +1,6 @@
 package sk.upjs.ics.paz;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -16,17 +17,22 @@ class DatabazovyPouzivateliaDao implements PouzivateliaDao {
 
     /**
      * Registruje noveho uzivatela
+     *
      * @param meno registracne meno
      * @param heslo registracne heslo
+     * @param gpsSirka zemepisna sirka (nepovinne)
+     * @param gpsDlzka zemepisna dlzka (nepovinne)
      */
     @Override
-    public void registruj(String meno, String heslo) {
+    public void registruj(String meno, String heslo, BigDecimal gpsSirka, BigDecimal gpsDlzka) {
         String nazovTabulky = meno + "Tab";
 
         Map<String, Object> hodnoty = new HashMap<>();
         hodnoty.put("Meno", meno);
         hodnoty.put("Heslo", heslo);
         hodnoty.put("Tabulka", nazovTabulky);
+        hodnoty.put("GpsSirka", gpsSirka);
+        hodnoty.put("GpsDlzka", gpsDlzka);
 
         SimpleJdbcInsert insert = new SimpleJdbcInsert(jdbcTemplate);
         insert.setTableName("Uzivatelia");
@@ -39,7 +45,7 @@ class DatabazovyPouzivateliaDao implements PouzivateliaDao {
      *
      * @param meno meno uzivatela
      * @param heslo heslo uzivatela
-     * @return vrati referenziu na uzivatela zo zadanym menom a heslom
+     * @return vrati referenziu na uzivatela so zadanym menom a heslom
      */
     @Override
     public Pouzivatel dajUzivatela(String meno, String heslo) {
@@ -50,6 +56,9 @@ class DatabazovyPouzivateliaDao implements PouzivateliaDao {
             pouzivatel.setMeno(meno);
             pouzivatel.setHeslo(heslo);
             pouzivatel.setNazovTabulky(dajTabulku(meno));
+
+            pouzivatel.setGpsSirka(dajSuradnicu(meno, "sirka"));
+            pouzivatel.setGpsDlzka(dajSuradnicu(meno, "dlzka"));
         }
 
         return pouzivatel;
@@ -85,6 +94,35 @@ class DatabazovyPouzivateliaDao implements PouzivateliaDao {
         return (String) jdbcTemplate.queryForObject(
                 sql, new Object[]{meno}, String.class);
     }
+    
+    /**
+     * Vrati suradnicu polohy uzivatela
+     * @param meno meno uzivatela
+     * @param suradnica suradnic (dlzka alebo sirka)
+     * @return 
+     */
+    private BigDecimal dajSuradnicu(String meno, String suradnica) {
+        String sql = null;
+        String novaSuradnica = null;
+        BigDecimal vysledok = null;
+
+        if (suradnica.equals("sirka")) {
+            sql = "SELECT GpsSirka FROM Uzivatelia WHERE meno = ?";
+            novaSuradnica = jdbcTemplate.queryForObject(
+                    sql, new Object[]{meno}, String.class);
+        } else if (suradnica.equals("dlzka")) {
+            sql = "SELECT GpsDlzka FROM Uzivatelia WHERE meno = ?";
+            novaSuradnica = jdbcTemplate.queryForObject(
+                    sql, new Object[]{meno}, String.class);
+        }
+
+        try {
+            vysledok = new BigDecimal(novaSuradnica);
+        } catch (Exception e) {
+            vysledok = null;
+        }
+        return vysledok;
+    }
 
     /**
      * Vytvori novy tabulku v databaze
@@ -106,7 +144,7 @@ class DatabazovyPouzivateliaDao implements PouzivateliaDao {
         } catch (EmptyResultDataAccessException e) {
             return false;
         }
-        
+
         return true;
     }
 

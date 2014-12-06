@@ -35,7 +35,6 @@ public class PridajUpravStrediskoForm extends javax.swing.JDialog {
 
         this.txtNazov.setText(stredisko.getNazov());
         this.txtVyskaSnehu.setText(Integer.toString(stredisko.getVyskaSnehu()));
-        // TODO otestovat, ci to funguje
         this.cmbPodmienky.setSelectedItem(stredisko.getPodmienky());
         this.txtPocetVlekovVPrevadzke.setText(Integer.toString(stredisko.getPocetVlekovVPrevadzke()));
         this.txtPocetVlekov.setText(Integer.toString(stredisko.getPocetVlekov()));
