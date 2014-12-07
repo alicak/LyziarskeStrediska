@@ -1,5 +1,7 @@
-package sk.upjs.ics.paz;
+package sk.upjs.ics.paz.gui;
 
+import sk.upjs.ics.paz.entity.*;
+import sk.upjs.ics.paz.dao.*;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -17,12 +19,12 @@ public class HlavnyForm extends javax.swing.JFrame {
     private final StrediskaPodlaNazvuRowFilter strediskaPodlaVsetkychStlpcovRowFilter
             = new StrediskaPodlaNazvuRowFilter();
     
-    private Pouzivatel pouzivatel;
+    private Pouzivatel pouzivatel = Factory.INSTANCE.getPouzivatel();
 
     public HlavnyForm() {
         initComponents();
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo.png"))); // NOI18N
-        strediskaDao = Factory.INSTANCE.getStrediskaDao(pouzivatel);
+        strediskaDao = Factory.INSTANCE.getStrediskaDao();
 
         strediskaRowSorter.setRowFilter(strediskaPodlaVsetkychStlpcovRowFilter);
 
@@ -459,8 +461,8 @@ public class HlavnyForm extends javax.swing.JFrame {
     private void odhlas() {
         pouzivatel = null;
         Factory.INSTANCE.setPouzivatel(pouzivatel);
-        strediskaDao = Factory.INSTANCE.getNovyStrediskaDao(pouzivatel);
-        filtreDao = Factory.INSTANCE.getNovyFiltreDao(pouzivatel);
+        strediskaDao = Factory.INSTANCE.getNovyStrediskaDao();
+        filtreDao = Factory.INSTANCE.getNovyFiltreDao();
 
         menuitemPridaj.setEnabled(false);  
         btnPridaj.setEnabled(false);

@@ -1,4 +1,4 @@
-package sk.upjs.ics.paz;
+package sk.upjs.ics.paz.dao;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -9,6 +9,8 @@ import java.util.Map;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import sk.upjs.ics.paz.entity.Pouzivatel;
+import sk.upjs.ics.paz.entity.Stredisko;
 
 public class DatabazovyStrediskaDao implements StrediskaDao {
 
@@ -146,7 +148,7 @@ public class DatabazovyStrediskaDao implements StrediskaDao {
      * Vrati zoznam stredisk nachadzajucich sa v danom okruhu
      *
      * @param sirka zemepisna sirka miesta
-     * @param sirka zemepisna dlzka miesta
+     * @param dlzka zemepisna dlzka miesta 
      * @param okruh polomer okruhu v kilometroch
      * @return
      */

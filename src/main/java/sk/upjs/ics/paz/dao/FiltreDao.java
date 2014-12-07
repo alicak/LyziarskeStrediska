@@ -1,6 +1,7 @@
-package sk.upjs.ics.paz;
+package sk.upjs.ics.paz.dao;
 
 import java.util.List;
+import sk.upjs.ics.paz.entity.Filter;
 
 public interface FiltreDao {
     

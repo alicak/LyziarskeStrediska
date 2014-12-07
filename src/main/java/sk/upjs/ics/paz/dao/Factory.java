@@ -1,7 +1,8 @@
-package sk.upjs.ics.paz;
+package sk.upjs.ics.paz.dao;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
+import sk.upjs.ics.paz.entity.Pouzivatel;
 
 public enum Factory {
 
@@ -21,26 +22,26 @@ public enum Factory {
         this.pouzivatel = pouzivatel;
     }
 
-    public StrediskaDao getNovyStrediskaDao(Pouzivatel pouzivatel) {
-        strediskaDao = new DatabazovyStrediskaDao(pouzivatel, getJdbcTemplate());
+    public StrediskaDao getNovyStrediskaDao() {
+        strediskaDao = new DatabazovyStrediskaDao(getPouzivatel(), getJdbcTemplate());
         return strediskaDao;
     }
 
-    public StrediskaDao getStrediskaDao(Pouzivatel pouzivatel) {
+    public StrediskaDao getStrediskaDao() {
         if (strediskaDao == null) {
-            strediskaDao = new DatabazovyStrediskaDao(pouzivatel, getJdbcTemplate());
+            strediskaDao = new DatabazovyStrediskaDao(getPouzivatel(), getJdbcTemplate());
         }
         return strediskaDao;
     }
     
-    public FiltreDao getNovyFiltreDao(Pouzivatel pouzivatel) {
-        filtreDao = new DatabazovyFiltreDao(pouzivatel, getJdbcTemplate());
+    public FiltreDao getNovyFiltreDao() {
+        filtreDao = new DatabazovyFiltreDao(getPouzivatel(), getJdbcTemplate());
         return filtreDao;
     }
 
-    public FiltreDao getFiltreDao(Pouzivatel pouzivatel) {
+    public FiltreDao getFiltreDao() {
         if (filtreDao == null) {
-            filtreDao = new DatabazovyFiltreDao(pouzivatel, getJdbcTemplate());
+            filtreDao = new DatabazovyFiltreDao(getPouzivatel(), getJdbcTemplate());
         }
         return filtreDao;
     }
@@ -61,7 +62,7 @@ public enum Factory {
         return dataSource;
     }
 
-    public JdbcTemplate getJdbcTemplate() {
+    private JdbcTemplate getJdbcTemplate() {
         if (jdbcTemplate == null) {
             jdbcTemplate = new JdbcTemplate(getDataSource());
         }

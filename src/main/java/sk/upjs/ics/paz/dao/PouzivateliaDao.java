@@ -1,6 +1,7 @@
-package sk.upjs.ics.paz;
+package sk.upjs.ics.paz.dao;
 
 import java.math.BigDecimal;
+import sk.upjs.ics.paz.entity.Pouzivatel;
 
 public interface PouzivateliaDao {
     

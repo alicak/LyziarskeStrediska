@@ -1,4 +1,4 @@
-package sk.upjs.ics.paz;
+package sk.upjs.ics.paz.dao;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,13 +9,14 @@ import java.util.Set;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import sk.upjs.ics.paz.entity.*;
 
 public class DatabazovyFiltreDao implements FiltreDao {
 
     private final JdbcTemplate jdbcTemplate;
     private static final BeanPropertyRowMapper<Filter> mapovac = new BeanPropertyRowMapper<>(Filter.class);
     // meno aktualne prihlaseneho pouzivatela
-    private String menoPouzivatela;
+    private final String menoPouzivatela;
 
     public DatabazovyFiltreDao(Pouzivatel pouzivatel, JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;

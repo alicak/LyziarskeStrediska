@@ -1,5 +1,9 @@
-package sk.upjs.ics.paz;
+package sk.upjs.ics.paz.gui;
 
+import sk.upjs.ics.paz.entity.Pouzivatel;
+import sk.upjs.ics.paz.entity.Stredisko;
+import sk.upjs.ics.paz.dao.StrediskaDao;
+import sk.upjs.ics.paz.dao.Factory;
 import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
@@ -17,7 +21,7 @@ public class StrediskoTableModel extends AbstractTableModel {
         String.class
     };
     private Pouzivatel pouzivatel = Factory.INSTANCE.getPouzivatel();
-    private final StrediskaDao strediskaDao = Factory.INSTANCE.getStrediskaDao(pouzivatel);
+    private StrediskaDao strediskaDao = Factory.INSTANCE.getStrediskaDao();
 
     /**
      * @return pocet riadkov tabulky
@@ -60,6 +64,8 @@ public class StrediskoTableModel extends AbstractTableModel {
      * Aktualizuje zoznam stredisk
      */
     public void obnov() {
+        pouzivatel = Factory.INSTANCE.getPouzivatel();
+        strediskaDao = Factory.INSTANCE.getNovyStrediskaDao();
         zoznamStredisk = strediskaDao.dajVsetky();
         fireTableDataChanged();
     }

@@ -1,4 +1,6 @@
-package sk.upjs.ics.paz;
+package sk.upjs.ics.paz.gui;
+
+import sk.upjs.ics.paz.entity.Stredisko;
 
 public class ZobrazDetailForm extends javax.swing.JDialog {
 

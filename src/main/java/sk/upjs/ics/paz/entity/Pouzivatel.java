@@ -1,8 +1,8 @@
-package sk.upjs.ics.paz;
+package sk.upjs.ics.paz.entity;
 
 import java.math.BigDecimal;
 
-class Pouzivatel {
+public class Pouzivatel {
     private String meno;
 
     private String heslo;

@@ -1,4 +1,7 @@
-package sk.upjs.ics.paz;
+package sk.upjs.ics.paz.gui;
+
+import sk.upjs.ics.paz.entity.Pouzivatel;
+import sk.upjs.ics.paz.dao.Factory;
 
 public class NajdiNajblizsieForm extends javax.swing.JDialog {
 

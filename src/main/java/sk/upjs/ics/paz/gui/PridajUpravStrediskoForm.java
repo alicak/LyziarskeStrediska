@@ -1,5 +1,9 @@
-package sk.upjs.ics.paz;
+package sk.upjs.ics.paz.gui;
 
+import sk.upjs.ics.paz.entity.Pouzivatel;
+import sk.upjs.ics.paz.entity.Stredisko;
+import sk.upjs.ics.paz.dao.StrediskaDao;
+import sk.upjs.ics.paz.dao.Factory;
 import java.awt.Frame;
 import java.math.BigDecimal;
 import javax.swing.JOptionPane;
@@ -8,8 +12,8 @@ import static javax.swing.JOptionPane.ERROR_MESSAGE;
 public class PridajUpravStrediskoForm extends javax.swing.JDialog {
 
     private Stredisko stredisko;
-    private Pouzivatel pouzivatel = Factory.INSTANCE.getPouzivatel();
-    private StrediskaDao strediskaDao = Factory.INSTANCE.getStrediskaDao(pouzivatel);
+    private final Pouzivatel pouzivatel = Factory.INSTANCE.getPouzivatel();
+    private final StrediskaDao strediskaDao = Factory.INSTANCE.getStrediskaDao();
 
     /**
      * Creates new form PridajUpravStrediskoForm

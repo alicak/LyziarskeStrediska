@@ -1,4 +1,4 @@
-package sk.upjs.ics.paz;
+package sk.upjs.ics.paz.dao;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import sk.upjs.ics.paz.entity.Pouzivatel;
 
 class DatabazovyPouzivateliaDao implements PouzivateliaDao {
 

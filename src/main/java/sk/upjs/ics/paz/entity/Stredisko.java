@@ -1,4 +1,4 @@
-package sk.upjs.ics.paz;
+package sk.upjs.ics.paz.entity;
 
 import java.math.BigDecimal;
 

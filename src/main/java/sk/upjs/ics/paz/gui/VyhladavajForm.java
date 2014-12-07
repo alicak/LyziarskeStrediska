@@ -1,4 +1,4 @@
-package sk.upjs.ics.paz;
+package sk.upjs.ics.paz.gui;
 
 public class VyhladavajForm extends javax.swing.JDialog {
 

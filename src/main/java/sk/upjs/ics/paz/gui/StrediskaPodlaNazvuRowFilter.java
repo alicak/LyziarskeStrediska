@@ -1,4 +1,4 @@
-package sk.upjs.ics.paz;
+package sk.upjs.ics.paz.gui;
 
 import javax.swing.RowFilter;
 
@@ -17,10 +17,7 @@ public class StrediskaPodlaNazvuRowFilter extends RowFilter {
     @Override
     public boolean include(Entry entry) {
         String string = entry.getStringValue(0).toUpperCase();
-        if (string.contains(hladanyVyraz)) {
-            return true;
-        }
-        return false;
+        return string.contains(hladanyVyraz);
     }
 
 }
