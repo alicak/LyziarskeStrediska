@@ -8,6 +8,7 @@ import javax.swing.table.TableRowSorter;
 public class HlavnyForm extends javax.swing.JFrame {
 
     private StrediskaDao strediskaDao;
+    private FiltreDao filtreDao;
 
     private final StrediskoTableModel strediskaTableModel = new StrediskoTableModel();
 
@@ -459,6 +460,7 @@ public class HlavnyForm extends javax.swing.JFrame {
         pouzivatel = null;
         Factory.INSTANCE.setPouzivatel(pouzivatel);
         strediskaDao = Factory.INSTANCE.getNovyStrediskaDao(pouzivatel);
+        filtreDao = Factory.INSTANCE.getNovyFiltreDao(pouzivatel);
 
         menuitemPridaj.setEnabled(false);  
         btnPridaj.setEnabled(false);

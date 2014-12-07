@@ -9,6 +9,7 @@ public enum Factory {
 
     private JdbcTemplate jdbcTemplate;
     private StrediskaDao strediskaDao;
+    private FiltreDao filtreDao;
     private PouzivateliaDao pouzivateliaDao;
     private Pouzivatel pouzivatel;
     
@@ -30,6 +31,18 @@ public enum Factory {
             strediskaDao = new DatabazovyStrediskaDao(pouzivatel, getJdbcTemplate());
         }
         return strediskaDao;
+    }
+    
+    public FiltreDao getNovyFiltreDao(Pouzivatel pouzivatel) {
+        filtreDao = new DatabazovyFiltreDao(pouzivatel, getJdbcTemplate());
+        return filtreDao;
+    }
+
+    public FiltreDao getFiltreDao(Pouzivatel pouzivatel) {
+        if (filtreDao == null) {
+            filtreDao = new DatabazovyFiltreDao(pouzivatel, getJdbcTemplate());
+        }
+        return filtreDao;
     }
 
     public PouzivateliaDao getPouzivatelDao() {

@@ -149,7 +149,7 @@ public class RegistraciaForm extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Zadajte používateľské meno aj heslo!");
             return;
         }
-
+        
         String sirka = txtSirka.getText();
         String dlzka = txtDlzka.getText();
         BigDecimal gpsSirka = null;
@@ -167,7 +167,9 @@ public class RegistraciaForm extends javax.swing.JDialog {
             }
         }
 
-        if (pouzivateliaDao.existujePouzivatel(meno)) {
+        // meno nemoze byt "neprihlaseny", lebo taketo meno bude pri filtroch, 
+        // ktore su pre neprihlasenych pouzivatelov
+        if (pouzivateliaDao.existujePouzivatel(meno) || meno.equals("neprihlaseny")) {
             JOptionPane.showMessageDialog(this, "Používateľ s menom " + meno + " už existuje!");
         } else {
             pouzivateliaDao.registruj(meno, heslo, gpsSirka, gpsDlzka);
