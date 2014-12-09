@@ -29,7 +29,7 @@ public enum Factory {
 
     public StrediskaDao getStrediskaDao() {
         if (strediskaDao == null) {
-            strediskaDao = new DatabazovyStrediskaDao(getPouzivatel(), getJdbcTemplate());
+            return getNovyStrediskaDao();
         }
         return strediskaDao;
     }
@@ -41,7 +41,7 @@ public enum Factory {
 
     public FiltreDao getFiltreDao() {
         if (filtreDao == null) {
-            filtreDao = new DatabazovyFiltreDao(getPouzivatel(), getJdbcTemplate());
+            return getNovyFiltreDao();
         }
         return filtreDao;
     }

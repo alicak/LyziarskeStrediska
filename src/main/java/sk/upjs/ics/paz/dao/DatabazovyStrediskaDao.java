@@ -168,7 +168,7 @@ public class DatabazovyStrediskaDao implements StrediskaDao {
 
     /**
      * Na zaklade suradnic vypocita vzdialenost medzi dvoma miestami
-     *
+     * Zdroj: http://rosettacode.org/wiki/Haversine_formula#Java
      * @param lat1 sirka miesta1
      * @param lon1 dlzka miesta1
      * @param lat2 sirka miesta2

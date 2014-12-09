@@ -1,10 +1,15 @@
 package sk.upjs.ics.paz.entity;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class Filter {
 
-    // pri vsetkych intoch je prazdna hodnota zadana -1
+    // ak nema nejaka premenna zadanu hodnotu, tak to bude 
+    // defaultna hodnota novej premennej (kvoli null v databaze)
     private Long id;
     private String nazov;
     private String menoUzivatela;
@@ -130,6 +135,153 @@ public class Filter {
 
     public void setId(Long id) {
         this.id = id;
+    }
+    
+    /**
+     * Princip filtrovania je taky, ze sa do vysledneho zoznamu pridaju strediska
+     * z povodneho zoznamu, ktore vyhovuju prvej podmienke. Potom sa vyberaju tie,
+     * ktore vyhovuju druhej podmienke, ale uz nie z povodneho zoznamu, ale z toho,
+     * ktory presiel prvou podmienkou. Atd.
+     * @param zoznamStredisk zoznam, ktory filtrujeme
+     * @param filter filter, ktory pouzivame
+     * @return zoznam, ktory je podmnozinou vstupneho zoznamu a vyhovuje podmienkam filtra
+     */
+    public List<Stredisko> filtruj(List<Stredisko> zoznamStredisk) {
+        List<Stredisko> pomocny = new ArrayList<>(zoznamStredisk);
+        List<Stredisko> vysledok = new ArrayList<>();
+
+        if (nazovObsahuje!= null) {
+            for (Stredisko s : pomocny) {
+                if (s.getNazov().contains(nazovObsahuje)) {
+                    vysledok.add(s);
+                }
+            }
+            pomocny = new ArrayList<>(vysledok);
+            vysledok = new ArrayList<>();
+        }
+
+        if (minVyskaSnehu > 0) {
+            for (Stredisko s : pomocny) {
+                if (s.getVyskaSnehu() >= minVyskaSnehu) {
+                    vysledok.add(s);
+                }
+            }
+            pomocny = new ArrayList<>(vysledok);
+            vysledok = new ArrayList<>();
+        }
+
+        if (minPodmienky.equals("nezadané")) {
+            Set<String> vyhovujuce = dajLepsiePodmienky(minPodmienky);
+            for (Stredisko s : pomocny) {
+                if (vyhovujuce.contains(s.getPodmienky()));
+                vysledok.add(s);
+            }
+            pomocny = new ArrayList<>(vysledok);
+            vysledok = new ArrayList<>();
+        }
+
+        if (minPocetVlekovVPrevadzke > 0) {
+            for (Stredisko s : pomocny) {
+                if (s.getPocetVlekovVPrevadzke() >= minPocetVlekovVPrevadzke) {
+                    vysledok.add(s);
+                }
+            }
+            pomocny = new ArrayList<>(vysledok);
+            vysledok = new ArrayList<>();
+        }
+
+        if (minPocetLanoviekVPrevadzke > 0) {
+            for (Stredisko s : pomocny) {
+                if (s.getPocetLanoviekVPrevadzke() >= minPocetLanoviekVPrevadzke) {
+                    vysledok.add(s);
+                }
+            }
+            pomocny = new ArrayList<>(vysledok);
+            vysledok = new ArrayList<>();
+        }
+
+        if (minPocetTratiVPrevadzke > 0) {
+            for (Stredisko s : pomocny) {
+                if (s.getPocetTratiVPrevadzke() >= minPocetTratiVPrevadzke) {
+                    vysledok.add(s);
+                }
+            }
+            pomocny = new ArrayList<>(vysledok);
+            vysledok = new ArrayList<>();
+        }
+
+        if (maxCenaListkaDospely.intValue() > 0) {
+            for (Stredisko s : pomocny) {
+                if (s.getCenaListkaDospely().doubleValue() <= maxCenaListkaDospely.doubleValue()) {
+                    vysledok.add(s);
+                }
+            }
+            pomocny = new ArrayList<>(vysledok);
+            vysledok = new ArrayList<>();
+        }
+
+        if (maxCenaListkaDieta.intValue() > 0) {
+            for (Stredisko s : pomocny) {
+                if (s.getCenaListkaDieta().doubleValue() <= maxCenaListkaDieta.doubleValue()) {
+                    vysledok.add(s);
+                }
+            }
+            pomocny = new ArrayList<>(vysledok);
+            vysledok = new ArrayList<>();
+        }
+
+        if (maxCenaListkaStudent.intValue() > 0) {
+            for (Stredisko s : pomocny) {
+                if (s.getCenaListkaStudent().doubleValue() <= maxCenaListkaStudent.doubleValue()) {
+                    vysledok.add(s);
+                }
+            }
+            pomocny = new ArrayList<>(vysledok);
+            vysledok = new ArrayList<>();
+        }
+
+        for (Stredisko s : pomocny) {
+            if (s.isDaSaPozicatVystroj() == daSaPozicatVystroj) {
+                vysledok.add(s);
+            }
+        }
+        pomocny = new ArrayList<>(vysledok);
+        vysledok = new ArrayList<>();
+
+        for (Stredisko s : pomocny) {
+            if (s.isDaSaUbytovat() == daSaUbytovat) {
+                vysledok.add(s);
+            }
+        }
+
+        return vysledok;
+
+    }
+
+    /**
+     * @param podmienky najhorsie mozne podmienky
+     * @return mnozinu podmienok, ktore su lepsie alebo rovnake ako vstupne
+     */
+    private Set<String> dajLepsiePodmienky(String podmienky) {
+        Set<String> vysledok = new HashSet<>();
+
+        if (podmienky.equals("výborné")) {
+            vysledok.add("výborné");
+        } else if (podmienky.equals("veľmi dobré")) {
+            vysledok.add("výborné");
+            vysledok.add("veľmi dobré");
+        } else if (podmienky.equals("dobré")) {
+            vysledok.add("výborné");
+            vysledok.add("veľmi dobré");
+            vysledok.add("dobré");
+        } else if (podmienky.equals("obmedzené")) {
+            vysledok.add("výborné");
+            vysledok.add("veľmi dobré");
+            vysledok.add("dobré");
+            vysledok.add("obmedzené");
+        }
+
+        return vysledok;
     }
 
 }

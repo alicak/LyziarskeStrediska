@@ -90,6 +90,8 @@ public class HlavnyForm extends javax.swing.JFrame {
         menuUzivatel = new javax.swing.JMenu();
         menuitemPrihlasOdhlas = new javax.swing.JMenuItem();
         menuitemRegistruj = new javax.swing.JMenuItem();
+        menuFilter = new javax.swing.JMenu();
+        menuitemSpravaFiltrov = new javax.swing.JMenuItem();
         menuOPrograme = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -225,6 +227,19 @@ public class HlavnyForm extends javax.swing.JFrame {
         menuUzivatel.add(menuitemRegistruj);
 
         menubarHlavneMenu.add(menuUzivatel);
+
+        menuFilter.setText("Filter");
+
+        menuitemSpravaFiltrov.setText("Správa filtrov...");
+        menuitemSpravaFiltrov.setEnabled(false);
+        menuitemSpravaFiltrov.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuitemSpravaFiltrovActionPerformed(evt);
+            }
+        });
+        menuFilter.add(menuitemSpravaFiltrov);
+
+        menubarHlavneMenu.add(menuFilter);
 
         menuOPrograme.setText("O programe...");
         menuOPrograme.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -429,6 +444,7 @@ public class HlavnyForm extends javax.swing.JFrame {
         // ak je pouzivatel prihlaseny, tak sa odhlasi
         if (pouzivatel != null) {
             odhlas();
+            aktualizujZoznamStredisk();
             return;
         }
         // ak nebol prihlaseny, tak sa prihlasi, 
@@ -447,6 +463,7 @@ public class HlavnyForm extends javax.swing.JFrame {
         if (pouzivatel != null) {
             menuitemPridaj.setEnabled(true);
             btnPridaj.setEnabled(true);
+            menuitemSpravaFiltrov.setEnabled(true);
             tabStrediska.clearSelection();
 
             lblMenoUzivatela.setText("Užívateľ: " + pouzivatel.getMeno());
@@ -466,6 +483,7 @@ public class HlavnyForm extends javax.swing.JFrame {
 
         menuitemPridaj.setEnabled(false);  
         btnPridaj.setEnabled(false);
+        menuitemSpravaFiltrov.setEnabled(false);
         tabStrediska.clearSelection();
 
         lblMenoUzivatela.setText("Užívateľ: neprihlásený");
@@ -521,6 +539,19 @@ public class HlavnyForm extends javax.swing.JFrame {
         oProgrameAction();
     }//GEN-LAST:event_menuOProgrameMouseClicked
 
+    private void menuitemSpravaFiltrovActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuitemSpravaFiltrovActionPerformed
+        spravaFiltrovAction();
+    }//GEN-LAST:event_menuitemSpravaFiltrovActionPerformed
+
+    /**
+     * Otvori okno so spravou filtrov
+     */
+    private void spravaFiltrovAction()
+    {
+        SpravaFiltrovForm spravaFiltrovForm = new SpravaFiltrovForm(this, true);
+        spravaFiltrovForm.setVisible(true);
+    }
+    
     /**
      * Otvori okno s registraciou noveho pouzivatela
      */
@@ -583,6 +614,7 @@ public class HlavnyForm extends javax.swing.JFrame {
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblMenoUzivatela;
     private javax.swing.JLabel lblRychlyFilter;
+    private javax.swing.JMenu menuFilter;
     private javax.swing.JMenu menuOPrograme;
     private javax.swing.JMenu menuStredisko;
     private javax.swing.JMenu menuUzivatel;
@@ -591,6 +623,7 @@ public class HlavnyForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuitemPridaj;
     private javax.swing.JMenuItem menuitemPrihlasOdhlas;
     private javax.swing.JMenuItem menuitemRegistruj;
+    private javax.swing.JMenuItem menuitemSpravaFiltrov;
     private javax.swing.JMenuItem menuitemVyhladavaj;
     private javax.swing.JTable tabStrediska;
     private javax.swing.JTextField txtRychlyFilter;

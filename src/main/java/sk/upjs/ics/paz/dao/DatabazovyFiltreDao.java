@@ -1,11 +1,8 @@
 package sk.upjs.ics.paz.dao;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
@@ -20,6 +17,7 @@ public class DatabazovyFiltreDao implements FiltreDao {
 
     public DatabazovyFiltreDao(Pouzivatel pouzivatel, JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+        mapovac.setPrimitivesDefaultedForNullValue(true);
 
         // ak pouzivatel nie je prihlaseny, tak sa mu zobrazuju 
         // defaultne filtre, ktore maju nastavene meno pouzivatela "neprihlaseny"
@@ -128,152 +126,4 @@ public class DatabazovyFiltreDao implements FiltreDao {
     public void odstran(Filter filter) {
         jdbcTemplate.update("DELETE FROM Filtre WHERE id = ?", filter.getId());
     }
-
-    /**
-     * Princip filtrovania je taky, ze sa do vysledneho zoznamu pridaju strediska
-     * z povodneho zoznamu, ktore vyhovuju prvej podmienke. Potom sa vyberaju tie,
-     * ktore vyhovuju druhej podmienke, ale uz nie z povodneho zoznamu, ale z toho,
-     * ktory presiel prvou podmienkou. Atd.
-     * @param zoznamStredisk zoznam, ktory filtrujeme
-     * @param filter filter, ktory pouzivame
-     * @return zoznam, ktory je podmnozinou vstupneho zoznamu a vyhovuje podmienkam filtra
-     */
-    public List<Stredisko> filtruj(List<Stredisko> zoznamStredisk, Filter filter) {
-        List<Stredisko> pomocny = new ArrayList<>(zoznamStredisk);
-        List<Stredisko> vysledok = new ArrayList<>();
-
-        if (filter.getNazovObsahuje() != null) {
-            for (Stredisko s : pomocny) {
-                if (s.getNazov().contains(filter.getNazovObsahuje())) {
-                    vysledok.add(s);
-                }
-            }
-            pomocny = new ArrayList<>(vysledok);
-            vysledok = new ArrayList<>();
-        }
-
-        if (filter.getMinVyskaSnehu() > 0) {
-            for (Stredisko s : pomocny) {
-                if (s.getVyskaSnehu() >= filter.getMinVyskaSnehu()) {
-                    vysledok.add(s);
-                }
-            }
-            pomocny = new ArrayList<>(vysledok);
-            vysledok = new ArrayList<>();
-        }
-
-        if (!filter.getMinPodmienky().equals("nezadané")) {
-            Set<String> vyhovujuce = dajLepsiePodmienky(filter.getMinPodmienky());
-            for (Stredisko s : pomocny) {
-                if (vyhovujuce.contains(s.getPodmienky()));
-                vysledok.add(s);
-            }
-            pomocny = new ArrayList<>(vysledok);
-            vysledok = new ArrayList<>();
-        }
-
-        if (filter.getMinPocetVlekovVPrevadzke() > 0) {
-            for (Stredisko s : pomocny) {
-                if (s.getPocetVlekovVPrevadzke() >= filter.getMinPocetVlekovVPrevadzke()) {
-                    vysledok.add(s);
-                }
-            }
-            pomocny = new ArrayList<>(vysledok);
-            vysledok = new ArrayList<>();
-        }
-
-        if (filter.getMinPocetLanoviekVPrevadzke() > 0) {
-            for (Stredisko s : pomocny) {
-                if (s.getPocetLanoviekVPrevadzke() >= filter.getMinPocetLanoviekVPrevadzke()) {
-                    vysledok.add(s);
-                }
-            }
-            pomocny = new ArrayList<>(vysledok);
-            vysledok = new ArrayList<>();
-        }
-
-        if (filter.getMinPocetTratiVPrevadzke() > 0) {
-            for (Stredisko s : pomocny) {
-                if (s.getPocetTratiVPrevadzke() >= filter.getMinPocetTratiVPrevadzke()) {
-                    vysledok.add(s);
-                }
-            }
-            pomocny = new ArrayList<>(vysledok);
-            vysledok = new ArrayList<>();
-        }
-
-        if (filter.getMaxCenaListkaDospely().intValue() > 0) {
-            for (Stredisko s : pomocny) {
-                if (s.getCenaListkaDospely().doubleValue() <= filter.getMaxCenaListkaDospely().doubleValue()) {
-                    vysledok.add(s);
-                }
-            }
-            pomocny = new ArrayList<>(vysledok);
-            vysledok = new ArrayList<>();
-        }
-
-        if (filter.getMaxCenaListkaDieta().intValue() > 0) {
-            for (Stredisko s : pomocny) {
-                if (s.getCenaListkaDieta().doubleValue() <= filter.getMaxCenaListkaDieta().doubleValue()) {
-                    vysledok.add(s);
-                }
-            }
-            pomocny = new ArrayList<>(vysledok);
-            vysledok = new ArrayList<>();
-        }
-
-        if (filter.getMaxCenaListkaStudent().intValue() > 0) {
-            for (Stredisko s : pomocny) {
-                if (s.getCenaListkaStudent().doubleValue() <= filter.getMaxCenaListkaStudent().doubleValue()) {
-                    vysledok.add(s);
-                }
-            }
-            pomocny = new ArrayList<>(vysledok);
-            vysledok = new ArrayList<>();
-        }
-
-        for (Stredisko s : pomocny) {
-            if (s.isDaSaPozicatVystroj() == filter.isDaSaPozicatVystroj()) {
-                vysledok.add(s);
-            }
-        }
-        pomocny = new ArrayList<>(vysledok);
-        vysledok = new ArrayList<>();
-
-        for (Stredisko s : pomocny) {
-            if (s.isDaSaUbytovat() == filter.isDaSaUbytovat()) {
-                vysledok.add(s);
-            }
-        }
-
-        return vysledok;
-
-    }
-
-    /**
-     * @param podmienky najhorsie mozne podmienky
-     * @return mnozinu podmienok, ktore su lepsie alebo rovnake ako vstupne
-     */
-    private Set<String> dajLepsiePodmienky(String podmienky) {
-        Set<String> vysledok = new HashSet<>();
-
-        if (podmienky.equals("výborné")) {
-            vysledok.add("výborné");
-        } else if (podmienky.equals("veľmi dobré")) {
-            vysledok.add("výborné");
-            vysledok.add("veľmi dobré");
-        } else if (podmienky.equals("dobré")) {
-            vysledok.add("výborné");
-            vysledok.add("veľmi dobré");
-            vysledok.add("dobré");
-        } else if (podmienky.equals("obmedzené")) {
-            vysledok.add("výborné");
-            vysledok.add("veľmi dobré");
-            vysledok.add("dobré");
-            vysledok.add("obmedzené");
-        }
-
-        return vysledok;
-    }
-
 }
