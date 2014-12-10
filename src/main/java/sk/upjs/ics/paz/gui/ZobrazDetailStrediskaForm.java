@@ -2,7 +2,7 @@ package sk.upjs.ics.paz.gui;
 
 import sk.upjs.ics.paz.entity.Stredisko;
 
-public class ZobrazDetailForm extends javax.swing.JDialog {
+public class ZobrazDetailStrediskaForm extends javax.swing.JDialog {
 
     private Stredisko stredisko;
 
@@ -12,7 +12,7 @@ public class ZobrazDetailForm extends javax.swing.JDialog {
      * @param parent rodicovske okno
      * @param modal ci je okno modalne
      */
-    public ZobrazDetailForm(java.awt.Frame parent, boolean modal) {
+    public ZobrazDetailStrediskaForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -23,7 +23,7 @@ public class ZobrazDetailForm extends javax.swing.JDialog {
      * @param parent rodicovske okno
      * @param stredisko stredisko, ktore zobrazujeme
      */
-    public ZobrazDetailForm(java.awt.Frame parent, Stredisko stredisko) {
+    public ZobrazDetailStrediskaForm(java.awt.Frame parent, Stredisko stredisko) {
         this(parent, true);
         this.stredisko = stredisko;
 
@@ -234,20 +234,21 @@ public class ZobrazDetailForm extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ZobrazDetailForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ZobrazDetailStrediskaForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ZobrazDetailForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ZobrazDetailStrediskaForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ZobrazDetailForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ZobrazDetailStrediskaForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ZobrazDetailForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ZobrazDetailStrediskaForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ZobrazDetailForm dialog = new ZobrazDetailForm(new javax.swing.JFrame(), true);
+                ZobrazDetailStrediskaForm dialog = new ZobrazDetailStrediskaForm(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

@@ -35,31 +35,31 @@ public class NajdiNajblizsieForm extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lblZadajtePolohu = new javax.swing.JLabel();
+        lblSirka = new javax.swing.JLabel();
+        lblDlzka = new javax.swing.JLabel();
         txtSirka = new javax.swing.JTextField();
         txtDlzka = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
+        lblOkruh = new javax.swing.JLabel();
         txtOkruh = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
+        lblKilometre = new javax.swing.JLabel();
         btnNajdi = new javax.swing.JButton();
         btnStorno = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Nájdi najbližšie stredisko");
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel1.setText("Zadajte svoju polohu:");
+        lblZadajtePolohu.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblZadajtePolohu.setText("Zadajte svoju polohu:");
 
-        jLabel2.setText("Šírka:");
+        lblSirka.setText("Šírka:");
 
-        jLabel3.setText("Dĺžka:");
+        lblDlzka.setText("Dĺžka:");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel4.setText("V akom okruhu chcete vyhľadávať?");
+        lblOkruh.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblOkruh.setText("V akom okruhu chcete vyhľadávať?");
 
-        jLabel5.setText("kilometrov");
+        lblKilometre.setText("kilometrov");
 
         btnNajdi.setText("Nájdi");
         btnNajdi.addActionListener(new java.awt.event.ActionListener() {
@@ -82,20 +82,20 @@ public class NajdiNajblizsieForm extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
+                    .addComponent(lblZadajtePolohu)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2))
+                            .addComponent(lblDlzka)
+                            .addComponent(lblSirka))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtSirka, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtDlzka, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabel4)
+                    .addComponent(lblOkruh)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtOkruh, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5))
+                        .addComponent(lblKilometre))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(73, 73, 73)
                         .addComponent(btnNajdi)
@@ -107,21 +107,21 @@ public class NajdiNajblizsieForm extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(lblZadajtePolohu)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                    .addComponent(lblSirka)
                     .addComponent(txtSirka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
+                    .addComponent(lblDlzka)
                     .addComponent(txtDlzka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                .addComponent(jLabel4)
+                .addComponent(lblOkruh)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtOkruh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                    .addComponent(lblKilometre))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnStorno)
@@ -138,7 +138,7 @@ public class NajdiNajblizsieForm extends javax.swing.JDialog {
 
     private void btnNajdiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNajdiActionPerformed
         double okruh = Double.parseDouble(txtOkruh.getText());
-        // TODO dorobit to
+        // TODO Dorobit to !!!
     }//GEN-LAST:event_btnNajdiActionPerformed
 
     /**
@@ -186,11 +186,11 @@ public class NajdiNajblizsieForm extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNajdi;
     private javax.swing.JButton btnStorno;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel lblDlzka;
+    private javax.swing.JLabel lblKilometre;
+    private javax.swing.JLabel lblOkruh;
+    private javax.swing.JLabel lblSirka;
+    private javax.swing.JLabel lblZadajtePolohu;
     private javax.swing.JTextField txtDlzka;
     private javax.swing.JTextField txtOkruh;
     private javax.swing.JTextField txtSirka;

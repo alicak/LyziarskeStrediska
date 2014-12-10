@@ -68,7 +68,6 @@ public class HlavnyForm extends javax.swing.JFrame {
 
         lblLogo = new javax.swing.JLabel();
         btnPridaj = new javax.swing.JButton();
-        btnVyhladavaj = new javax.swing.JButton();
         btnNajdiNajblizsie = new javax.swing.JButton();
         txtRychlyFilter = new javax.swing.JTextField();
         btnRychloFiltruj = new javax.swing.JButton();
@@ -85,7 +84,6 @@ public class HlavnyForm extends javax.swing.JFrame {
         menubarHlavneMenu = new javax.swing.JMenuBar();
         menuStredisko = new javax.swing.JMenu();
         menuitemPridaj = new javax.swing.JMenuItem();
-        menuitemVyhladavaj = new javax.swing.JMenuItem();
         menuitemNajdiNajblizsie = new javax.swing.JMenuItem();
         menuUzivatel = new javax.swing.JMenu();
         menuitemPrihlasOdhlas = new javax.swing.JMenuItem();
@@ -104,13 +102,6 @@ public class HlavnyForm extends javax.swing.JFrame {
         btnPridaj.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPridajActionPerformed(evt);
-            }
-        });
-
-        btnVyhladavaj.setText("Vyhľadávaj...");
-        btnVyhladavaj.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVyhladavajActionPerformed(evt);
             }
         });
 
@@ -189,14 +180,6 @@ public class HlavnyForm extends javax.swing.JFrame {
             }
         });
         menuStredisko.add(menuitemPridaj);
-
-        menuitemVyhladavaj.setText("Vyhľadávaj...");
-        menuitemVyhladavaj.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuitemVyhladavajActionPerformed(evt);
-            }
-        });
-        menuStredisko.add(menuitemVyhladavaj);
 
         menuitemNajdiNajblizsie.setText("Nájdi najbližšie...");
         menuitemNajdiNajblizsie.addActionListener(new java.awt.event.ActionListener() {
@@ -278,13 +261,13 @@ public class HlavnyForm extends javax.swing.JFrame {
                                     .addComponent(btnOdstran, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnUprav, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnZobrazDetail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnVyhladavaj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnNajdiNajblizsie, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnPridaj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnPrihlasenieOdhlasenie, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(2, 2, 2))
-                            .addComponent(lblMenoUzivatela, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())))
+                                .addGap(12, 12, 12))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(lblMenoUzivatela, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())))))
             .addComponent(jSeparator1)
         );
         layout.setVerticalGroup(
@@ -301,7 +284,7 @@ public class HlavnyForm extends javax.swing.JFrame {
                     .addComponent(btnResetFiltra)
                     .addComponent(lblRychlyFilter))
                 .addGap(6, 6, 6)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblMenoUzivatela)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -315,27 +298,13 @@ public class HlavnyForm extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnPridaj)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnVyhladavaj)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnNajdiNajblizsie))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnVyhladavajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVyhladavajActionPerformed
-        vyhladavajAction();
-    }//GEN-LAST:event_btnVyhladavajActionPerformed
-
-    /**
-     * Otvori modalne okno s podrobnym vyhladavanim
-     */
-    private void vyhladavajAction() {
-        VyhladavajForm vyhladavajForm = new VyhladavajForm(this, true);
-        vyhladavajForm.setVisible(true);
-    }
 
     private void btnNajdiNajblizsieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNajdiNajblizsieActionPerformed
         najdiNajblizsieAction();
@@ -371,7 +340,7 @@ public class HlavnyForm extends javax.swing.JFrame {
      */
     private void zobrazDetailStrediskaAction() {
         Stredisko vybraneStredisko = dajStrediskoZTabulky();
-        ZobrazDetailForm zobrazDetailForm = new ZobrazDetailForm(this, vybraneStredisko);
+        ZobrazDetailStrediskaForm zobrazDetailForm = new ZobrazDetailStrediskaForm(this, vybraneStredisko);
         zobrazDetailForm.setVisible(true);
     }
 
@@ -519,10 +488,6 @@ public class HlavnyForm extends javax.swing.JFrame {
         pridajStrediskoAction();
     }//GEN-LAST:event_menuitemPridajActionPerformed
 
-    private void menuitemVyhladavajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuitemVyhladavajActionPerformed
-        vyhladavajAction();
-    }//GEN-LAST:event_menuitemVyhladavajActionPerformed
-
     private void menuitemNajdiNajblizsieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuitemNajdiNajblizsieActionPerformed
         najdiNajblizsieAction();
     }//GEN-LAST:event_menuitemNajdiNajblizsieActionPerformed
@@ -548,7 +513,7 @@ public class HlavnyForm extends javax.swing.JFrame {
      */
     private void spravaFiltrovAction()
     {
-        SpravaFiltrovForm spravaFiltrovForm = new SpravaFiltrovForm(this, true);
+        SpravaFiltrovForm spravaFiltrovForm = new SpravaFiltrovForm();
         spravaFiltrovForm.setVisible(true);
     }
     
@@ -607,7 +572,6 @@ public class HlavnyForm extends javax.swing.JFrame {
     private javax.swing.JButton btnResetFiltra;
     private javax.swing.JButton btnRychloFiltruj;
     private javax.swing.JButton btnUprav;
-    private javax.swing.JButton btnVyhladavaj;
     private javax.swing.JButton btnZobrazDetail;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
@@ -624,7 +588,6 @@ public class HlavnyForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuitemPrihlasOdhlas;
     private javax.swing.JMenuItem menuitemRegistruj;
     private javax.swing.JMenuItem menuitemSpravaFiltrov;
-    private javax.swing.JMenuItem menuitemVyhladavaj;
     private javax.swing.JTable tabStrediska;
     private javax.swing.JTextField txtRychlyFilter;
     // End of variables declaration//GEN-END:variables

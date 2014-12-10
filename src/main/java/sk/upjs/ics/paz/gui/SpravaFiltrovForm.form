@@ -78,6 +78,7 @@
     <Component class="javax.swing.JButton" name="btnZobrazDetail">
       <Properties>
         <Property name="text" type="java.lang.String" value="Zobraz detail..."/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnZobrazDetailActionPerformed"/>
@@ -94,6 +95,7 @@
     <Component class="javax.swing.JButton" name="btnUprav">
       <Properties>
         <Property name="text" type="java.lang.String" value="Uprav..."/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUpravActionPerformed"/>
@@ -102,6 +104,7 @@
     <Component class="javax.swing.JButton" name="btnOdstran">
       <Properties>
         <Property name="text" type="java.lang.String" value="Odstr&#xe1;&#x148;..."/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOdstranActionPerformed"/>

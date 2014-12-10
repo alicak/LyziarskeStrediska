@@ -85,8 +85,8 @@ public class DatabazovyFiltreDao implements FiltreDao {
             filter.getMaxCenaListkaDospely(),
             filter.getMaxCenaListkaDieta(),
             filter.getMaxCenaListkaStudent(),
-            filter.isDaSaPozicatVystroj(),
-            filter.isDaSaUbytovat(),
+            filter.isNutnostPozicatVystroj(),
+            filter.isNutnostUbytovat(),
             filter.getId()});
     }
 
@@ -108,8 +108,8 @@ public class DatabazovyFiltreDao implements FiltreDao {
         hodnoty.put("maxCenaListkaDospely", filter.getMaxCenaListkaDospely());
         hodnoty.put("maxCenaListkaDieta", filter.getMaxCenaListkaDieta());
         hodnoty.put("maxCenaListkaStudent", filter.getMaxCenaListkaStudent());
-        hodnoty.put("daSaPozicatVystroj", filter.isDaSaPozicatVystroj());
-        hodnoty.put("daSaUbytovat", filter.isDaSaUbytovat());
+        hodnoty.put("daSaPozicatVystroj", filter.isNutnostPozicatVystroj());
+        hodnoty.put("daSaUbytovat", filter.isNutnostUbytovat());
 
         SimpleJdbcInsert insert = new SimpleJdbcInsert(jdbcTemplate);
 

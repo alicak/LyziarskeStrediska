@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="chkDaSaUbytovat" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="lblNazovObsahuje" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="txtNazovObsahuje" min="-2" pref="92" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lblMinVyskaSnehu" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblMinPodmienky" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="txtMinVyskaSnehu" max="32767" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="lblCm" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="cmbMinPodmienky" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="lblNazov" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="txtNazov" min="-2" pref="146" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblMinPocetVlekov" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblMinPocetLanoviek" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblMinPocetTrati" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="txtMinPocetVlekov" max="32767" attributes="0"/>
+                          <Component id="txtMinPocetLanoviek" max="32767" attributes="0"/>
+                          <Component id="txtMinPocetTrati" pref="71" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Component id="lblMaxCenyListkov" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="lblMaxCenaListkaStudent" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="txtMaxCenaListkaStudent" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="lblMaxCenaListkaDieta" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="txtMaxCenaListkaDieta" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="lblMaxCenaListkaDospely" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="txtMaxCenaListkaDospely" min="-2" pref="68" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblEuro1" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblEuro2" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblEuro3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Component id="chkDaSaPozicatVystroj" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="26" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="btnUloz" min="-2" pref="69" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="btnStorno" min="-2" pref="69" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblNazov" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtNazov" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblNazovObsahuje" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtNazovObsahuje" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblMinVyskaSnehu" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtMinVyskaSnehu" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblCm" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblMinPodmienky" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cmbMinPodmienky" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="lblMaxCenyListkov" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblMaxCenaListkaDospely" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtMaxCenaListkaDospely" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblEuro1" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblMaxCenaListkaDieta" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtMaxCenaListkaDieta" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblEuro2" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblMaxCenaListkaStudent" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtMaxCenaListkaStudent" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblEuro3" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblMinPocetVlekov" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtMinPocetVlekov" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblMinPocetLanoviek" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtMinPocetLanoviek" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblMinPocetTrati" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtMinPocetTrati" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="chkDaSaPozicatVystroj" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="chkDaSaUbytovat" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="15" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnStorno" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnUloz" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="lblNazov">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="11" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="N&#xe1;zov filtra:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtNazov">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMinVyskaSnehu">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Minim&#xe1;lna v&#xfd;&#x161;ka snehu:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtMinVyskaSnehu">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblCm">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="cm"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblNazovObsahuje">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="N&#xe1;zov strediska obsahuje:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtNazovObsahuje">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMinPodmienky">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Minim&#xe1;lne podmienky:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cmbMinPodmienky">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="6">
+            <StringItem index="0" value="nezadan&#xe9;"/>
+            <StringItem index="1" value="v&#xfd;born&#xe9;"/>
+            <StringItem index="2" value="ve&#x13e;mi dobr&#xe9;"/>
+            <StringItem index="3" value="dobr&#xe9;"/>
+            <StringItem index="4" value="obmedzen&#xe9;"/>
+            <StringItem index="5" value="nevyhovuj&#xfa;ce"/>
+          </StringArray>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMinPocetVlekov">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Minim&#xe1;lny po&#x10d;et vlekov v prev&#xe1;dzke:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtMinPocetVlekov">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMinPocetLanoviek">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Minim&#xe1;lny po&#x10d;et lanoviek v prev&#xe1;dzke:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtMinPocetLanoviek">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMinPocetTrati">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Minim&#xe1;lny po&#x10d;et trat&#xed; v prev&#xe1;dzke:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtMinPocetTrati">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMaxCenyListkov">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Maxim&#xe1;lne ceny l&#xed;stkov"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMaxCenaListkaDospely">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Dospel&#xfd;:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMaxCenaListkaDieta">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Die&#x165;a:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMaxCenaListkaStudent">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#x160;tudent:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtMaxCenaListkaDospely">
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtMaxCenaListkaDieta">
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtMaxCenaListkaStudent">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblEuro1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#x20ac;"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblEuro2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#x20ac;"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblEuro3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#x20ac;"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="chkDaSaPozicatVystroj">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="nutn&#xe1; mo&#x17e;nos&#x165; zapo&#x17e;i&#x10d;ania v&#xfd;stroje"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="chkDaSaUbytovat">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="nutn&#xe1; mo&#x17e;nos&#x165; ubytovania"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnStorno">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Storno"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnUloz">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ulo&#x17e;"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUlozActionPerformed"/>
+      </Events>
+    </Component>
+  </SubComponents>
+</Form>

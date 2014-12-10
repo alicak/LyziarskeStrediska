@@ -21,14 +21,6 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuitemPridajActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="menuitemVyhladavaj">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Vyh&#x13e;ad&#xe1;vaj..."/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuitemVyhladavajActionPerformed"/>
-              </Events>
-            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="menuitemNajdiNajblizsie">
               <Properties>
                 <Property name="text" type="java.lang.String" value="N&#xe1;jdi najbli&#x17e;&#x161;ie..."/>
@@ -136,16 +128,17 @@
                                   <Component id="btnOdstran" alignment="0" max="32767" attributes="0"/>
                                   <Component id="btnUprav" alignment="0" max="32767" attributes="0"/>
                                   <Component id="btnZobrazDetail" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="btnVyhladavaj" alignment="0" max="32767" attributes="0"/>
                                   <Component id="btnNajdiNajblizsie" alignment="0" max="32767" attributes="0"/>
                                   <Component id="btnPridaj" alignment="0" max="32767" attributes="0"/>
                                   <Component id="btnPrihlasenieOdhlasenie" min="-2" pref="115" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="lblMenoUzivatela" alignment="1" min="-2" pref="117" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="lblMenoUzivatela" min="-2" pref="117" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -167,7 +160,7 @@
                   <Component id="lblRychlyFilter" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="lblMenoUzivatela" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -181,11 +174,9 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnPridaj" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnVyhladavaj" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnNajdiNajblizsie" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jScrollPane1" pref="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" min="-2" pref="241" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -207,14 +198,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPridajActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnVyhladavaj">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Vyh&#x13e;ad&#xe1;vaj..."/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVyhladavajActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnNajdiNajblizsie">

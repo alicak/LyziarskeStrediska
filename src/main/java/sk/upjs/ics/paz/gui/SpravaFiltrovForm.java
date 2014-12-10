@@ -1,15 +1,51 @@
 package sk.upjs.ics.paz.gui;
 
-public class SpravaFiltrovForm extends javax.swing.JDialog {
+import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import sk.upjs.ics.paz.dao.Factory;
+import sk.upjs.ics.paz.dao.FiltreDao;
+import sk.upjs.ics.paz.entity.Filter;
+
+public class SpravaFiltrovForm extends javax.swing.JFrame {
 
     FiltreListModel filtreListModel = new FiltreListModel();
-    
+    FiltreDao filtreDao = Factory.INSTANCE.getFiltreDao();
+
     /**
      * Creates new form SpravaFiltrovForm
      */
-    public SpravaFiltrovForm(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public SpravaFiltrovForm() {
         initComponents();
+        aktualizujZoznamFiltrov();
+
+        lstZoznamFiltrov.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            // pri zmene (vybratie/nevybratie strediska) aktivuje/deaktivuje tlacitka
+            public void valueChanged(ListSelectionEvent e) {
+                lstZoznamFiltrovSelectionValueChanged(e);
+            }
+        });
+    }
+
+    private void lstZoznamFiltrovSelectionValueChanged(ListSelectionEvent e) {
+        if (!e.getValueIsAdjusting()) {
+            // nemusime riesit, ci je uzivatel prihlaseny, 
+            // pretoze pravo otvorit Spravcu filtrov maju iba prihlaseni
+            if (!lstZoznamFiltrov.getSelectionModel().isSelectionEmpty()) {
+                btnZobrazDetail.setEnabled(true);
+                btnUprav.setEnabled(true);
+                btnOdstran.setEnabled(true);
+
+            } else {
+                btnZobrazDetail.setEnabled(false);
+                btnUprav.setEnabled(false);
+                btnOdstran.setEnabled(false);
+            }
+        }
+    }
+
+    private void aktualizujZoznamFiltrov() {
         filtreListModel.obnov();
     }
 
@@ -35,6 +71,7 @@ public class SpravaFiltrovForm extends javax.swing.JDialog {
         jScrollPane1.setViewportView(lstZoznamFiltrov);
 
         btnZobrazDetail.setText("Zobraz detail...");
+        btnZobrazDetail.setEnabled(false);
         btnZobrazDetail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnZobrazDetailActionPerformed(evt);
@@ -49,6 +86,7 @@ public class SpravaFiltrovForm extends javax.swing.JDialog {
         });
 
         btnUprav.setText("Uprav...");
+        btnUprav.setEnabled(false);
         btnUprav.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUpravActionPerformed(evt);
@@ -56,6 +94,7 @@ public class SpravaFiltrovForm extends javax.swing.JDialog {
         });
 
         btnOdstran.setText("Odstráň...");
+        btnOdstran.setEnabled(false);
         btnOdstran.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOdstranActionPerformed(evt);
@@ -106,12 +145,35 @@ public class SpravaFiltrovForm extends javax.swing.JDialog {
     }//GEN-LAST:event_btnUpravActionPerformed
 
     private void btnOdstranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOdstranActionPerformed
-        // TODO add your handling code here:
+        odstranFilterAction();
     }//GEN-LAST:event_btnOdstranActionPerformed
 
     private void btnPridajNovyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPridajNovyActionPerformed
-        // TODO add your handling code here:
+        pridajNovyFilterAction();
     }//GEN-LAST:event_btnPridajNovyActionPerformed
+
+    private void odstranFilterAction() {
+        int vybranyIndex = lstZoznamFiltrov.getSelectedIndex();
+        Filter vybranyFilter = filtreDao.dajVsetky().get(vybranyIndex);
+
+        int tlacidlo = JOptionPane.showConfirmDialog(
+                this,
+                "Naozaj chcete odstrániť vybraný filter?",
+                "Odstrániť filter",
+                JOptionPane.YES_NO_OPTION
+        );
+
+        if (tlacidlo == JOptionPane.YES_OPTION) {
+            filtreDao.odstran(vybranyFilter);
+            aktualizujZoznamFiltrov();
+        }
+    }
+
+    private void pridajNovyFilterAction() {
+        PridajUpravFilterForm pridajUpravFilterForm = new PridajUpravFilterForm(this);
+        pridajUpravFilterForm.setVisible(true);
+        aktualizujZoznamFiltrov();
+    }
 
     /**
      * @param args the command line arguments
@@ -144,14 +206,7 @@ public class SpravaFiltrovForm extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                SpravaFiltrovForm dialog = new SpravaFiltrovForm(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
+                new SpravaFiltrovForm().setVisible(true);
             }
         });
     }

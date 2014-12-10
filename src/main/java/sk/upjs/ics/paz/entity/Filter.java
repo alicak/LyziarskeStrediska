@@ -22,8 +22,8 @@ public class Filter {
     private BigDecimal maxCenaListkaDospely;
     private BigDecimal maxCenaListkaDieta;
     private BigDecimal maxCenaListkaStudent;
-    private boolean daSaPozicatVystroj;
-    private boolean daSaUbytovat;
+    private boolean nutnostPozicatVystroj;
+    private boolean nutnostUbytovat;
 
     public String getNazov() {
         return nazov;
@@ -113,20 +113,20 @@ public class Filter {
         this.maxCenaListkaStudent = maxCenaListkaStudent;
     }
 
-    public boolean isDaSaPozicatVystroj() {
-        return daSaPozicatVystroj;
+    public boolean isNutnostPozicatVystroj() {
+        return nutnostPozicatVystroj;
     }
 
-    public void setDaSaPozicatVystroj(boolean daSaPozicatVystroj) {
-        this.daSaPozicatVystroj = daSaPozicatVystroj;
+    public void setNutnostPozicatVystroj(boolean daSaPozicatVystroj) {
+        this.nutnostPozicatVystroj = daSaPozicatVystroj;
     }
 
-    public boolean isDaSaUbytovat() {
-        return daSaUbytovat;
+    public boolean isNutnostUbytovat() {
+        return nutnostUbytovat;
     }
 
-    public void setDaSaUbytovat(boolean daSaUbytovat) {
-        this.daSaUbytovat = daSaUbytovat;
+    public void setNutnostUbytovat(boolean daSaUbytovat) {
+        this.nutnostUbytovat = daSaUbytovat;
     }
 
     public Long getId() {
@@ -136,21 +136,23 @@ public class Filter {
     public void setId(Long id) {
         this.id = id;
     }
-    
+
     /**
-     * Princip filtrovania je taky, ze sa do vysledneho zoznamu pridaju strediska
-     * z povodneho zoznamu, ktore vyhovuju prvej podmienke. Potom sa vyberaju tie,
-     * ktore vyhovuju druhej podmienke, ale uz nie z povodneho zoznamu, ale z toho,
-     * ktory presiel prvou podmienkou. Atd.
+     * Princip filtrovania je taky, ze sa do vysledneho zoznamu pridaju
+     * strediska z povodneho zoznamu, ktore vyhovuju prvej podmienke. Potom sa
+     * vyberaju tie, ktore vyhovuju druhej podmienke, ale uz nie z povodneho
+     * zoznamu, ale z toho, ktory presiel prvou podmienkou. Atd.
+     *
      * @param zoznamStredisk zoznam, ktory filtrujeme
      * @param filter filter, ktory pouzivame
-     * @return zoznam, ktory je podmnozinou vstupneho zoznamu a vyhovuje podmienkam filtra
+     * @return zoznam, ktory je podmnozinou vstupneho zoznamu a vyhovuje
+     * podmienkam filtra
      */
     public List<Stredisko> filtruj(List<Stredisko> zoznamStredisk) {
         List<Stredisko> pomocny = new ArrayList<>(zoznamStredisk);
         List<Stredisko> vysledok = new ArrayList<>();
 
-        if (nazovObsahuje!= null) {
+        if (nazovObsahuje != null) {
             for (Stredisko s : pomocny) {
                 if (s.getNazov().contains(nazovObsahuje)) {
                     vysledok.add(s);
@@ -240,22 +242,24 @@ public class Filter {
             vysledok = new ArrayList<>();
         }
 
-        for (Stredisko s : pomocny) {
-            if (s.isDaSaPozicatVystroj() == daSaPozicatVystroj) {
-                vysledok.add(s);
+        if (nutnostPozicatVystroj) {
+            for (Stredisko s : pomocny) {
+                if (s.isDaSaPozicatVystroj()) {
+                    vysledok.add(s);
+                }
             }
         }
         pomocny = new ArrayList<>(vysledok);
         vysledok = new ArrayList<>();
 
-        for (Stredisko s : pomocny) {
-            if (s.isDaSaUbytovat() == daSaUbytovat) {
-                vysledok.add(s);
+        if (nutnostPozicatVystroj) {
+            for (Stredisko s : pomocny) {
+                if (s.isDaSaUbytovat()) {
+                    vysledok.add(s);
+                }
             }
         }
-
         return vysledok;
-
     }
 
     /**
