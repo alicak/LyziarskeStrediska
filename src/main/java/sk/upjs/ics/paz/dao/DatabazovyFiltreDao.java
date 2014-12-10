@@ -113,6 +113,7 @@ public class DatabazovyFiltreDao implements FiltreDao {
 
         SimpleJdbcInsert insert = new SimpleJdbcInsert(jdbcTemplate);
 
+        insert.setTableName("Filtre");
         insert.setGeneratedKeyName("id");
         Number id = insert.executeAndReturnKey(hodnoty);
         filter.setId(id.longValue());

@@ -3,11 +3,16 @@ package sk.upjs.ics.paz.gui;
 import java.math.BigDecimal;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
+import sk.upjs.ics.paz.dao.Factory;
+import sk.upjs.ics.paz.dao.FiltreDao;
 import sk.upjs.ics.paz.entity.Filter;
+import sk.upjs.ics.paz.entity.Pouzivatel;
 
 public class PridajUpravFilterForm extends javax.swing.JDialog {
 
     Filter filter;
+    FiltreDao filtreDao = Factory.INSTANCE.getFiltreDao();
+    Pouzivatel pouzivatel = Factory.INSTANCE.getPouzivatel();
 
     /**
      * Creates new form PridajUpravFilterForm
@@ -257,6 +262,8 @@ public class PridajUpravFilterForm extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnUlozActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUlozActionPerformed
+        filter.setMenoUzivatela(pouzivatel.getMeno());
+        
         if (overVyplneniePola(txtNazov)) {
             filter.setNazov(txtNazov.getText());
         } else {
@@ -309,6 +316,9 @@ public class PridajUpravFilterForm extends javax.swing.JDialog {
 
         filter.setNutnostPozicatVystroj(chkDaSaPozicatVystroj.isSelected());
         filter.setNutnostUbytovat(chkDaSaUbytovat.isSelected());
+        
+        filtreDao.uloz(filter);
+        dispose();
 
     }//GEN-LAST:event_btnUlozActionPerformed
 
