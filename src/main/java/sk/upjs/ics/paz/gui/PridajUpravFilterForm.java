@@ -263,7 +263,7 @@ public class PridajUpravFilterForm extends javax.swing.JDialog {
 
     private void btnUlozActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUlozActionPerformed
         filter.setMenoUzivatela(pouzivatel.getMeno());
-        
+
         if (overVyplneniePola(txtNazov)) {
             filter.setNazov(txtNazov.getText());
         } else {
@@ -274,6 +274,12 @@ public class PridajUpravFilterForm extends javax.swing.JDialog {
             filter.setNazovObsahuje(txtNazovObsahuje.getText());
         } else {
             filter.setNazovObsahuje(null);
+        }
+
+        if (!txtMinVyskaSnehu.getText().equals("")) {
+            filter.setMinVyskaSnehu(new Integer(txtMinVyskaSnehu.getText()));
+        } else {
+            filter.setMinVyskaSnehu(0);
         }
 
         filter.setMinPodmienky(cmbMinPodmienky.getSelectedItem().toString());
@@ -316,7 +322,7 @@ public class PridajUpravFilterForm extends javax.swing.JDialog {
 
         filter.setNutnostPozicatVystroj(chkDaSaPozicatVystroj.isSelected());
         filter.setNutnostUbytovat(chkDaSaUbytovat.isSelected());
-        
+
         filtreDao.uloz(filter);
         dispose();
 
