@@ -13,11 +13,11 @@ public enum Factory {
     private FiltreDao filtreDao;
     private PouzivateliaDao pouzivateliaDao;
     private Pouzivatel pouzivatel;
-    
+
     public Pouzivatel getPouzivatel() {
         return pouzivatel;
     }
-    
+
     public void setPouzivatel(Pouzivatel pouzivatel) {
         this.pouzivatel = pouzivatel;
     }
@@ -33,7 +33,7 @@ public enum Factory {
         }
         return strediskaDao;
     }
-    
+
     public FiltreDao getNovyFiltreDao() {
         filtreDao = new DatabazovyFiltreDao(getPouzivatel(), getJdbcTemplate());
         return filtreDao;

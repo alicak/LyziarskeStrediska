@@ -6,6 +6,8 @@ import sk.upjs.ics.paz.entity.Filter;
 public interface FiltreDao {
     
     List<Filter> dajVsetky();
+    
+    Filter dajPodlaNazvu(String nazov);
 
     void uloz(Filter filter);
 

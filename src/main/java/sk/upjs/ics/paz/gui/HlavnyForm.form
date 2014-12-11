@@ -62,7 +62,6 @@
             <MenuItem class="javax.swing.JMenuItem" name="menuitemSpravaFiltrov">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Spr&#xe1;va filtrov..."/>
-                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuitemSpravaFiltrovActionPerformed"/>
@@ -110,11 +109,11 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="lblRychlyFilter" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblVyberFiltra" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="txtRychlyFilter" max="32767" attributes="0"/>
+                      <Component id="cmbZoznamFiltrov" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnRychloFiltruj" min="-2" pref="59" max="-2" attributes="0"/>
+                      <Component id="btnFiltruj" min="-2" pref="59" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnResetFiltra" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="136" max="-2" attributes="0"/>
@@ -154,10 +153,10 @@
               <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txtRychlyFilter" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnRychloFiltruj" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnFiltruj" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnResetFiltra" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblRychlyFilter" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblVyberFiltra" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cmbZoznamFiltrov" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -203,19 +202,18 @@
     <Component class="javax.swing.JButton" name="btnNajdiNajblizsie">
       <Properties>
         <Property name="text" type="java.lang.String" value="N&#xe1;jdi najbli&#x17e;&#x161;ie..."/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNajdiNajblizsieActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtRychlyFilter">
-    </Component>
-    <Component class="javax.swing.JButton" name="btnRychloFiltruj">
+    <Component class="javax.swing.JButton" name="btnFiltruj">
       <Properties>
         <Property name="text" type="java.lang.String" value="Filtruj"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRychloFiltrujActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFiltrujActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnResetFiltra">
@@ -297,9 +295,9 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUpravActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblRychlyFilter">
+    <Component class="javax.swing.JLabel" name="lblVyberFiltra">
       <Properties>
-        <Property name="text" type="java.lang.String" value="R&#xfd;chly filter:"/>
+        <Property name="text" type="java.lang.String" value="V&#xfd;ber filtra:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblMenoUzivatela">
@@ -316,6 +314,13 @@
       </Events>
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator1">
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cmbZoznamFiltrov">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="filtreListAndComboBoxModel" type="code"/>
+        </Property>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

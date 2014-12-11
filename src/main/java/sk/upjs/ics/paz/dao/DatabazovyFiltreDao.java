@@ -127,4 +127,10 @@ public class DatabazovyFiltreDao implements FiltreDao {
     public void odstran(Filter filter) {
         jdbcTemplate.update("DELETE FROM Filtre WHERE id = ?", filter.getId());
     }
+
+    @Override
+    public Filter dajPodlaNazvu(String nazov) {
+        String sql = "SELECT * FROM Filtre WHERE nazov = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{nazov}, mapovac);
+    }
 }

@@ -149,110 +149,113 @@ public class Filter {
      * podmienkam filtra
      */
     public List<Stredisko> filtruj(List<Stredisko> zoznamStredisk) {
-        List<Stredisko> pomocny = new ArrayList<>(zoznamStredisk);
-        List<Stredisko> vysledok = new ArrayList<>();
+        List<Stredisko> pomocny = new ArrayList<>();
+        List<Stredisko> vysledok = new ArrayList<>(zoznamStredisk);
 
         if (nazovObsahuje != null) {
+            pomocny = new ArrayList<>(zoznamStredisk);
+            vysledok = new ArrayList<>();
             for (Stredisko s : pomocny) {
                 if (s.getNazov().contains(nazovObsahuje)) {
                     vysledok.add(s);
                 }
             }
-            pomocny = new ArrayList<>(vysledok);
-            vysledok = new ArrayList<>();
         }
 
         if (minVyskaSnehu > 0) {
+            pomocny = new ArrayList<>(vysledok);
+            vysledok = new ArrayList<>();
             for (Stredisko s : pomocny) {
                 if (s.getVyskaSnehu() >= minVyskaSnehu) {
                     vysledok.add(s);
                 }
             }
-            pomocny = new ArrayList<>(vysledok);
-            vysledok = new ArrayList<>();
+
         }
 
-        if (minPodmienky.equals("nezadané")) {
+        if (!minPodmienky.equals("nezadané")) {
+            pomocny = new ArrayList<>(vysledok);
+            vysledok = new ArrayList<>();
             Set<String> vyhovujuce = dajLepsiePodmienky(minPodmienky);
             for (Stredisko s : pomocny) {
                 if (vyhovujuce.contains(s.getPodmienky()));
                 vysledok.add(s);
             }
-            pomocny = new ArrayList<>(vysledok);
-            vysledok = new ArrayList<>();
         }
 
         if (minPocetVlekovVPrevadzke > 0) {
+            pomocny = new ArrayList<>(vysledok);
+            vysledok = new ArrayList<>();
             for (Stredisko s : pomocny) {
                 if (s.getPocetVlekovVPrevadzke() >= minPocetVlekovVPrevadzke) {
                     vysledok.add(s);
                 }
             }
-            pomocny = new ArrayList<>(vysledok);
-            vysledok = new ArrayList<>();
         }
 
         if (minPocetLanoviekVPrevadzke > 0) {
+            pomocny = new ArrayList<>(vysledok);
+            vysledok = new ArrayList<>();
             for (Stredisko s : pomocny) {
                 if (s.getPocetLanoviekVPrevadzke() >= minPocetLanoviekVPrevadzke) {
                     vysledok.add(s);
                 }
             }
-            pomocny = new ArrayList<>(vysledok);
-            vysledok = new ArrayList<>();
         }
 
         if (minPocetTratiVPrevadzke > 0) {
+            pomocny = new ArrayList<>(vysledok);
+            vysledok = new ArrayList<>();
             for (Stredisko s : pomocny) {
                 if (s.getPocetTratiVPrevadzke() >= minPocetTratiVPrevadzke) {
                     vysledok.add(s);
                 }
             }
-            pomocny = new ArrayList<>(vysledok);
-            vysledok = new ArrayList<>();
         }
 
-        if (maxCenaListkaDospely.intValue() > 0) {
+        if (maxCenaListkaDospely != null) {
+            pomocny = new ArrayList<>(vysledok);
+            vysledok = new ArrayList<>();
             for (Stredisko s : pomocny) {
                 if (s.getCenaListkaDospely().doubleValue() <= maxCenaListkaDospely.doubleValue()) {
                     vysledok.add(s);
                 }
             }
-            pomocny = new ArrayList<>(vysledok);
-            vysledok = new ArrayList<>();
         }
 
-        if (maxCenaListkaDieta.intValue() > 0) {
+        if (maxCenaListkaDieta != null) {
+            pomocny = new ArrayList<>(vysledok);
+            vysledok = new ArrayList<>();
             for (Stredisko s : pomocny) {
                 if (s.getCenaListkaDieta().doubleValue() <= maxCenaListkaDieta.doubleValue()) {
                     vysledok.add(s);
                 }
             }
-            pomocny = new ArrayList<>(vysledok);
-            vysledok = new ArrayList<>();
         }
 
-        if (maxCenaListkaStudent.intValue() > 0) {
+        if (maxCenaListkaStudent != null) {
+            pomocny = new ArrayList<>(vysledok);
+            vysledok = new ArrayList<>();
             for (Stredisko s : pomocny) {
                 if (s.getCenaListkaStudent().doubleValue() <= maxCenaListkaStudent.doubleValue()) {
                     vysledok.add(s);
                 }
             }
-            pomocny = new ArrayList<>(vysledok);
-            vysledok = new ArrayList<>();
         }
 
         if (nutnostPozicatVystroj) {
+            pomocny = new ArrayList<>(vysledok);
+            vysledok = new ArrayList<>();
             for (Stredisko s : pomocny) {
                 if (s.isDaSaPozicatVystroj()) {
                     vysledok.add(s);
                 }
             }
         }
-        pomocny = new ArrayList<>(vysledok);
-        vysledok = new ArrayList<>();
 
         if (nutnostPozicatVystroj) {
+            pomocny = new ArrayList<>(vysledok);
+            vysledok = new ArrayList<>();
             for (Stredisko s : pomocny) {
                 if (s.isDaSaUbytovat()) {
                     vysledok.add(s);

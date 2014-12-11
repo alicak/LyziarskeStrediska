@@ -1,18 +1,17 @@
 package sk.upjs.ics.paz.gui;
 
-import sk.upjs.ics.paz.entity.Pouzivatel;
 import sk.upjs.ics.paz.entity.Stredisko;
 import sk.upjs.ics.paz.dao.StrediskaDao;
 import sk.upjs.ics.paz.dao.Factory;
 import java.math.BigDecimal;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 public class StrediskoTableModel extends AbstractTableModel {
 
     // zoznam stredisk, ktore chceme zobrazovat
-    private List<Stredisko> zoznamStredisk = new LinkedList<>();
+    private List<Stredisko> zoznamStredisk = new ArrayList<>();
     private static final int POCET_STLPCOV = 3;
     private static final String[] NAZVY_STLPCOV = {"Názov", "Výška snehu", "Podmienky"};
     private static final Class[] TYPY_STLPCOV = {
@@ -20,7 +19,6 @@ public class StrediskoTableModel extends AbstractTableModel {
         BigDecimal.class,
         String.class
     };
-    private Pouzivatel pouzivatel = Factory.INSTANCE.getPouzivatel();
     private StrediskaDao strediskaDao = Factory.INSTANCE.getStrediskaDao();
 
     /**
@@ -64,8 +62,7 @@ public class StrediskoTableModel extends AbstractTableModel {
      * Aktualizuje zoznam stredisk
      */
     public void obnov() {
-        pouzivatel = Factory.INSTANCE.getPouzivatel();
-        strediskaDao = Factory.INSTANCE.getNovyStrediskaDao();
+        strediskaDao = Factory.INSTANCE.getStrediskaDao();
         zoznamStredisk = strediskaDao.dajVsetky();
         fireTableDataChanged();
     }

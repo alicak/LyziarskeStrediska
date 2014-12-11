@@ -1,5 +1,7 @@
 package sk.upjs.ics.paz.gui;
 
+import java.util.List;
+import javax.swing.ComboBoxModel;
 import sk.upjs.ics.paz.entity.*;
 import sk.upjs.ics.paz.dao.*;
 import javax.swing.JOptionPane;
@@ -13,21 +15,23 @@ public class HlavnyForm extends javax.swing.JFrame {
     private FiltreDao filtreDao;
 
     private final StrediskoTableModel strediskaTableModel = new StrediskoTableModel();
+    // je to aj model pre ComboBox, preto ho tu pouzijeme
+    private final FiltreListAndComboBoxModel filtreListAndComboBoxModel = new FiltreListAndComboBoxModel();
 
     private final TableRowSorter strediskaRowSorter = new TableRowSorter(strediskaTableModel);
 
-    private final StrediskaPodlaNazvuRowFilter strediskaPodlaVsetkychStlpcovRowFilter
-            = new StrediskaPodlaNazvuRowFilter();
-    
     private Pouzivatel pouzivatel = Factory.INSTANCE.getPouzivatel();
 
+    // private final StrediskaPodlaNazvuRowFilter strediskaPodlaVsetkychStlpcovRowFilter
+    //        = new StrediskaPodlaNazvuRowFilter();
     public HlavnyForm() {
         initComponents();
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo.png"))); // NOI18N
         strediskaDao = Factory.INSTANCE.getStrediskaDao();
+        filtreDao = Factory.INSTANCE.getFiltreDao();
+        filtreListAndComboBoxModel.obnov();
 
-        strediskaRowSorter.setRowFilter(strediskaPodlaVsetkychStlpcovRowFilter);
-
+        //strediskaRowSorter.setRowFilter(strediskaPodlaVsetkychStlpcovRowFilter);
         tabStrediska.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             // pri zmene (vybratie/nevybratie strediska) aktivuje/deaktivuje tlacitka
@@ -69,18 +73,18 @@ public class HlavnyForm extends javax.swing.JFrame {
         lblLogo = new javax.swing.JLabel();
         btnPridaj = new javax.swing.JButton();
         btnNajdiNajblizsie = new javax.swing.JButton();
-        txtRychlyFilter = new javax.swing.JTextField();
-        btnRychloFiltruj = new javax.swing.JButton();
+        btnFiltruj = new javax.swing.JButton();
         btnResetFiltra = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabStrediska = new javax.swing.JTable();
         btnZobrazDetail = new javax.swing.JButton();
         btnOdstran = new javax.swing.JButton();
         btnUprav = new javax.swing.JButton();
-        lblRychlyFilter = new javax.swing.JLabel();
+        lblVyberFiltra = new javax.swing.JLabel();
         lblMenoUzivatela = new javax.swing.JLabel();
         btnPrihlasenieOdhlasenie = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
+        cmbZoznamFiltrov = new javax.swing.JComboBox();
         menubarHlavneMenu = new javax.swing.JMenuBar();
         menuStredisko = new javax.swing.JMenu();
         menuitemPridaj = new javax.swing.JMenuItem();
@@ -106,16 +110,17 @@ public class HlavnyForm extends javax.swing.JFrame {
         });
 
         btnNajdiNajblizsie.setText("Nájdi najbližšie...");
+        btnNajdiNajblizsie.setEnabled(false);
         btnNajdiNajblizsie.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNajdiNajblizsieActionPerformed(evt);
             }
         });
 
-        btnRychloFiltruj.setText("Filtruj");
-        btnRychloFiltruj.addActionListener(new java.awt.event.ActionListener() {
+        btnFiltruj.setText("Filtruj");
+        btnFiltruj.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRychloFiltrujActionPerformed(evt);
+                btnFiltrujActionPerformed(evt);
             }
         });
 
@@ -159,7 +164,7 @@ public class HlavnyForm extends javax.swing.JFrame {
             }
         });
 
-        lblRychlyFilter.setText("Rýchly filter:");
+        lblVyberFiltra.setText("Výber filtra:");
 
         lblMenoUzivatela.setText("Užívateľ: neprihlásený");
 
@@ -169,6 +174,8 @@ public class HlavnyForm extends javax.swing.JFrame {
                 btnPrihlasenieOdhlasenieActionPerformed(evt);
             }
         });
+
+        cmbZoznamFiltrov.setModel(filtreListAndComboBoxModel);
 
         menuStredisko.setText("Stredisko");
 
@@ -214,7 +221,6 @@ public class HlavnyForm extends javax.swing.JFrame {
         menuFilter.setText("Filter");
 
         menuitemSpravaFiltrov.setText("Správa filtrov...");
-        menuitemSpravaFiltrov.setEnabled(false);
         menuitemSpravaFiltrov.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuitemSpravaFiltrovActionPerformed(evt);
@@ -244,11 +250,11 @@ public class HlavnyForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblRychlyFilter)
+                        .addComponent(lblVyberFiltra)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtRychlyFilter)
+                        .addComponent(cmbZoznamFiltrov, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnRychloFiltruj, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnFiltruj, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnResetFiltra)
                         .addGap(136, 136, 136))
@@ -279,10 +285,10 @@ public class HlavnyForm extends javax.swing.JFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtRychlyFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRychloFiltruj)
+                    .addComponent(btnFiltruj)
                     .addComponent(btnResetFiltra)
-                    .addComponent(lblRychlyFilter))
+                    .addComponent(lblVyberFiltra)
+                    .addComponent(cmbZoznamFiltrov, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -306,77 +312,48 @@ public class HlavnyForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnNajdiNajblizsieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNajdiNajblizsieActionPerformed
-        najdiNajblizsieAction();
-    }//GEN-LAST:event_btnNajdiNajblizsieActionPerformed
-
     /**
      * Otvori modalne okno s vyhladavanim najblizsieho strediska
+     *
+     * @param evt
      */
-    private void najdiNajblizsieAction() {
+    private void btnNajdiNajblizsieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNajdiNajblizsieActionPerformed
         NajdiNajblizsieForm najdiNajblizsieForm = new NajdiNajblizsieForm(this, true);
         najdiNajblizsieForm.setVisible(true);
-    }
-
-    private void btnPridajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPridajActionPerformed
-        pridajStrediskoAction();
-    }//GEN-LAST:event_btnPridajActionPerformed
+    }//GEN-LAST:event_btnNajdiNajblizsieActionPerformed
 
     /**
      * Otvori modalne okno pre pridanie noveho strediska
      */
-    private void pridajStrediskoAction() {
+    private void btnPridajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPridajActionPerformed
         PridajUpravStrediskoForm pridajUpravStrediskoForm = new PridajUpravStrediskoForm(this);
         pridajUpravStrediskoForm.setVisible(true);
         aktualizujZoznamStredisk();
-    }
-
-    private void btnZobrazDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZobrazDetailActionPerformed
-        zobrazDetailStrediskaAction();
-    }//GEN-LAST:event_btnZobrazDetailActionPerformed
+    }//GEN-LAST:event_btnPridajActionPerformed
 
     /**
      * Otvori modalne okno s detailami vybraneho strediska
      */
-    private void zobrazDetailStrediskaAction() {
+    private void btnZobrazDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZobrazDetailActionPerformed
         Stredisko vybraneStredisko = dajStrediskoZTabulky();
         ZobrazDetailStrediskaForm zobrazDetailForm = new ZobrazDetailStrediskaForm(this, vybraneStredisko);
         zobrazDetailForm.setVisible(true);
-    }
-
-    private void btnUpravActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpravActionPerformed
-        upravStrediskoAction();
-    }//GEN-LAST:event_btnUpravActionPerformed
+    }//GEN-LAST:event_btnZobrazDetailActionPerformed
 
     /**
      * Otvori modalne okno pre upravu vybraneho strediska
      */
-    private void upravStrediskoAction() {
+    private void btnUpravActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpravActionPerformed
         Stredisko vybraneStredisko = dajStrediskoZTabulky();
         PridajUpravStrediskoForm pridajUpravStrediskoForm = new PridajUpravStrediskoForm(this, vybraneStredisko);
         pridajUpravStrediskoForm.setVisible(true);
         aktualizujZoznamStredisk();
-    }
-
-    private Stredisko dajStrediskoZTabulky() {
-        // vrati cislo riadka v aktualnom zosorteni
-        int vybranyRiadok = tabStrediska.getSelectedRow();
-        // vrati cislo riadka v modeli
-        int vybratyRiadokVModeli = tabStrediska.convertRowIndexToModel(vybranyRiadok);
-        // z cisla riadka v modeli viem zistit stredisko na danom riadku
-        Stredisko vybraneStredisko = strediskaTableModel.dajPodlaCislaRiadka(vybratyRiadokVModeli);
-
-        return vybraneStredisko;
-    }
-
-    private void btnOdstranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOdstranActionPerformed
-        odstranStrediskoAction();
-    }//GEN-LAST:event_btnOdstranActionPerformed
+    }//GEN-LAST:event_btnUpravActionPerformed
 
     /**
      * Odstrani vybrane stredisko, predtym si vypyta potvrdenie
      */
-    private void odstranStrediskoAction() {
+    private void btnOdstranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOdstranActionPerformed
         int vybranyRiadok = tabStrediska.getSelectedRow();
         int vybratyRiadokVModeli = tabStrediska.convertRowIndexToModel(vybranyRiadok);
         Stredisko vybraneStredisko = strediskaTableModel.dajPodlaCislaRiadka(vybratyRiadokVModeli);
@@ -392,24 +369,12 @@ public class HlavnyForm extends javax.swing.JFrame {
             strediskaDao.odstran(vybraneStredisko);
             aktualizujZoznamStredisk();
         }
-    }
-
-    /**
-     * Otvori okno s info o programe
-     */
-    private void oProgrameAction() {
-        OProgrameForm oProgrameForm = new OProgrameForm(this, true);
-        oProgrameForm.setVisible(true);
-    }
-
-    private void btnPrihlasenieOdhlasenieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrihlasenieOdhlasenieActionPerformed
-        prihlasOdhlasAction();
-    }//GEN-LAST:event_btnPrihlasenieOdhlasenieActionPerformed
+    }//GEN-LAST:event_btnOdstranActionPerformed
 
     /**
      * Otvori prihlasovaci formular/odhlasi pouzivatela
      */
-    private void prihlasOdhlasAction() {
+    private void btnPrihlasenieOdhlasenieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrihlasenieOdhlasenieActionPerformed
         // ak je pouzivatel prihlaseny, tak sa odhlasi
         if (pouzivatel != null) {
             odhlas();
@@ -420,15 +385,18 @@ public class HlavnyForm extends javax.swing.JFrame {
         // a ak sa prihlasovanie podari, nastavia sa vsetky veci
         PrihlasovanieForm prihlasovanieForm = new PrihlasovanieForm(this, true);
         prihlasovanieForm.setVisible(true);
-        aktualizujZoznamStredisk();
         prihlas();
-    }
+        aktualizujZoznamStredisk();
+    }//GEN-LAST:event_btnPrihlasenieOdhlasenieActionPerformed
 
     /**
      * Prihlasi uzivatela
      */
     private void prihlas() {
         pouzivatel = Factory.INSTANCE.getPouzivatel();
+        strediskaDao = Factory.INSTANCE.getNovyStrediskaDao();
+        filtreDao = Factory.INSTANCE.getNovyFiltreDao();
+        filtreListAndComboBoxModel.obnov();
         if (pouzivatel != null) {
             menuitemPridaj.setEnabled(true);
             btnPridaj.setEnabled(true);
@@ -449,8 +417,9 @@ public class HlavnyForm extends javax.swing.JFrame {
         Factory.INSTANCE.setPouzivatel(pouzivatel);
         strediskaDao = Factory.INSTANCE.getNovyStrediskaDao();
         filtreDao = Factory.INSTANCE.getNovyFiltreDao();
+        filtreListAndComboBoxModel.obnov();
 
-        menuitemPridaj.setEnabled(false);  
+        menuitemPridaj.setEnabled(false);
         btnPridaj.setEnabled(false);
         menuitemSpravaFiltrov.setEnabled(false);
         tabStrediska.clearSelection();
@@ -458,6 +427,17 @@ public class HlavnyForm extends javax.swing.JFrame {
         lblMenoUzivatela.setText("Užívateľ: neprihlásený");
         btnPrihlasenieOdhlasenie.setText("Prihlás...");
         menuitemPrihlasOdhlas.setText("Prihlás...");
+    }
+
+    private Stredisko dajStrediskoZTabulky() {
+        // vrati cislo riadka v aktualnom zosorteni
+        int vybranyRiadok = tabStrediska.getSelectedRow();
+        // vrati cislo riadka v modeli
+        int vybratyRiadokVModeli = tabStrediska.convertRowIndexToModel(vybranyRiadok);
+        // z cisla riadka v modeli viem zistit stredisko na danom riadku
+        Stredisko vybraneStredisko = strediskaTableModel.dajPodlaCislaRiadka(vybratyRiadokVModeli);
+
+        return vybraneStredisko;
     }
 
     /**
@@ -471,59 +451,54 @@ public class HlavnyForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tabStrediskaMouseClicked
 
-    private void btnRychloFiltrujActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRychloFiltrujActionPerformed
-        String filter = txtRychlyFilter.getText().trim().toUpperCase();
-        strediskaPodlaVsetkychStlpcovRowFilter.setHladanyVyraz(filter);
-
-        aktualizujZoznamStredisk();
-    }//GEN-LAST:event_btnRychloFiltrujActionPerformed
-
     private void btnResetFiltraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetFiltraActionPerformed
-        strediskaPodlaVsetkychStlpcovRowFilter.setHladanyVyraz("");
-
+        //strediskaPodlaVsetkychStlpcovRowFilter.setHladanyVyraz("");
         aktualizujZoznamStredisk();
+        strediskaTableModel.obnov();
+        filtreListAndComboBoxModel.obnov();
     }//GEN-LAST:event_btnResetFiltraActionPerformed
 
     private void menuitemPridajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuitemPridajActionPerformed
-        pridajStrediskoAction();
+        btnPridajActionPerformed(evt);
     }//GEN-LAST:event_menuitemPridajActionPerformed
 
     private void menuitemNajdiNajblizsieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuitemNajdiNajblizsieActionPerformed
-        najdiNajblizsieAction();
+        btnNajdiNajblizsieActionPerformed(evt);
     }//GEN-LAST:event_menuitemNajdiNajblizsieActionPerformed
 
     private void menuitemPrihlasOdhlasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuitemPrihlasOdhlasActionPerformed
-        prihlasOdhlasAction();
+        btnPrihlasenieOdhlasenieActionPerformed(evt);
     }//GEN-LAST:event_menuitemPrihlasOdhlasActionPerformed
 
+    /**
+     * Otvori okno s registraciou noveho pouzivatela
+     */
     private void menuitemRegistrujActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuitemRegistrujActionPerformed
-        registrujAction();
+        RegistraciaForm registraciaForm = new RegistraciaForm(this, true);
+        registraciaForm.setVisible(true);
     }//GEN-LAST:event_menuitemRegistrujActionPerformed
 
+    /**
+     * Otvori okno s info o programe
+     */
     private void menuOProgrameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuOProgrameMouseClicked
-        oProgrameAction();
+        OProgrameForm oProgrameForm = new OProgrameForm(this, true);
+        oProgrameForm.setVisible(true);
     }//GEN-LAST:event_menuOProgrameMouseClicked
-
-    private void menuitemSpravaFiltrovActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuitemSpravaFiltrovActionPerformed
-        spravaFiltrovAction();
-    }//GEN-LAST:event_menuitemSpravaFiltrovActionPerformed
 
     /**
      * Otvori okno so spravou filtrov
      */
-    private void spravaFiltrovAction()
-    {
+    private void menuitemSpravaFiltrovActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuitemSpravaFiltrovActionPerformed
         SpravaFiltrovForm spravaFiltrovForm = new SpravaFiltrovForm();
         spravaFiltrovForm.setVisible(true);
-    }
-    
-    /**
-     * Otvori okno s registraciou noveho pouzivatela
-     */
-    private void registrujAction() {
-        RegistraciaForm registraciaForm = new RegistraciaForm(this, true);
-        registraciaForm.setVisible(true);
-    }
+    }//GEN-LAST:event_menuitemSpravaFiltrovActionPerformed
+
+    private void btnFiltrujActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrujActionPerformed
+        Filter vybranyFilter = filtreDao.dajPodlaNazvu(cmbZoznamFiltrov.getSelectedItem().toString());
+        List<Stredisko> vyfiltrovaneStrediska = vybranyFilter.filtruj(strediskaDao.dajVsetky());
+        strediskaTableModel.zobrazZadanyZoznam(vyfiltrovaneStrediska);
+    }//GEN-LAST:event_btnFiltrujActionPerformed
 
     private void aktualizujZoznamStredisk() {
         strediskaTableModel.obnov();
@@ -565,19 +540,20 @@ public class HlavnyForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnFiltruj;
     private javax.swing.JButton btnNajdiNajblizsie;
     private javax.swing.JButton btnOdstran;
     private javax.swing.JButton btnPridaj;
     private javax.swing.JButton btnPrihlasenieOdhlasenie;
     private javax.swing.JButton btnResetFiltra;
-    private javax.swing.JButton btnRychloFiltruj;
     private javax.swing.JButton btnUprav;
     private javax.swing.JButton btnZobrazDetail;
+    private javax.swing.JComboBox cmbZoznamFiltrov;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblMenoUzivatela;
-    private javax.swing.JLabel lblRychlyFilter;
+    private javax.swing.JLabel lblVyberFiltra;
     private javax.swing.JMenu menuFilter;
     private javax.swing.JMenu menuOPrograme;
     private javax.swing.JMenu menuStredisko;
@@ -589,7 +565,6 @@ public class HlavnyForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuitemRegistruj;
     private javax.swing.JMenuItem menuitemSpravaFiltrov;
     private javax.swing.JTable tabStrediska;
-    private javax.swing.JTextField txtRychlyFilter;
     // End of variables declaration//GEN-END:variables
 
 }

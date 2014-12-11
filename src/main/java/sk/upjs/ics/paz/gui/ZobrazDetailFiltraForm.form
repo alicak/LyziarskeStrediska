@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                      <Component id="lblNazovObsahuje" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                          <Component id="lblMinVyskaSnehu" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblMinPodmienky" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Component id="lblNazov" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                      <Component id="lblMinPocetVlekov" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblMinPocetLanoviek" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblMinPocetTrati" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="lblMaxCenyListkov" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                      <Component id="lblMaxCenaListkaStudent" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblMaxCenaListkaDieta" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblMaxCenaListkaDospely" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace pref="91" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="lblNazov" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+              <Component id="lblNazovObsahuje" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="lblMinVyskaSnehu" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="lblMinPodmienky" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="lblMaxCenyListkov" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="lblMaxCenaListkaDospely" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="lblMaxCenaListkaDieta" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="lblMaxCenaListkaStudent" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="lblMinPocetVlekov" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="lblMinPocetLanoviek" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="lblMinPocetTrati" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="lblMaxCenyListkov">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Maxim&#xe1;lne ceny l&#xed;stkov"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMaxCenaListkaDospely">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Dospel&#xfd;:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMinPocetTrati">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Minim&#xe1;lny po&#x10d;et trat&#xed; v prev&#xe1;dzke:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMinPocetLanoviek">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Minim&#xe1;lny po&#x10d;et lanoviek v prev&#xe1;dzke:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMinPocetVlekov">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Minim&#xe1;lny po&#x10d;et vlekov v prev&#xe1;dzke:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMaxCenaListkaDieta">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Die&#x165;a:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMaxCenaListkaStudent">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#x160;tudent:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMinPodmienky">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Minim&#xe1;lne podmienky:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblNazovObsahuje">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="N&#xe1;zov strediska obsahuje:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMinVyskaSnehu">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Minim&#xe1;lna v&#xfd;&#x161;ka snehu:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblNazov">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="11" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="N&#xe1;zov filtra:"/>
+      </Properties>
+    </Component>
+  </SubComponents>
+</Form>

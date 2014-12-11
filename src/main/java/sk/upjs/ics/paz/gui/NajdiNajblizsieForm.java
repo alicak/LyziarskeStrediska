@@ -1,11 +1,16 @@
 package sk.upjs.ics.paz.gui;
 
+import java.math.BigDecimal;
+import java.util.List;
 import sk.upjs.ics.paz.entity.Pouzivatel;
 import sk.upjs.ics.paz.dao.Factory;
+import sk.upjs.ics.paz.dao.StrediskaDao;
+import sk.upjs.ics.paz.entity.Stredisko;
 
 public class NajdiNajblizsieForm extends javax.swing.JDialog {
 
     private Pouzivatel pouzivatel = Factory.INSTANCE.getPouzivatel();
+    private StrediskaDao strediskaDao = Factory.INSTANCE.getStrediskaDao();
 
     /**
      * Creates new form NajdiNajblizsieForm
@@ -138,7 +143,8 @@ public class NajdiNajblizsieForm extends javax.swing.JDialog {
 
     private void btnNajdiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNajdiActionPerformed
         double okruh = Double.parseDouble(txtOkruh.getText());
-        // TODO Dorobit to !!!
+        List<Stredisko> zoznam = strediskaDao.najdiStrediskaVOkruhu(new BigDecimal(txtSirka.getText()), 
+                new BigDecimal(txtDlzka.getText()), okruh);
     }//GEN-LAST:event_btnNajdiActionPerformed
 
     /**

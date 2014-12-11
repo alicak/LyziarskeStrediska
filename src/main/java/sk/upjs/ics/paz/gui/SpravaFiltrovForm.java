@@ -6,11 +6,13 @@ import javax.swing.event.ListSelectionListener;
 import sk.upjs.ics.paz.dao.Factory;
 import sk.upjs.ics.paz.dao.FiltreDao;
 import sk.upjs.ics.paz.entity.Filter;
+import sk.upjs.ics.paz.entity.Pouzivatel;
 
 public class SpravaFiltrovForm extends javax.swing.JFrame {
 
-    FiltreListModel filtreListModel = new FiltreListModel();
+    FiltreListAndComboBoxModel filtreListAndComboBoxModel = new FiltreListAndComboBoxModel();
     FiltreDao filtreDao = Factory.INSTANCE.getFiltreDao();
+    Pouzivatel pouzivatel = Factory.INSTANCE.getPouzivatel();
 
     /**
      * Creates new form SpravaFiltrovForm
@@ -18,6 +20,9 @@ public class SpravaFiltrovForm extends javax.swing.JFrame {
     public SpravaFiltrovForm() {
         initComponents();
         aktualizujZoznamFiltrov();
+        if (pouzivatel != null) {
+            btnPridajNovy.setEnabled(true);
+        }
 
         lstZoznamFiltrov.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -34,8 +39,10 @@ public class SpravaFiltrovForm extends javax.swing.JFrame {
             // pretoze pravo otvorit Spravcu filtrov maju iba prihlaseni
             if (!lstZoznamFiltrov.getSelectionModel().isSelectionEmpty()) {
                 btnZobrazDetail.setEnabled(true);
-                btnUprav.setEnabled(true);
-                btnOdstran.setEnabled(true);
+                if (pouzivatel != null) {
+                    btnUprav.setEnabled(true);
+                    btnOdstran.setEnabled(true);
+                }
 
             } else {
                 btnZobrazDetail.setEnabled(false);
@@ -46,7 +53,7 @@ public class SpravaFiltrovForm extends javax.swing.JFrame {
     }
 
     private void aktualizujZoznamFiltrov() {
-        filtreListModel.obnov();
+        filtreListAndComboBoxModel.obnov();
     }
 
     /**
@@ -67,7 +74,7 @@ public class SpravaFiltrovForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        lstZoznamFiltrov.setModel(filtreListModel);
+        lstZoznamFiltrov.setModel(filtreListAndComboBoxModel);
         jScrollPane1.setViewportView(lstZoznamFiltrov);
 
         btnZobrazDetail.setText("Zobraz detail...");
@@ -79,6 +86,7 @@ public class SpravaFiltrovForm extends javax.swing.JFrame {
         });
 
         btnPridajNovy.setText("Pridaj nový...");
+        btnPridajNovy.setEnabled(false);
         btnPridajNovy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPridajNovyActionPerformed(evt);
@@ -137,7 +145,9 @@ public class SpravaFiltrovForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnZobrazDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZobrazDetailActionPerformed
-        // TODO add your handling code here:
+        Filter vybranyFilter = dajVybranyFilter();
+        ZobrazDetailFiltraForm zobrazDetailFiltraForm = new ZobrazDetailFiltraForm(this, vybranyFilter);
+        zobrazDetailFiltraForm.setVisible(true);
     }//GEN-LAST:event_btnZobrazDetailActionPerformed
 
     private void btnUpravActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpravActionPerformed
@@ -145,16 +155,7 @@ public class SpravaFiltrovForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUpravActionPerformed
 
     private void btnOdstranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOdstranActionPerformed
-        odstranFilterAction();
-    }//GEN-LAST:event_btnOdstranActionPerformed
-
-    private void btnPridajNovyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPridajNovyActionPerformed
-        pridajNovyFilterAction();
-    }//GEN-LAST:event_btnPridajNovyActionPerformed
-
-    private void odstranFilterAction() {
-        int vybranyIndex = lstZoznamFiltrov.getSelectedIndex();
-        Filter vybranyFilter = filtreDao.dajVsetky().get(vybranyIndex);
+        Filter vybranyFilter = dajVybranyFilter();
 
         int tlacidlo = JOptionPane.showConfirmDialog(
                 this,
@@ -167,12 +168,17 @@ public class SpravaFiltrovForm extends javax.swing.JFrame {
             filtreDao.odstran(vybranyFilter);
             aktualizujZoznamFiltrov();
         }
-    }
+    }//GEN-LAST:event_btnOdstranActionPerformed
 
-    private void pridajNovyFilterAction() {
+    private void btnPridajNovyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPridajNovyActionPerformed
         PridajUpravFilterForm pridajUpravFilterForm = new PridajUpravFilterForm(this);
         pridajUpravFilterForm.setVisible(true);
         aktualizujZoznamFiltrov();
+    }//GEN-LAST:event_btnPridajNovyActionPerformed
+
+    private Filter dajVybranyFilter() {
+        int vybranyIndex = lstZoznamFiltrov.getSelectedIndex();
+        return filtreDao.dajVsetky().get(vybranyIndex);
     }
 
     /**
