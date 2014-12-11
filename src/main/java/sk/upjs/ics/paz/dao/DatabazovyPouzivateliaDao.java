@@ -8,7 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import sk.upjs.ics.paz.entity.Pouzivatel;
 
-class DatabazovyPouzivateliaDao implements PouzivateliaDao {
+public class DatabazovyPouzivateliaDao implements PouzivateliaDao {
 
     JdbcTemplate jdbcTemplate;
 
@@ -107,14 +107,17 @@ class DatabazovyPouzivateliaDao implements PouzivateliaDao {
         String novaSuradnica = null;
         BigDecimal vysledok = null;
 
-        if (suradnica.equals("sirka")) {
-            sql = "SELECT GpsSirka FROM Uzivatelia WHERE meno = ?";
-            novaSuradnica = jdbcTemplate.queryForObject(
-                    sql, new Object[]{meno}, String.class);
-        } else if (suradnica.equals("dlzka")) {
-            sql = "SELECT GpsDlzka FROM Uzivatelia WHERE meno = ?";
-            novaSuradnica = jdbcTemplate.queryForObject(
-                    sql, new Object[]{meno}, String.class);
+        switch (suradnica) {
+            case "sirka":
+                sql = "SELECT GpsSirka FROM Uzivatelia WHERE meno = ?";
+                novaSuradnica = jdbcTemplate.queryForObject(
+                        sql, new Object[]{meno}, String.class);
+                break;
+            case "dlzka":
+                sql = "SELECT GpsDlzka FROM Uzivatelia WHERE meno = ?";
+                novaSuradnica = jdbcTemplate.queryForObject(
+                        sql, new Object[]{meno}, String.class);
+                break;
         }
 
         try {

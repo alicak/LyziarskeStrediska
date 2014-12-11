@@ -62,7 +62,7 @@ public enum Factory {
         return dataSource;
     }
 
-    private JdbcTemplate getJdbcTemplate() {
+    public JdbcTemplate getJdbcTemplate() {
         if (jdbcTemplate == null) {
             jdbcTemplate = new JdbcTemplate(getDataSource());
         }
