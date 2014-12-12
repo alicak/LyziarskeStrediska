@@ -9,6 +9,7 @@ import java.util.Map;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import sk.ics.upjs.ics.paz.exceptions.NedostatocneOpravneniaNaOperaciuException;
 import sk.upjs.ics.paz.entity.Pouzivatel;
 import sk.upjs.ics.paz.entity.Stredisko;
 
@@ -17,11 +18,13 @@ public class DatabazovyStrediskaDao implements StrediskaDao {
     private final JdbcTemplate jdbcTemplate;
     private static final BeanPropertyRowMapper<Stredisko> mapovac = new BeanPropertyRowMapper<>(Stredisko.class);
     private final String tabulkaSKtorouPracujem;
+    private final Pouzivatel pouzivatel;
 
     public DatabazovyStrediskaDao(Pouzivatel pouzivatel, JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+        this.pouzivatel = pouzivatel;
 
-        if (pouzivatel == null) {
+        if (this.pouzivatel == null) {
             tabulkaSKtorouPracujem = "strediska";
             return;
         }
@@ -43,7 +46,10 @@ public class DatabazovyStrediskaDao implements StrediskaDao {
      * @param stredisko stredisko, ktore chceme pridat
      */
     @Override
-    public void uloz(Stredisko stredisko) {
+    public void uloz(Stredisko stredisko) throws NedostatocneOpravneniaNaOperaciuException {
+        if (pouzivatel == null) {
+            throw new NedostatocneOpravneniaNaOperaciuException("Nie som prihlaseny a chcem ukladat.");
+        }
         if (stredisko.getId() == null) {
             ulozNove(stredisko);
         } else {
@@ -136,7 +142,10 @@ public class DatabazovyStrediskaDao implements StrediskaDao {
      * @param stredisko stredisko, ktore odstranujeme
      */
     @Override
-    public void odstran(Stredisko stredisko) {
+    public void odstran(Stredisko stredisko) throws NedostatocneOpravneniaNaOperaciuException {
+        if (pouzivatel == null) {
+            throw new NedostatocneOpravneniaNaOperaciuException("Nie som prihlaseny a chcem odstranovat.");
+        }
         // jdbcTemplate.update("DELETE FROM ? WHERE id = ?", tabulkaSKtorouPracujem, stredisko.getId());
         // meno tabulky nemoze vystupovat ako parameter v PreparedStatement, hadze to vynimky
         jdbcTemplate.update("DELETE FROM " + tabulkaSKtorouPracujem + " WHERE id = ?",
@@ -148,17 +157,18 @@ public class DatabazovyStrediskaDao implements StrediskaDao {
      * Vrati zoznam stredisk nachadzajucich sa v danom okruhu
      *
      * @param sirka zemepisna sirka miesta
-     * @param dlzka zemepisna dlzka miesta 
+     * @param dlzka zemepisna dlzka miesta
      * @param okruh polomer okruhu v kilometroch
      * @return
      */
+    @Override
     public List<Stredisko> najdiStrediskaVOkruhu(BigDecimal sirka, BigDecimal dlzka, double okruh) {
         List<Stredisko> vysledok = new ArrayList<>();
         for (Stredisko s : dajVsetky()) {
-            if (vzdialenostMedziMiestami(sirka.doubleValue(), 
-                    dlzka.doubleValue(), 
-                    s.getGpsSirka().doubleValue(), 
-                    s.getGpsDlzka().doubleValue()) 
+            if (vzdialenostMedziMiestami(sirka.doubleValue(),
+                    dlzka.doubleValue(),
+                    s.getGpsSirka().doubleValue(),
+                    s.getGpsDlzka().doubleValue())
                     <= okruh) {
                 vysledok.add(s);
             }
@@ -167,8 +177,9 @@ public class DatabazovyStrediskaDao implements StrediskaDao {
     }
 
     /**
-     * Na zaklade suradnic vypocita vzdialenost medzi dvoma miestami
-     * Zdroj: http://rosettacode.org/wiki/Haversine_formula#Java
+     * Na zaklade suradnic vypocita vzdialenost medzi dvoma miestami Zdroj:
+     * http://rosettacode.org/wiki/Haversine_formula#Java
+     *
      * @param lat1 sirka miesta1
      * @param lon1 dlzka miesta1
      * @param lat2 sirka miesta2
