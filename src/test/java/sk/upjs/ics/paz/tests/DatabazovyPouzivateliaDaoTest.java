@@ -47,30 +47,30 @@ public class DatabazovyPouzivateliaDaoTest {
      */
     @Test
     public void dajVsetkyTest3() {
-        BigDecimal sirka = new BigDecimal("40.12");
-        BigDecimal dlzka = new BigDecimal("40.13");
+            BigDecimal sirka = new BigDecimal("40.12");
+            BigDecimal dlzka = new BigDecimal("40.13");
 
-        pouzivateliaDao.registruj("gadzo", "heslo", sirka, dlzka);
+            pouzivateliaDao.registruj("gadzo", "heslo", sirka, dlzka);
 
-        String sql1 = "SELECT Heslo FROM Uzivatelia WHERE meno = ?";
-        String heslo = (String) jdbcTemplate.queryForObject(
-                sql1, new Object[]{"gadzo"}, String.class);
+            String sql1 = "SELECT Heslo FROM Uzivatelia WHERE meno = ?";
+            String heslo = (String) jdbcTemplate.queryForObject(
+                    sql1, new Object[]{"gadzo"}, String.class);
 
-        String sql2 = "SELECT GpsSirka FROM Uzivatelia WHERE meno = ?";
-        BigDecimal gpsSirka = jdbcTemplate.queryForObject(
-                sql2, new Object[]{"gadzo"}, BigDecimal.class);
+            String sql2 = "SELECT GpsSirka FROM Uzivatelia WHERE meno = ?";
+            BigDecimal gpsSirka = jdbcTemplate.queryForObject(
+                    sql2, new Object[]{"gadzo"}, BigDecimal.class);
 
-        String sql3 = "SELECT GpsDlzka FROM Uzivatelia WHERE meno = ?";
-        BigDecimal gpsDlzka = jdbcTemplate.queryForObject(
-                sql3, new Object[]{"gadzo"}, BigDecimal.class);
+            String sql3 = "SELECT GpsDlzka FROM Uzivatelia WHERE meno = ?";
+            BigDecimal gpsDlzka = jdbcTemplate.queryForObject(
+                    sql3, new Object[]{"gadzo"}, BigDecimal.class);
 
-        assertTrue(heslo.equals("heslo"));
-        assertTrue(gpsSirka.compareTo(sirka) == 0);
-        assertTrue(gpsDlzka.compareTo(dlzka) == 0);
+            assertTrue(heslo.equals("heslo"));
+            assertTrue(gpsSirka.compareTo(sirka) == 0);
+            assertTrue(gpsDlzka.compareTo(dlzka) == 0);
 
-        // dame do povodneho stavu
-        jdbcTemplate.execute("DELETE FROM Uzivatelia WHERE meno = 'gadzo'");
-        jdbcTemplate.execute("DROP TABLE gadzoTab");
+            // dame do povodneho stavu
+            jdbcTemplate.execute("DELETE FROM Uzivatelia WHERE meno = 'gadzo'");
+            jdbcTemplate.execute("DROP TABLE gadzoTab");
     }
 
     /**

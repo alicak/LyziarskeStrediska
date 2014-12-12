@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import sk.ics.upjs.ics.paz.exceptions.NedostatocneOpravneniaNaOperaciuException;
 import sk.upjs.ics.paz.entity.*;
 
 public class DatabazovyFiltreDao implements FiltreDao {
@@ -14,14 +15,16 @@ public class DatabazovyFiltreDao implements FiltreDao {
     private static final BeanPropertyRowMapper<Filter> mapovac = new BeanPropertyRowMapper<>(Filter.class);
     // meno aktualne prihlaseneho pouzivatela
     private final String menoPouzivatela;
+    private final Pouzivatel pouzivatel;
 
     public DatabazovyFiltreDao(Pouzivatel pouzivatel, JdbcTemplate jdbcTemplate) {
+        this.pouzivatel = pouzivatel;
         this.jdbcTemplate = jdbcTemplate;
         mapovac.setPrimitivesDefaultedForNullValue(true);
 
         // ak pouzivatel nie je prihlaseny, tak sa mu zobrazuju 
         // defaultne filtre, ktore maju nastavene meno pouzivatela "neprihlaseny"
-        if (pouzivatel == null) {
+        if (this.pouzivatel == null) {
             menoPouzivatela = "neprihlaseny";
             return;
         }
@@ -29,7 +32,7 @@ public class DatabazovyFiltreDao implements FiltreDao {
         menoPouzivatela = pouzivatel.getMeno();
     }
 
-    /** 
+    /**
      * @return zoznam vsetkych filtrov aktualneho pouzivatela
      */
     @Override
@@ -40,10 +43,14 @@ public class DatabazovyFiltreDao implements FiltreDao {
 
     /**
      * vytvori novy / upravi existujuci filter
+     *
      * @param filter filter, s ktorym narabame
      */
     @Override
     public void uloz(Filter filter) {
+        if (pouzivatel == null) {
+            throw new NedostatocneOpravneniaNaOperaciuException("Nie som prihlaseny a chcem ukladat.");
+        }
         // ak filter nema ziadne id, tak to znamena, ze este nie je v databaze
         if (filter.getId() == null) {
             ulozNovy(filter);
@@ -54,6 +61,7 @@ public class DatabazovyFiltreDao implements FiltreDao {
 
     /**
      * upravi existujuci filter
+     *
      * @param filter filter, s ktorym narabame
      */
     private void obnov(Filter filter) {
@@ -92,6 +100,7 @@ public class DatabazovyFiltreDao implements FiltreDao {
 
     /**
      * ulozi novy filter
+     *
      * @param filter filter, s ktorym narabame
      */
     private void ulozNovy(Filter filter) {
@@ -121,10 +130,14 @@ public class DatabazovyFiltreDao implements FiltreDao {
 
     /**
      * Odstrani filter z databazy
+     *
      * @param filter filter, s ktorym narabame
      */
     @Override
     public void odstran(Filter filter) {
+        if (pouzivatel == null) {
+            throw new NedostatocneOpravneniaNaOperaciuException("Nie som prihlaseny a chcem odstranovat.");
+        }
         jdbcTemplate.update("DELETE FROM Filtre WHERE id = ?", filter.getId());
     }
 
