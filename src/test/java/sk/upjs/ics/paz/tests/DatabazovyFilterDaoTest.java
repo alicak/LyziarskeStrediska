@@ -5,7 +5,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;
 import org.springframework.jdbc.core.JdbcTemplate;
-import sk.ics.upjs.ics.paz.exceptions.NedostatocneOpravneniaNaOperaciuException;
+import sk.upjs.ics.paz.exceptions.NedostatocneOpravneniaNaOperaciuException;
 import sk.upjs.ics.paz.dao.DatabazovyFiltreDao;
 import sk.upjs.ics.paz.dao.DatabazovyPouzivateliaDao;
 import sk.upjs.ics.paz.dao.Factory;
