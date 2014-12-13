@@ -1,7 +1,6 @@
 package sk.upjs.ics.paz.gui;
 
 import java.util.List;
-import javax.swing.ComboBoxModel;
 import sk.upjs.ics.paz.entity.*;
 import sk.upjs.ics.paz.dao.*;
 import javax.swing.JOptionPane;
@@ -14,22 +13,28 @@ public class HlavnyForm extends javax.swing.JFrame {
     private StrediskaDao strediskaDao;
     private FiltreDao filtreDao;
 
+    // modely pre zobrazovanie stredisk a filtrov
     private final StrediskoTableModel strediskaTableModel = new StrediskoTableModel();
     private final FiltreListAndComboBoxModel filtreListAndComboBoxModel = new FiltreListAndComboBoxModel();
+
+    // rowsorter pre strediska
     private final TableRowSorter strediskaRowSorter = new TableRowSorter(strediskaTableModel);
 
     private Pouzivatel pouzivatel = Factory.INSTANCE.getPouzivatel();
 
-    // private final StrediskaPodlaNazvuRowFilter strediskaPodlaVsetkychStlpcovRowFilter
-    //        = new StrediskaPodlaNazvuRowFilter();
     public HlavnyForm() {
         initComponents();
+        // nastavi obrazok
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo.png"))); // NOI18N
+
+        // ziska Dao
         strediskaDao = Factory.INSTANCE.getStrediskaDao();
         filtreDao = Factory.INSTANCE.getFiltreDao();
-        filtreListAndComboBoxModel.obnov();
 
-        //strediskaRowSorter.setRowFilter(strediskaPodlaVsetkychStlpcovRowFilter);
+        // aktualizuje zoznamy
+        aktualizujZoznamFiltrov();
+        aktualizujZoznamStredisk();
+
         tabStrediska.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             // pri zmene (vybratie/nevybratie strediska) aktivuje/deaktivuje tlacitka
@@ -38,20 +43,23 @@ public class HlavnyForm extends javax.swing.JFrame {
             }
         });
 
-        aktualizujZoznamStredisk();
-
+        // pri zavreti okna sa program ukonci
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
     private void tabStrediskaSelectionValueChanged(ListSelectionEvent e) {
         if (!e.getValueIsAdjusting()) {
+
             if (!tabStrediska.getSelectionModel().isSelectionEmpty()) {
+                // ak je nieco vybrate, tak sa tlacitka pre pracu so strediskami
+                // zaktivuju podla toho, ci je uzivatel prihlaseny
                 btnZobrazDetail.setEnabled(true);
                 if (pouzivatel != null) {
                     btnUprav.setEnabled(true);
                     btnOdstran.setEnabled(true);
                 }
             } else {
+                // ak nie je vybrate nic, tak sa nezaktivuje nic
                 btnZobrazDetail.setEnabled(false);
                 btnUprav.setEnabled(false);
                 btnOdstran.setEnabled(false);
@@ -96,6 +104,7 @@ public class HlavnyForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Lyžiarske strediská");
+        setResizable(false);
 
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo.png"))); // NOI18N
 
@@ -312,13 +321,15 @@ public class HlavnyForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * Otvori modalne okno s vyhladavanim najblizsieho strediska
+     * Otvori modalne okno s vyhladavanim najblizsieho strediska (este nie je
+     * implementovane)
      *
      * @param evt
      */
     private void btnNajdiNajblizsieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNajdiNajblizsieActionPerformed
         NajdiNajblizsieForm najdiNajblizsieForm = new NajdiNajblizsieForm(this, true);
         najdiNajblizsieForm.setVisible(true);
+        aktualizujZoznamStredisk();
     }//GEN-LAST:event_btnNajdiNajblizsieActionPerformed
 
     /**
@@ -343,6 +354,7 @@ public class HlavnyForm extends javax.swing.JFrame {
      * Otvori modalne okno pre upravu vybraneho strediska
      */
     private void btnUpravActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpravActionPerformed
+        // ziska vybrane stredisko z databazy
         Stredisko vybraneStredisko = dajStrediskoZTabulky();
         PridajUpravStrediskoForm pridajUpravStrediskoForm = new PridajUpravStrediskoForm(this, vybraneStredisko);
         pridajUpravStrediskoForm.setVisible(true);
@@ -353,6 +365,7 @@ public class HlavnyForm extends javax.swing.JFrame {
      * Odstrani vybrane stredisko, predtym si vypyta potvrdenie
      */
     private void btnOdstranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOdstranActionPerformed
+        // ziska vybrane stredisko z tabulky
         int vybranyRiadok = tabStrediska.getSelectedRow();
         int vybratyRiadokVModeli = tabStrediska.convertRowIndexToModel(vybranyRiadok);
         Stredisko vybraneStredisko = strediskaTableModel.dajPodlaCislaRiadka(vybratyRiadokVModeli);
@@ -377,34 +390,40 @@ public class HlavnyForm extends javax.swing.JFrame {
         // ak je pouzivatel prihlaseny, tak sa odhlasi
         if (pouzivatel != null) {
             odhlas();
-            aktualizujZoznamStredisk();
             return;
         }
-        // ak nebol prihlaseny, tak sa prihlasi, 
-        // a ak sa prihlasovanie podari, nastavia sa vsetky veci
+        // ak nebol prihlaseny, tak sa prihlasi
         PrihlasovanieForm prihlasovanieForm = new PrihlasovanieForm(this, true);
         prihlasovanieForm.setVisible(true);
         prihlas();
-        aktualizujZoznamStredisk();
     }//GEN-LAST:event_btnPrihlasenieOdhlasenieActionPerformed
 
     /**
      * Prihlasi uzivatela
      */
     private void prihlas() {
+        // v PrihlasovanieForm sa urobi samotne prihlasenie, 
+        // tu sa uz len aktualizuje Dao a zobrazene data
+
         pouzivatel = Factory.INSTANCE.getPouzivatel();
-        strediskaDao = Factory.INSTANCE.getNovyStrediskaDao();
-        filtreDao = Factory.INSTANCE.getNovyFiltreDao();
-        filtreListAndComboBoxModel.obnov();
+
         if (pouzivatel != null) {
+            // musia sa vytvorit nove Dao objekty pre novoprihlaseneho pouzivatela
+            strediskaDao = Factory.INSTANCE.getNovyStrediskaDao();
+            filtreDao = Factory.INSTANCE.getNovyFiltreDao();
+
+            // zaktivuju sa tlacitka
             menuitemPridaj.setEnabled(true);
             btnPridaj.setEnabled(true);
-            menuitemSpravaFiltrov.setEnabled(true);
             tabStrediska.clearSelection();
 
             lblMenoUzivatela.setText("Užívateľ: " + pouzivatel.getMeno());
             btnPrihlasenieOdhlasenie.setText("Odhlás");
             menuitemPrihlasOdhlas.setText("Odhlás");
+
+            // aktualizuju sa zobrazene data
+            aktualizujZoznamStredisk();
+            aktualizujZoznamFiltrov();
         }
     }
 
@@ -412,22 +431,30 @@ public class HlavnyForm extends javax.swing.JFrame {
      * Odhlasi pouzivatela
      */
     private void odhlas() {
+        // pouzivatel bude neprihlaseny, a teda null
         pouzivatel = null;
         Factory.INSTANCE.setPouzivatel(pouzivatel);
+        // preto sa musia vytvorit nove Dao objekty
         strediskaDao = Factory.INSTANCE.getNovyStrediskaDao();
         filtreDao = Factory.INSTANCE.getNovyFiltreDao();
-        filtreListAndComboBoxModel.obnov();
 
+        // deaktivuju sa tlacitka
         menuitemPridaj.setEnabled(false);
         btnPridaj.setEnabled(false);
-        menuitemSpravaFiltrov.setEnabled(false);
         tabStrediska.clearSelection();
 
         lblMenoUzivatela.setText("Užívateľ: neprihlásený");
         btnPrihlasenieOdhlasenie.setText("Prihlás...");
         menuitemPrihlasOdhlas.setText("Prihlás...");
+
+        // aktualizuju sa zobrazene data
+        aktualizujZoznamFiltrov();
+        aktualizujZoznamStredisk();
     }
 
+    /**
+     * @return vybrane stredisko v tabulke
+     */
     private Stredisko dajStrediskoZTabulky() {
         // vrati cislo riadka v aktualnom zosorteni
         int vybranyRiadok = tabStrediska.getSelectedRow();
@@ -440,7 +467,7 @@ public class HlavnyForm extends javax.swing.JFrame {
     }
 
     /**
-     * Pri dvojkliku na stredisko v tabulke sa spusti jeho uprava
+     * Pri dvojkliku na stredisko v tabulke sa zobrazi jeho detail
      *
      * @param evt
      */
@@ -451,12 +478,12 @@ public class HlavnyForm extends javax.swing.JFrame {
     }//GEN-LAST:event_tabStrediskaMouseClicked
 
     private void btnResetFiltraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetFiltraActionPerformed
-        //strediskaPodlaVsetkychStlpcovRowFilter.setHladanyVyraz("");
         aktualizujZoznamStredisk();
-        strediskaTableModel.obnov();
-        filtreListAndComboBoxModel.obnov();
+        // zoznam filtrov aktualizujeme, aby nebol ziadny filter vybrany
+        aktualizujZoznamFiltrov();
     }//GEN-LAST:event_btnResetFiltraActionPerformed
 
+    // tlacidla v hornom menu, ktore vykonavaju rovnake akcie ako tlacidla vo formulari
     private void menuitemPridajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuitemPridajActionPerformed
         btnPridajActionPerformed(evt);
     }//GEN-LAST:event_menuitemPridajActionPerformed
@@ -478,7 +505,7 @@ public class HlavnyForm extends javax.swing.JFrame {
     }//GEN-LAST:event_menuitemRegistrujActionPerformed
 
     /**
-     * Otvori okno s info o programe
+     * Otvori okno s informaciami o programe
      */
     private void menuOProgrameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuOProgrameMouseClicked
         OProgrameForm oProgrameForm = new OProgrameForm(this, true);
@@ -493,14 +520,31 @@ public class HlavnyForm extends javax.swing.JFrame {
         spravaFiltrovForm.setVisible(true);
     }//GEN-LAST:event_menuitemSpravaFiltrovActionPerformed
 
+    /**
+     * Zobrazi vyfiltrovany zoznam stredisk
+     * @param evt 
+     */
     private void btnFiltrujActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrujActionPerformed
+        // ziska nazov filtra zo zoznamu
         Filter vybranyFilter = filtreDao.dajPodlaNazvu(cmbZoznamFiltrov.getSelectedItem().toString());
+        // podla neho vyfiltruje
         List<Stredisko> vyfiltrovaneStrediska = vybranyFilter.filtruj(strediskaDao.dajVsetky());
+        // zobrazi vvyfiltrovany zoznam
         strediskaTableModel.zobrazZadanyZoznam(vyfiltrovaneStrediska);
     }//GEN-LAST:event_btnFiltrujActionPerformed
 
+    /**
+     * Aktualizuje zoznam stredisk
+     */
     private void aktualizujZoznamStredisk() {
         strediskaTableModel.obnov();
+    }
+
+    /**
+     * Aktulizuje zoznam filtrov
+     */
+    private void aktualizujZoznamFiltrov() {
+        filtreListAndComboBoxModel.obnov();
     }
 
     /**

@@ -15,6 +15,7 @@ public class DatabazovyFiltreDao implements FiltreDao {
     private static final BeanPropertyRowMapper<Filter> mapovac = new BeanPropertyRowMapper<>(Filter.class);
     // meno aktualne prihlaseneho pouzivatela
     private final String menoPouzivatela;
+    // aktualny pouzivatel - ak je neprihlaseny, tak null
     private final Pouzivatel pouzivatel;
 
     public DatabazovyFiltreDao(Pouzivatel pouzivatel, JdbcTemplate jdbcTemplate) {
@@ -52,6 +53,7 @@ public class DatabazovyFiltreDao implements FiltreDao {
             throw new NedostatocneOpravneniaNaOperaciuException("Nie som prihlaseny a chcem ukladat.");
         }
         // ak filter nema ziadne id, tak to znamena, ze este nie je v databaze
+        // a treba ho tam pridat
         if (filter.getId() == null) {
             ulozNovy(filter);
         } else {
@@ -141,6 +143,11 @@ public class DatabazovyFiltreDao implements FiltreDao {
         jdbcTemplate.update("DELETE FROM Filtre WHERE id = ?", filter.getId());
     }
 
+    /**
+     * 
+     * @param nazov nazov filtra
+     * @return filter s tym nazvom
+     */
     @Override
     public Filter dajPodlaNazvu(String nazov) {
         String sql = "SELECT * FROM Filtre WHERE nazov = ?";

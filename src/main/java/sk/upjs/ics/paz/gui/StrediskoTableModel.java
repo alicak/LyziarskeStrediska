@@ -12,6 +12,7 @@ public class StrediskoTableModel extends AbstractTableModel {
 
     // zoznam stredisk, ktore chceme zobrazovat
     private List<Stredisko> zoznamStredisk = new ArrayList<>();
+    // parametre stlpcov
     private static final int POCET_STLPCOV = 3;
     private static final String[] NAZVY_STLPCOV = {"Názov", "Výška snehu", "Podmienky"};
     private static final Class[] TYPY_STLPCOV = {

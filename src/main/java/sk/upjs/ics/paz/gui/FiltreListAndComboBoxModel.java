@@ -12,7 +12,10 @@ public class FiltreListAndComboBoxModel extends AbstractListModel implements Com
 
     // zoznam filtrov, ktore chceme zobrazovat
     private List<Filter> zoznamFiltrov = new LinkedList<>();
+
     private FiltreDao filtreDao = Factory.INSTANCE.getFiltreDao();
+
+    // prvok, na ktory je kliknute a teda je vybrany
     private Object vybranyPrvokVComboBoxe;
 
     @Override
@@ -25,21 +28,35 @@ public class FiltreListAndComboBoxModel extends AbstractListModel implements Com
         return zoznamFiltrov.get(index).getNazov();
     }
 
+    /**
+     * Obnovi obsah celeho zoznamu a nastavi, aby ziadny prvok nebol vybrany
+     */
     public void obnov() {
         filtreDao = Factory.INSTANCE.getFiltreDao();
         zoznamFiltrov = filtreDao.dajVsetky();
-        fireContentsChanged(this, 0, this.getSize()-1);
+        fireContentsChanged(this, 0, this.getSize() - 1);
         setSelectedItem(null);
     }
 
+    // ------------------------
+    // metody pre ComboBoxModel
+    // ------------------------
+    
+    /**
+     * nastavi vybrany prvok
+     *
+     * @param anItem vybrany prvok
+     */
     @Override
     public void setSelectedItem(Object anItem) {
         vybranyPrvokVComboBoxe = anItem;
     }
 
+    /**
+     * @return vybrany prvok
+     */
     @Override
     public Object getSelectedItem() {
         return vybranyPrvokVComboBoxe;
     }
-
 }

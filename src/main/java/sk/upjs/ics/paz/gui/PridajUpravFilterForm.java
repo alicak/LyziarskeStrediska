@@ -11,7 +11,7 @@ public class PridajUpravFilterForm extends javax.swing.JDialog {
     Filter filter;
     FiltreDao filtreDao = Factory.INSTANCE.getFiltreDao();
     Pouzivatel pouzivatel = Factory.INSTANCE.getPouzivatel();
-    VerifikatorVstupov verifikator = new VerifikatorVstupov();
+    VerifikatorVstupov verifikator = Factory.INSTANCE.getVerifikator();
 
     /**
      * Creates new form PridajUpravFilterForm
@@ -84,6 +84,7 @@ public class PridajUpravFilterForm extends javax.swing.JDialog {
         btnUloz = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         lblNazov.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblNazov.setText("Názov filtra:");
@@ -290,6 +291,13 @@ public class PridajUpravFilterForm extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Ulozi alebo aktualizuje filter. Overuje, ci je vo vsetkych poliach
+     * korektny vstup. Ak nie, vyhodi o tom okno s hlaskou a returnuje sa, aby
+     * to pouzivatel mohol opravit
+     *
+     * @param evt
+     */
     private void btnUlozActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUlozActionPerformed
         filter.setMenoUzivatela(pouzivatel.getMeno());
 
@@ -358,7 +366,6 @@ public class PridajUpravFilterForm extends javax.swing.JDialog {
 
         filtreDao.uloz(filter);
         dispose();
-
     }//GEN-LAST:event_btnUlozActionPerformed
 
     /**

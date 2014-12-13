@@ -30,7 +30,7 @@ public class DatabazovyFilterDaoTest {
     }
 
     /**
-     * Otestujem, ci vyhodi vynimku ak idem ukadat ako neprihlaseny uzivatel
+     * Otestujem, ci vyhodi vynimku, ak idem ukladat ako neprihlaseny uzivatel
      */
     @Test(expected = NedostatocneOpravneniaNaOperaciuException.class)
     public void ulozTest() {
@@ -40,7 +40,7 @@ public class DatabazovyFilterDaoTest {
     }
 
     /**
-     * Otestujem, ci vyhodi vynimku ak idem mazat ako neprihlaseny uzivatel
+     * Otestujem, ci vyhodi vynimku, ak idem mazat ako neprihlaseny uzivatel
      */
     @Test(expected = NedostatocneOpravneniaNaOperaciuException.class)
     public void odstranTest() {
@@ -88,7 +88,7 @@ public class DatabazovyFilterDaoTest {
     }
 
     /**
-     * Overim, ci mi da spravne id ak vyhladam filter podla nazvu
+     * Overim, ci mi da spravne id, ak vyhladam filter podla nazvu
      */
     @Test
     public void dajPodlaNazvuTest() {

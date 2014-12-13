@@ -8,11 +8,17 @@ import java.util.Set;
 
 public class Filter {
 
-    // ak nema nejaka premenna zadanu hodnotu, tak to bude 
-    // defaultna hodnota novej premennej (kvoli null v databaze)
+    // povinne udaje
     private Long id;
     private String nazov;
     private String menoUzivatela;
+
+    // nepovinne udaje
+    
+    // ak nema nejaky udaj zadanu hodnotu, tak to bude 
+    // defaultna hodnota novej premennej (kvoli nullom v databaze)
+    // String - "", int - 0, BigDecimal - null
+    
     private String nazovObsahuje;
     private int minVyskaSnehu;
     private String minPodmienky;

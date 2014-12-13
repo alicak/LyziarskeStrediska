@@ -30,7 +30,7 @@ public class DatabazovyStrediskaDaoTest {
     }
 
     /**
-     * Otestujem, ci vyhodi vynimku ak idem ukadat ako neprihlaseny uzivatel
+     * Otestujem, ci vyhodi vynimku, ak idem ukladat ako neprihlaseny uzivatel
      */
     @Test(expected = NedostatocneOpravneniaNaOperaciuException.class)
     public void ulozTest() {
@@ -40,7 +40,7 @@ public class DatabazovyStrediskaDaoTest {
     }
 
     /**
-     * Otestujem, ci vyhodi vynimku ak idem odstranovat ako neprihlaseny
+     * Otestujem, ci vyhodi vynimku, ak idem odstranovat ako neprihlaseny
      * uzivatel
      */
     @Test(expected = NedostatocneOpravneniaNaOperaciuException.class)
@@ -97,7 +97,7 @@ public class DatabazovyStrediskaDaoTest {
     }
 
     /**
-     * Dam okruh 0 a GSP suradnice podla presne jedneho strediska
+     * Dam okruh 0 a GPS suradnice podla presne jedneho strediska
      */
     @Test
     public void najdiStrediskaVOkruhuTestJedno() {

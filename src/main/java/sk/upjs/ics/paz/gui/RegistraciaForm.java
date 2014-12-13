@@ -42,6 +42,7 @@ public class RegistraciaForm extends javax.swing.JDialog {
         txtDlzka = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setText("Meno:");
@@ -139,25 +140,44 @@ public class RegistraciaForm extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Storno
+     *
+     * @param evt
+     */
     private void btnStornoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStornoActionPerformed
         dispose();
     }//GEN-LAST:event_btnStornoActionPerformed
 
+    /**
+     * Registruje uzivatela. Ak zada zle udaje alebo uz taky uzivatel existuje,
+     * vyhodi o tom hlasku a returnuje sa, aby to uzivatel mohol opravit
+     *
+     * @param evt
+     */
     private void btnRegistrujActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrujActionPerformed
         String meno = txtMeno.getText();
         String heslo = new String(txtHeslo.getPassword());
 
+        // meno ani heslo nemozu byt prazdne
         if (meno.equals("") || heslo.equals("")) {
             JOptionPane.showMessageDialog(this, "Zadajte používateľské meno aj heslo!");
             return;
         }
-        
+
+        // meno nemoze byt "neprihlaseny" (lebo taketo meno bude pri filtroch, 
+        // ktore su pre neprihlasenych pouzivatelov)
+        if (pouzivateliaDao.existujePouzivatel(meno) || meno.equals("neprihlaseny")) {
+            JOptionPane.showMessageDialog(this, "Používateľ s menom " + meno + " už existuje!");
+            return;
+        }
+
         String sirka = txtSirka.getText();
         String dlzka = txtDlzka.getText();
         BigDecimal gpsSirka = null;
         BigDecimal gpsDlzka = null;
 
-        // ak su polia prazdne, vynimku neodchytavame, lebo su nepovinne
+        // ak su polia prazdne, vynimku neodchytavame a ulozime null hodnoty (lebo su nepovinne)
         // ale nemoze byt jedno prazdne a jedno vyplnene - to odchytime
         if (!sirka.isEmpty() && !dlzka.isEmpty()) {
             try {
@@ -169,14 +189,8 @@ public class RegistraciaForm extends javax.swing.JDialog {
             }
         }
 
-        // meno nemoze byt "neprihlaseny", lebo taketo meno bude pri filtroch, 
-        // ktore su pre neprihlasenych pouzivatelov
-        if (pouzivateliaDao.existujePouzivatel(meno) || meno.equals("neprihlaseny")) {
-            JOptionPane.showMessageDialog(this, "Používateľ s menom " + meno + " už existuje!");
-        } else {
-            pouzivateliaDao.registruj(meno, heslo, gpsSirka, gpsDlzka);
-            dispose();
-        }
+        pouzivateliaDao.registruj(meno, heslo, gpsSirka, gpsDlzka);
+        dispose();
     }//GEN-LAST:event_btnRegistrujActionPerformed
 
     /**

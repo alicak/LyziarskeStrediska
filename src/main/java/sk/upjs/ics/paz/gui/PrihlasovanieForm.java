@@ -41,6 +41,7 @@ public class PrihlasovanieForm extends javax.swing.JDialog {
         lblLogo3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         btnStorno.setText("Storno");
         btnStorno.addActionListener(new java.awt.event.ActionListener() {
@@ -110,10 +111,21 @@ public class PrihlasovanieForm extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Storno
+     *
+     * @param evt
+     */
     private void btnStornoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStornoActionPerformed
         dispose();
     }//GEN-LAST:event_btnStornoActionPerformed
 
+    /**
+     * Prihlasi pouzivatela. Ak zadal nespravne alebo neuplne udaje, vyhodi o
+     * tom hlasku
+     *
+     * @param evt
+     */
     private void btnPrihlasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrihlasActionPerformed
         String meno = txtMeno.getText();
         String heslo = new String(txtHeslo.getPassword());
@@ -125,11 +137,11 @@ public class PrihlasovanieForm extends javax.swing.JDialog {
         Pouzivatel pouzivatel = pouzivateliaDao.dajUzivatela(meno, heslo);
         if (pouzivatel == null) {
             JOptionPane.showMessageDialog(this, "Zlé používateľské meno alebo heslo!");
-        } else {
-            Factory.INSTANCE.setPouzivatel(pouzivatel);
-            dispose();
+            return;
         }
-
+        
+        Factory.INSTANCE.setPouzivatel(pouzivatel);
+        dispose();
     }//GEN-LAST:event_btnPrihlasActionPerformed
 
     /**

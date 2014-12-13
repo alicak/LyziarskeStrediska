@@ -5,35 +5,60 @@ import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import javax.swing.JTextField;
 
-// Regularne vyrazy:
-// http://ocpsoft.org/opensource/guide-to-regular-expressions-in-java-part-1/
+/**
+ * Obsahuje metody pre overovanie vstupu a na vyhadzovanie chybovych hlasok.
+ * Zdroj pre regularne vyrazy:
+ * http://ocpsoft.org/opensource/guide-to-regular-expressions-in-java-part-1/
+ */
 public class VerifikatorVstupov {
 
+    // nadpis, ktory budu mat vsetky chybove hlasky
     private String nadpisChybovejHlasky = "Chyba - nesprávny vstup";
 
+    /**
+     * @param pole pole, ktore overujeme
+     * @return true, ak je neprazdne
+     */
     public boolean jeNeprazdny(JTextField pole) {
         return !pole.getText().equals("");
     }
 
+    /**
+     *
+     * @param pole pole, ktore overujeme
+     * @return true, ak je v nom desatinne cislo (musi mat desatinnu cast!)
+     */
     private boolean jeDesatinneCislo(JTextField pole) {
         // regularny vyraz - znamena 0 alebo 1 minus,
         // 1 alebo viac cislic, za tym bodku a za tym zase 1 alebo viac cislic
         return pole.getText().matches("-?\\d+\\.\\d+");
     }
 
+    /**
+     * @param pole pole, ktore overujeme
+     * @return true, ak je v nom cele cislo
+     */
     private boolean jeCeleCislo(JTextField pole) {
         // regularny vyraz - znamena 0 alebo 1 minus
         // a za tym 1 alebo viac cislic
         return pole.getText().matches("-?\\d+");
     }
 
+    /**
+     * @param pole pole, ktore overujeme
+     * @return true, ak je v nom cele alebo desatinne cislo
+     */
     private boolean jeCeleAleboDesatinneCislo(JTextField pole) {
         return jeDesatinneCislo(pole) || jeCeleCislo(pole);
     }
 
-    // ---------------------
-    // Metody pre overovanie
-    // ---------------------
+    /**
+     *
+     * @param pole pole, ktore overujeme
+     * @param min minimalna hodnota
+     * @param max maximalna hodnota
+     * @return true, ak je hodnota cele cislo medzi min a max (vratane)
+     */
     public boolean jeCeleCisloVRozsahu(JTextField pole, int min, int max) {
         if (!jeCeleCislo(pole)) {
             return false;
@@ -42,6 +67,14 @@ public class VerifikatorVstupov {
         return (hodnota >= min && hodnota <= max);
     }
 
+    /**
+     *
+     * @param pole pole, ktore overujeme
+     * @param min minimalna hodnota
+     * @param max maximalna hodnota
+     * @return true, ak je hodnota cele alebo desatinne cislo medzi min a max
+     * (vratane)
+     */
     public boolean jeCeleAleboDesatinneCisloVRozsahu(JTextField pole, double min, double max) {
         if (!jeCeleAleboDesatinneCislo(pole)) {
             return false;
@@ -50,11 +83,23 @@ public class VerifikatorVstupov {
         return (hodnota >= min && hodnota <= max);
     }
 
+    /**
+     *
+     * @param pole pole, ktore overujeme
+     * @param maxDlzka maximalna dlzka retazca
+     * @return true, ak retazec nepresahuje max dlzku
+     */
     public boolean jeMaxDlzky(JTextField pole, int maxDlzka) {
         int dlzka = pole.getText().length();
         return dlzka <= maxDlzka;
     }
 
+    /**
+     *
+     * @param pole pole, ktore overujeme
+     * @param maxDlzka maximalna dlzka retazca
+     * @return true, ak je retazec neprazny a nepresahuje max dlzku
+     */
     public boolean jeNeprazdneMaxDlzky(JTextField pole, int maxDlzka) {
         if (!jeNeprazdny(pole)) {
             return false;
@@ -63,13 +108,25 @@ public class VerifikatorVstupov {
         return dlzka <= maxDlzka;
     }
 
+    /**
+     * Pocet vlekov/lanoviek/trati v prevadzke nemoze byt vacsi ako pocet
+     * vsetkych.
+     *
+     * @param vPrevadzke pocet v prevazdke
+     * @param vsetky pocet vsetkych
+     * @return true, ak je v prevadzke menej alebo rovnako ako vsetkych
+     */
     public boolean jeVPrevadzkeMenejAkoVsetkych(JTextField vPrevadzke, JTextField vsetky) {
         return Integer.valueOf(vPrevadzke.getText()) <= Integer.valueOf(vsetky.getText());
     }
 
-    // ---------------------------
-    // Vytvaranie chybovych hlasok
-    // ---------------------------
+    /**
+     * Hlaska pre povinne cele cislo
+     * @param parent rodic hlasky
+     * @param pole pole, ktore overujeme
+     * @param min min hodnota
+     * @param max max hodnota
+     */
     public void hlaskaPrazdneAleboZleCeleCislo(JDialog parent, JTextField pole, int min, int max) {
         String sprava = "Zadali ste nesprávny formát čísla v poli "
                 + pole.getName()
@@ -81,6 +138,13 @@ public class VerifikatorVstupov {
         JOptionPane.showMessageDialog(parent, sprava, nadpisChybovejHlasky, ERROR_MESSAGE);
     }
 
+    /**
+     * Hlaska pre povinne cele alebo desatinne cislo
+     * @param parent rodic hlasky
+     * @param pole pole, ktore overujeme
+     * @param min min hodnota
+     * @param max max hodnota
+     */
     public void hlaskaPrazdneAleboZleCeleAleboDesatinneCislo(JDialog parent, JTextField pole, double min, double max) {
         String sprava = "Zadali ste nesprávny formát čísla v poli "
                 + pole.getName()
@@ -92,6 +156,12 @@ public class VerifikatorVstupov {
         JOptionPane.showMessageDialog(parent, sprava, nadpisChybovejHlasky, ERROR_MESSAGE);
     }
 
+    /**
+     * Hlaska pre povinny string
+     * @param parent rodic hlasky
+     * @param pole pole, ktore overujeme
+     * @param maxDlzka
+     */
     public void hlaskaPrazdnyAleboDlhyString(JDialog parent, JTextField pole, int maxDlzka) {
         String sprava = "Zadali ste nesprávny reťazec v poli "
                 + pole.getName()
@@ -101,6 +171,12 @@ public class VerifikatorVstupov {
         JOptionPane.showMessageDialog(parent, sprava, nadpisChybovejHlasky, ERROR_MESSAGE);
     }
 
+    /**
+     * Hlaska pre nepovinny string
+     * @param parent rodic hlasky
+     * @param pole pole, ktore overujeme
+     * @param maxDlzka 
+     */
     public void hlaskaDlhyString(JDialog parent, JTextField pole, int maxDlzka) {
         String sprava = "Zadali ste nesprávny reťazec v poli "
                 + pole.getName()
@@ -110,6 +186,12 @@ public class VerifikatorVstupov {
         JOptionPane.showMessageDialog(parent, sprava, nadpisChybovejHlasky, ERROR_MESSAGE);
     }
 
+    /**
+     * Hlaska pre viac vlekov/lanoviek/trati v prevadzke ako vsetkych
+     * @param parent rodic hlasky
+     * @param vPrevadzke pocet v prevadzke
+     * @param vsetky pocet vsetkych
+     */
     public void hlaskaVelaVPrevadzke(JDialog parent, JTextField vPrevadzke, JTextField vsetky) {
         String sprava = "Zadali ste nesprávne hodnoty v poliach "
                 + vPrevadzke.getName()

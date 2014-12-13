@@ -17,18 +17,23 @@ public class DatabazovyStrediskaDao implements StrediskaDao {
 
     private final JdbcTemplate jdbcTemplate;
     private static final BeanPropertyRowMapper<Stredisko> mapovac = new BeanPropertyRowMapper<>(Stredisko.class);
+    // nazov tabulky prisluchajucej aktualnemu pouzivatelovi
     private final String tabulkaSKtorouPracujem;
+    // aktualny pouzivatel
     private final Pouzivatel pouzivatel;
 
     public DatabazovyStrediskaDao(Pouzivatel pouzivatel, JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
         this.pouzivatel = pouzivatel;
 
+        // neprihlaseny pouzivatel pracuje s defaultnou tabulkou
+        // (ale nema opravnenie robit v nej nejake upravy)
         if (this.pouzivatel == null) {
             tabulkaSKtorouPracujem = "strediska";
             return;
         }
 
+        // pruhlaseny pouzivatel pracuje s vlastnou tabulkou stredisk
         tabulkaSKtorouPracujem = pouzivatel.getNazovTabulky();
     }
 
@@ -50,6 +55,8 @@ public class DatabazovyStrediskaDao implements StrediskaDao {
         if (pouzivatel == null) {
             throw new NedostatocneOpravneniaNaOperaciuException("Nie som prihlaseny a chcem ukladat.");
         }
+
+        // ak stredisko nema id, tak este nie je v databaze a treba ho tam pridat
         if (stredisko.getId() == null) {
             ulozNove(stredisko);
         } else {
@@ -129,9 +136,9 @@ public class DatabazovyStrediskaDao implements StrediskaDao {
 
         SimpleJdbcInsert insert = new SimpleJdbcInsert(jdbcTemplate);
 
-        insert.setGeneratedKeyName("id");
-
         insert.setTableName(tabulkaSKtorouPracujem);
+        // tu sa zabezpeci, aby sa stredisku ulozilo id a by sme ho dostali spat
+        insert.setGeneratedKeyName("id");
         Number id = insert.executeAndReturnKey(hodnoty);
         stredisko.setId(id.longValue());
     }
@@ -146,20 +153,19 @@ public class DatabazovyStrediskaDao implements StrediskaDao {
         if (pouzivatel == null) {
             throw new NedostatocneOpravneniaNaOperaciuException("Nie som prihlaseny a chcem odstranovat.");
         }
-        // jdbcTemplate.update("DELETE FROM ? WHERE id = ?", tabulkaSKtorouPracujem, stredisko.getId());
-        // meno tabulky nemoze vystupovat ako parameter v PreparedStatement, hadze to vynimky
+        // meno tabulky nemoze vystupovat ako parameter v PreparedStatement,
+        // hadze to vynimky, takze to musi byt konkatenacia stringov
         jdbcTemplate.update("DELETE FROM " + tabulkaSKtorouPracujem + " WHERE id = ?",
                 stredisko.getId());
 
     }
 
     /**
-     * Vrati zoznam stredisk nachadzajucich sa v danom okruhu
      *
      * @param sirka zemepisna sirka miesta
      * @param dlzka zemepisna dlzka miesta
      * @param okruh polomer okruhu v kilometroch
-     * @return
+     * @return zoznam stredisk v okruhu daneho miesta
      */
     @Override
     public List<Stredisko> najdiStrediskaVOkruhu(BigDecimal sirka, BigDecimal dlzka, double okruh) {
@@ -177,7 +183,7 @@ public class DatabazovyStrediskaDao implements StrediskaDao {
     }
 
     /**
-     * Na zaklade suradnic vypocita vzdialenost medzi dvoma miestami Zdroj:
+     * Na zaklade suradnic vypocita vzdialenost medzi dvoma miestami. Zdroj:
      * http://rosettacode.org/wiki/Haversine_formula#Java
      *
      * @param lat1 sirka miesta1

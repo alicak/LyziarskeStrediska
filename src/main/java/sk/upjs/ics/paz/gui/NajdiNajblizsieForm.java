@@ -21,8 +21,9 @@ public class NajdiNajblizsieForm extends javax.swing.JDialog {
     public NajdiNajblizsieForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
- 
-        // ak ma pouzivatel zadane suradnice, tak sa nacitaju
+
+        // ak ma pouzivatel zadane suradnice (nepovinny udaj pri registracii),
+        // tak sa nacitaju a nemusi ich zadavat
         if (pouzivatel != null) {
             if (pouzivatel.getGpsDlzka() != null && pouzivatel.getGpsSirka() != null) {
                 txtDlzka.setText(pouzivatel.getGpsDlzka().toString());
@@ -53,6 +54,7 @@ public class NajdiNajblizsieForm extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Nájdi najbližšie stredisko");
+        setResizable(false);
 
         lblZadajtePolohu.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblZadajtePolohu.setText("Zadajte svoju polohu:");
@@ -141,9 +143,15 @@ public class NajdiNajblizsieForm extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_btnStornoActionPerformed
 
+    /**
+     * Ziska zoznam stredisk v danom okruhu, ale este ho nevie zobrazit v
+     * hlavnom formulari :-(
+     *
+     * @param evt
+     */
     private void btnNajdiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNajdiActionPerformed
         double okruh = Double.parseDouble(txtOkruh.getText());
-        List<Stredisko> zoznam = strediskaDao.najdiStrediskaVOkruhu(new BigDecimal(txtSirka.getText()), 
+        List<Stredisko> zoznam = strediskaDao.najdiStrediskaVOkruhu(new BigDecimal(txtSirka.getText()),
                 new BigDecimal(txtDlzka.getText()), okruh);
     }//GEN-LAST:event_btnNajdiActionPerformed
 

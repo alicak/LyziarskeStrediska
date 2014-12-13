@@ -26,7 +26,9 @@ public class DatabazovyPouzivateliaDao implements PouzivateliaDao {
      */
     @Override
     public void registruj(String meno, String heslo, BigDecimal gpsSirka, BigDecimal gpsDlzka) {
+        // uzivatel dostane tabulku menoTab
         String nazovTabulky = meno + "Tab";
+        vytvorTabulku(nazovTabulky);
 
         Map<String, Object> hodnoty = new HashMap<>();
         hodnoty.put("Meno", meno);
@@ -38,8 +40,6 @@ public class DatabazovyPouzivateliaDao implements PouzivateliaDao {
         SimpleJdbcInsert insert = new SimpleJdbcInsert(jdbcTemplate);
         insert.setTableName("Uzivatelia");
         insert.execute(hodnoty);
-
-        vytvorTabulku(nazovTabulky);
     }
 
     /**
@@ -75,13 +75,16 @@ public class DatabazovyPouzivateliaDao implements PouzivateliaDao {
     public boolean korektneMenoAHeslo(String meno, String heslo) {
         String hesloZTabulky;
         try {
+            // nacita heslo pre dane meno
             String sql = "SELECT Heslo FROM Uzivatelia WHERE meno = ?";
             hesloZTabulky = (String) jdbcTemplate.queryForObject(
                     sql, new Object[]{meno}, String.class);
         } catch (EmptyResultDataAccessException e) {
+            // ak tam take meno nie je, vrati false
             return false;
         }
 
+        // ak tam take meno je, tak vrati, ci sa heslo zhoduje
         return hesloZTabulky.equals(heslo);
     }
 
@@ -92,21 +95,21 @@ public class DatabazovyPouzivateliaDao implements PouzivateliaDao {
      */
     private String dajTabulku(String meno) {
         String sql = "SELECT Tabulka FROM Uzivatelia WHERE meno = ?";
-        return (String) jdbcTemplate.queryForObject(
-                sql, new Object[]{meno}, String.class);
+        return jdbcTemplate.queryForObject(sql, new Object[]{meno}, String.class);
     }
-    
+
     /**
-     * Vrati suradnicu polohy uzivatela
+     *
      * @param meno meno uzivatela
-     * @param suradnica suradnic (dlzka alebo sirka)
-     * @return 
+     * @param suradnica dlzka alebo sirka
+     * @return hodnota danej suradnice
      */
     private BigDecimal dajSuradnicu(String meno, String suradnica) {
         String sql = null;
         String novaSuradnica = null;
         BigDecimal vysledok = null;
 
+        // vytiahne zadanu suradnicu
         switch (suradnica) {
             case "sirka":
                 sql = "SELECT GpsSirka FROM Uzivatelia WHERE meno = ?";
@@ -121,15 +124,19 @@ public class DatabazovyPouzivateliaDao implements PouzivateliaDao {
         }
 
         try {
+            // vyskusa zo suradnice spravit vysledok
             vysledok = new BigDecimal(novaSuradnica);
         } catch (Exception e) {
+            // ak to nejde, tak to bude null
             vysledok = null;
         }
+
         return vysledok;
     }
 
     /**
-     * Vytvori novy tabulku v databaze
+     * Vytvori novu tabulku v databaze, ktora bude obsahovat vsetky zaznamy,
+     * ktore su v defaultnej tabulke strediska
      *
      * @param nazovTabulky nazov vytvaranej tabulky
      */
@@ -143,8 +150,7 @@ public class DatabazovyPouzivateliaDao implements PouzivateliaDao {
         String tabulka = null;
         try {
             String sql = "SELECT Tabulka FROM Uzivatelia WHERE meno = ?";
-            tabulka = (String) jdbcTemplate.queryForObject(
-                    sql, new Object[]{meno}, String.class);
+            tabulka = jdbcTemplate.queryForObject(sql, new Object[]{meno}, String.class);
         } catch (EmptyResultDataAccessException e) {
             return false;
         }

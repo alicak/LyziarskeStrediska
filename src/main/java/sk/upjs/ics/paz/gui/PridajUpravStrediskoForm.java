@@ -6,16 +6,13 @@ import sk.upjs.ics.paz.dao.StrediskaDao;
 import sk.upjs.ics.paz.dao.Factory;
 import java.awt.Frame;
 import java.math.BigDecimal;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import static javax.swing.JOptionPane.ERROR_MESSAGE;
 
 public class PridajUpravStrediskoForm extends javax.swing.JDialog {
 
     private Stredisko stredisko;
     private Pouzivatel pouzivatel = Factory.INSTANCE.getPouzivatel();
     private StrediskaDao strediskaDao = Factory.INSTANCE.getStrediskaDao();
-    private final VerifikatorVstupov verifikator = new VerifikatorVstupov();
+    private VerifikatorVstupov verifikator = Factory.INSTANCE.getVerifikator();
 
     private String nadpisChybovejHlasky = "Chyba - nesprávny vstup";
 
@@ -119,6 +116,7 @@ public class PridajUpravStrediskoForm extends javax.swing.JDialog {
         btnStorno = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         lblNazov.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblNazov.setText("Názov:");
@@ -390,8 +388,9 @@ public class PridajUpravStrediskoForm extends javax.swing.JDialog {
     }//GEN-LAST:event_btnStornoActionPerformed
 
     /**
-     * Ulozi zmeny do strediska a zavrie okno. Pri vsetkych poliach overi, ci su
-     * vyplnene, a ci ciselne polia obsahuju povolene hodnoty
+     * Ulozi alebo aktualizuje stredisko. Overuje, ci je vo vsetkych poliach
+     * korektny vstup. Ak nie, vyhodi o tom okno s hlaskou a returnuje sa, aby
+     * to pouzivatel mohol opravit
      *
      * @param evt
      */

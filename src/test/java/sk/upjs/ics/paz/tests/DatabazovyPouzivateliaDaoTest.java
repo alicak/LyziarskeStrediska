@@ -121,6 +121,9 @@ public class DatabazovyPouzivateliaDaoTest {
         assertTrue(pouzivatel.getNazovTabulky().equals(naPorovnanie.getNazovTabulky()));
     }
 
+    /**
+     * Overi, ci existujePouzivatel da spravnu odpoved - s dobrym menom
+     */
     @Test
     public void existujeUzivatelTestAno() {
         boolean existujePouzivatel = pouzivateliaDao.existujePouzivatel("Admin");

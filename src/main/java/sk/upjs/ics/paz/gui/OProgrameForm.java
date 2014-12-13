@@ -29,6 +29,7 @@ public class OProgrameForm extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("O programe");
+        setResizable(false);
 
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo o programe.png"))); // NOI18N
 

@@ -20,6 +20,8 @@ public class SpravaFiltrovForm extends javax.swing.JFrame {
     public SpravaFiltrovForm() {
         initComponents();
         aktualizujZoznamFiltrov();
+
+        // zaktivuje tlacitko pre prihlaseneho pouzivatela
         if (pouzivatel != null) {
             btnPridajNovy.setEnabled(true);
         }
@@ -35,15 +37,14 @@ public class SpravaFiltrovForm extends javax.swing.JFrame {
 
     private void lstZoznamFiltrovSelectionValueChanged(ListSelectionEvent e) {
         if (!e.getValueIsAdjusting()) {
-            // nemusime riesit, ci je uzivatel prihlaseny, 
-            // pretoze pravo otvorit Spravcu filtrov maju iba prihlaseni
             if (!lstZoznamFiltrov.getSelectionModel().isSelectionEmpty()) {
+                // zobrazit detail moze kazdy
                 btnZobrazDetail.setEnabled(true);
                 if (pouzivatel != null) {
+                    // ale upravovat data len prihlaseny uzivatel
                     btnUprav.setEnabled(true);
                     btnOdstran.setEnabled(true);
                 }
-
             } else {
                 btnZobrazDetail.setEnabled(false);
                 btnUprav.setEnabled(false);
@@ -54,6 +55,17 @@ public class SpravaFiltrovForm extends javax.swing.JFrame {
 
     private void aktualizujZoznamFiltrov() {
         filtreListAndComboBoxModel.obnov();
+    }
+
+    /**
+     * Pri dvojkliku na filter v tabulke sa zobrazi jeho detail
+     *
+     * @param evt
+     */
+    private void lstFiltreMouseClicked(java.awt.event.MouseEvent evt) {
+        if (evt.getClickCount() == 2) {
+            btnZobrazDetail.doClick();
+        }
     }
 
     /**
@@ -73,6 +85,7 @@ public class SpravaFiltrovForm extends javax.swing.JFrame {
         btnOdstran = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         lstZoznamFiltrov.setModel(filtreListAndComboBoxModel);
         jScrollPane1.setViewportView(lstZoznamFiltrov);
@@ -144,18 +157,33 @@ public class SpravaFiltrovForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Otvori modalne okno s detailami vybraneho filtra
+     *
+     * @param evt
+     */
     private void btnZobrazDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZobrazDetailActionPerformed
         Filter vybranyFilter = dajVybranyFilter();
         ZobrazDetailFiltraForm zobrazDetailFiltraForm = new ZobrazDetailFiltraForm(this, vybranyFilter);
         zobrazDetailFiltraForm.setVisible(true);
     }//GEN-LAST:event_btnZobrazDetailActionPerformed
 
+    /**
+     * Otvori modalne okno pre upravu vybraneho filtra
+     *
+     * @param evt
+     */
     private void btnUpravActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpravActionPerformed
         Filter vybranyFilter = dajVybranyFilter();
         PridajUpravFilterForm pridajUpravFilterForm = new PridajUpravFilterForm(this, vybranyFilter);
         pridajUpravFilterForm.setVisible(true);
     }//GEN-LAST:event_btnUpravActionPerformed
 
+    /**
+     * Odstrani vybrany filter
+     *
+     * @param evt
+     */
     private void btnOdstranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOdstranActionPerformed
         Filter vybranyFilter = dajVybranyFilter();
 
@@ -172,12 +200,21 @@ public class SpravaFiltrovForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnOdstranActionPerformed
 
+    /**
+     * Otvori modalne okno pre pridanie noveho filtra
+     *
+     * @param evt
+     */
     private void btnPridajNovyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPridajNovyActionPerformed
         PridajUpravFilterForm pridajUpravFilterForm = new PridajUpravFilterForm(this);
         pridajUpravFilterForm.setVisible(true);
         aktualizujZoznamFiltrov();
     }//GEN-LAST:event_btnPridajNovyActionPerformed
 
+    /**
+     * Vrati vybrany filter zo zoznamu
+     * @return 
+     */
     private Filter dajVybranyFilter() {
         int vybranyIndex = lstZoznamFiltrov.getSelectedIndex();
         return filtreDao.dajVsetky().get(vybranyIndex);

@@ -12,6 +12,12 @@ public class ZobrazDetailFiltraForm extends javax.swing.JDialog {
         initComponents();
     }
 
+    /**
+     * Konstruktor pre zobrazenie detailu daneho filtra
+     *
+     * @param parent
+     * @param filter
+     */
     public ZobrazDetailFiltraForm(java.awt.Frame parent, Filter filter) {
         this(parent, true);
         lblNazov.setText("Názov filtra: " + filter.getNazov());
@@ -65,7 +71,6 @@ public class ZobrazDetailFiltraForm extends javax.swing.JDialog {
         } else {
             lblMinPocetTrati.setText("Minimálny počet tratí v prevádzke: - ");
         }
-
     }
 
     /**
@@ -90,6 +95,7 @@ public class ZobrazDetailFiltraForm extends javax.swing.JDialog {
         lblNazov = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         lblMaxCenyListkov.setText("Maximálne ceny lístkov");
 
@@ -121,21 +127,17 @@ public class ZobrazDetailFiltraForm extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(lblNazovObsahuje, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblMinVyskaSnehu)
-                            .addComponent(lblMinPodmienky)))
+                    .addComponent(lblNazovObsahuje)
+                    .addComponent(lblMinVyskaSnehu)
+                    .addComponent(lblMinPodmienky)
                     .addComponent(lblNazov)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lblMinPocetVlekov)
-                        .addComponent(lblMinPocetLanoviek)
-                        .addComponent(lblMinPocetTrati))
+                    .addComponent(lblMinPocetVlekov)
+                    .addComponent(lblMinPocetLanoviek)
+                    .addComponent(lblMinPocetTrati)
                     .addComponent(lblMaxCenyListkov)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(lblMaxCenaListkaStudent, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lblMaxCenaListkaDieta, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lblMaxCenaListkaDospely, javax.swing.GroupLayout.Alignment.LEADING)))
+                    .addComponent(lblMaxCenaListkaStudent)
+                    .addComponent(lblMaxCenaListkaDieta)
+                    .addComponent(lblMaxCenaListkaDospely))
                 .addContainerGap(91, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(

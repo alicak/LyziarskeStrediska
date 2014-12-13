@@ -18,7 +18,7 @@ public class ZobrazDetailStrediskaForm extends javax.swing.JDialog {
     }
 
     /**
-     * Vytvori formular, ktory zobrazi konkretne stredisko
+     * Vytvori formular, ktory zobrazi detail konkretneho strediska
      *
      * @param parent rodicovske okno
      * @param stredisko stredisko, ktore zobrazujeme
@@ -30,38 +30,42 @@ public class ZobrazDetailStrediskaForm extends javax.swing.JDialog {
         lblNazov.setText(stredisko.getNazov());
         lblVyskaSnehu.setText(String.valueOf("Výška snehu: " + stredisko.getVyskaSnehu() + " cm"));
         lblPodmienky.setText("Podmienky: " + stredisko.getPodmienky());
-        lblPocetVlekov.setText("Počet vlekov: " 
-                + String.valueOf(stredisko.getPocetVlekovVPrevadzke()) 
-                + "/" 
+        lblPocetVlekov.setText("Počet vlekov: "
+                + String.valueOf(stredisko.getPocetVlekovVPrevadzke())
+                + "/"
                 + String.valueOf(stredisko.getPocetVlekov()));
-        lblPocetLanoviek.setText("Počet lanoviek: " 
-                + String.valueOf(stredisko.getPocetLanoviekVPrevadzke()) 
-                + "/" 
+        lblPocetLanoviek.setText("Počet lanoviek: "
+                + String.valueOf(stredisko.getPocetLanoviekVPrevadzke())
+                + "/"
                 + String.valueOf(stredisko.getPocetLanoviek()));
-        lblPocetTrati.setText("Počet tratí: " 
-                + String.valueOf(stredisko.getPocetTratiVPrevadzke()) 
-                + "/" 
+        lblPocetTrati.setText("Počet tratí: "
+                + String.valueOf(stredisko.getPocetTratiVPrevadzke())
+                + "/"
                 + String.valueOf(stredisko.getPocetTrati()));
-        lblCenaDospely.setText("Dospelý: " 
-                + stredisko.getCenaListkaDospely() 
+        lblCenaDospely.setText("Dospelý: "
+                + stredisko.getCenaListkaDospely()
                 + " €");
-        lblCenaDieta.setText("Dieťa: " 
-                + stredisko.getCenaListkaDieta() 
+        lblCenaDieta.setText("Dieťa: "
+                + stredisko.getCenaListkaDieta()
                 + " €");
-        lblCenaStudent.setText("Študent: " 
-                + stredisko.getCenaListkaStudent() 
+        lblCenaStudent.setText("Študent: "
+                + stredisko.getCenaListkaStudent()
                 + " €");
-        
+
         lblPozicanieVystroje.setText("možnosť požičania výstroje: " + dajAnoNie(stredisko.isDaSaPozicatVystroj()));
         lblUbytovanie.setText("možnosť ubytovania: " + dajAnoNie(stredisko.isDaSaUbytovat()));
     }
-    
-    private String dajAnoNie(boolean b)
-    {
-        if (b)
+
+    /**
+     * @param b boolovska hodnota
+     * @return slovna reprezentacia b (ano/nie)
+     */
+    private String dajAnoNie(boolean b) {
+        if (b) {
             return "áno";
-        else
+        } else {
             return "nie";
+        }
     }
 
     /**
@@ -94,6 +98,7 @@ public class ZobrazDetailStrediskaForm extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Detail strediska");
+        setResizable(false);
 
         lblNazov.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblNazov.setText("Názov strediska");
