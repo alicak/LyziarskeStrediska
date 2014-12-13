@@ -7,13 +7,17 @@ import sk.upjs.ics.paz.dao.Factory;
 import java.awt.Frame;
 import java.math.BigDecimal;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 
 public class PridajUpravStrediskoForm extends javax.swing.JDialog {
 
     private Stredisko stredisko;
-    private final Pouzivatel pouzivatel = Factory.INSTANCE.getPouzivatel();
-    private final StrediskaDao strediskaDao = Factory.INSTANCE.getStrediskaDao();
+    private Pouzivatel pouzivatel = Factory.INSTANCE.getPouzivatel();
+    private StrediskaDao strediskaDao = Factory.INSTANCE.getStrediskaDao();
+    private final VerifikatorVstupov verifikator = new VerifikatorVstupov();
+
+    private String nadpisChybovejHlasky = "Chyba - nesprávny vstup";
 
     /**
      * Creates new form PridajUpravStrediskoForm
@@ -158,7 +162,7 @@ public class PridajUpravStrediskoForm extends javax.swing.JDialog {
 
         lblLomka2.setText("/");
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, txtPocetLanoviekVPrevadzke, org.jdesktop.beansbinding.ELProperty.create("Počet lanoviek v prevádzke"), txtPocetLanoviek, org.jdesktop.beansbinding.BeanProperty.create("name"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, txtPocetLanoviek, org.jdesktop.beansbinding.ELProperty.create("Počet lanoviek"), txtPocetLanoviek, org.jdesktop.beansbinding.BeanProperty.create("name"));
         bindingGroup.addBinding(binding);
 
         lblPocetTrati.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -387,127 +391,125 @@ public class PridajUpravStrediskoForm extends javax.swing.JDialog {
 
     /**
      * Ulozi zmeny do strediska a zavrie okno. Pri vsetkych poliach overi, ci su
-     * vyplnene, a ci ciselne polia obsahuju iba povolene znaky
+     * vyplnene, a ci ciselne polia obsahuju povolene hodnoty
      *
      * @param evt
      */
     private void btnUlozActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUlozActionPerformed
-        // Musi tam byt aj ten return, lebo inak si tie okna vyskakuju, ako chcu, niekedy aj tri za sebou
-        if (overVyplneniePola(txtNazov)) {
+        if (verifikator.jeNeprazdneMaxDlzky(txtNazov, 30)) {
             stredisko.setNazov(txtNazov.getText());
         } else {
+            verifikator.hlaskaPrazdnyAleboDlhyString(this, txtNazov, 30);
             return;
         }
-        if (overVyplneniePola(txtVyskaSnehu) && overCiJeVPoliCislo(txtVyskaSnehu)) {
-            stredisko.setVyskaSnehu(new Integer(txtVyskaSnehu.getText()));
+
+        if (verifikator.jeCeleCisloVRozsahu(txtVyskaSnehu, 0, 1000)) {
+            stredisko.setVyskaSnehu(Integer.valueOf(txtVyskaSnehu.getText()));
         } else {
+            verifikator.hlaskaPrazdneAleboZleCeleCislo(this, txtVyskaSnehu, 0, 1000);
             return;
         }
 
         stredisko.setPodmienky(cmbPodmienky.getSelectedItem().toString());
 
-        if (overVyplneniePola(txtPocetVlekov) && overCiJeVPoliCislo(txtPocetVlekov)) {
-            stredisko.setPocetVlekov(new Integer(txtPocetVlekov.getText()));
+        if (verifikator.jeCeleCisloVRozsahu(txtPocetVlekov, 0, 1000)) {
+            stredisko.setPocetVlekov(Integer.valueOf(txtPocetVlekov.getText()));
         } else {
+            verifikator.hlaskaPrazdneAleboZleCeleCislo(this, txtPocetVlekov, 0, 1000);
             return;
         }
 
-        if (overCiJeVPoliCislo(txtPocetVlekovVPrevadzke) && overVyplneniePola(txtPocetVlekovVPrevadzke)) {
-            stredisko.setPocetVlekovVPrevadzke(new Integer(txtPocetVlekovVPrevadzke.getText()));
+        if (verifikator.jeCeleCisloVRozsahu(txtPocetVlekovVPrevadzke, 0, 1000)) {
+            stredisko.setPocetVlekovVPrevadzke(Integer.valueOf(txtPocetVlekovVPrevadzke.getText()));
         } else {
+            verifikator.hlaskaPrazdneAleboZleCeleCislo(this, txtPocetVlekovVPrevadzke, 0, 1000);
             return;
         }
 
-        if (overCiJeVPoliCislo(txtPocetLanoviek) && overVyplneniePola(txtPocetLanoviek)) {
-            stredisko.setPocetLanoviek(new Integer(txtPocetLanoviek.getText()));
-        } else {
+        if (!verifikator.jeVPrevadzkeMenejAkoVsetkych(txtPocetVlekovVPrevadzke, txtPocetVlekov)) {
+            verifikator.hlaskaVelaVPrevadzke(this, txtPocetVlekovVPrevadzke, txtPocetVlekov);
             return;
         }
 
-        if (overCiJeVPoliCislo(txtPocetLanoviekVPrevadzke) && overVyplneniePola(txtPocetLanoviekVPrevadzke)) {
-            stredisko.setPocetLanoviekVPrevadzke(new Integer(txtPocetLanoviekVPrevadzke.getText()));
+        if (verifikator.jeCeleCisloVRozsahu(txtPocetLanoviek, 0, 1000)) {
+            stredisko.setPocetLanoviek(Integer.valueOf(txtPocetLanoviek.getText()));
         } else {
+            verifikator.hlaskaPrazdneAleboZleCeleCislo(this, txtPocetLanoviek, 0, 1000);
             return;
         }
 
-        if (overCiJeVPoliCislo(txtPocetTrati) && overVyplneniePola(txtPocetTrati)) {
-            stredisko.setPocetTrati(new Integer(txtPocetTrati.getText()));
+        if (verifikator.jeCeleCisloVRozsahu(txtPocetLanoviekVPrevadzke, 0, 1000)) {
+            stredisko.setPocetLanoviekVPrevadzke(Integer.valueOf(txtPocetLanoviekVPrevadzke.getText()));
         } else {
+            verifikator.hlaskaPrazdneAleboZleCeleCislo(this, txtPocetLanoviekVPrevadzke, 0, 1000);
             return;
         }
 
-        if (overCiJeVPoliCislo(txtPocetTratiVPrevadzke) && overVyplneniePola(txtPocetTratiVPrevadzke)) {
-            stredisko.setPocetTratiVPrevadzke(new Integer(txtPocetTratiVPrevadzke.getText()));
+        if (!verifikator.jeVPrevadzkeMenejAkoVsetkych(txtPocetLanoviekVPrevadzke, txtPocetLanoviek)) {
+            verifikator.hlaskaVelaVPrevadzke(this, txtPocetLanoviekVPrevadzke, txtPocetLanoviek);
+            return;
+        }
+
+        if (verifikator.jeCeleCisloVRozsahu(txtPocetTrati, 0, 1000)) {
+            stredisko.setPocetTrati(Integer.valueOf(txtPocetTrati.getText()));
         } else {
+            verifikator.hlaskaPrazdneAleboZleCeleCislo(this, txtPocetTrati, 0, 1000);
+            return;
+        }
+
+        if (verifikator.jeCeleCisloVRozsahu(txtPocetTratiVPrevadzke, 0, 1000)) {
+            stredisko.setPocetTratiVPrevadzke(Integer.valueOf(txtPocetTratiVPrevadzke.getText()));
+        } else {
+            verifikator.hlaskaPrazdneAleboZleCeleCislo(this, txtPocetTratiVPrevadzke, 0, 1000);
+            return;
+        }
+
+        if (!verifikator.jeVPrevadzkeMenejAkoVsetkych(txtPocetTratiVPrevadzke, txtPocetTrati)) {
+            verifikator.hlaskaVelaVPrevadzke(this, txtPocetTratiVPrevadzke, txtPocetTrati);
             return;
         }
 
         stredisko.setDaSaPozicatVystroj(chkPozicanieVystroje.isSelected());
         stredisko.setDaSaUbytovat(chkUbytovanie.isSelected());
 
-        if (overVyplneniePola(txtGpsSirka) && overCiJeVPoliCislo(txtGpsSirka)) {
+        if (verifikator.jeCeleAleboDesatinneCisloVRozsahu(txtGpsSirka, -90, 90)) {
             stredisko.setGpsSirka(new BigDecimal(txtGpsSirka.getText()));
         } else {
+            verifikator.hlaskaPrazdneAleboZleCeleAleboDesatinneCislo(this, txtGpsSirka, -90, 90);
             return;
         }
 
-        if (overVyplneniePola(txtGpsDlzka) && overCiJeVPoliCislo(txtGpsDlzka)) {
+        if (verifikator.jeCeleAleboDesatinneCisloVRozsahu(txtGpsDlzka, -180, 180)) {
             stredisko.setGpsDlzka(new BigDecimal(txtGpsDlzka.getText()));
         } else {
+            verifikator.hlaskaPrazdneAleboZleCeleAleboDesatinneCislo(this, txtGpsDlzka, -180, 180);
             return;
         }
 
-        if (overVyplneniePola(txtListokDospely) && overCiJeVPoliCislo(txtListokDospely)) {
+        if (verifikator.jeCeleAleboDesatinneCisloVRozsahu(txtListokDospely, 0, 1000)) {
             stredisko.setCenaListkaDospely(new BigDecimal(txtListokDospely.getText()));
         } else {
+            verifikator.hlaskaPrazdneAleboZleCeleAleboDesatinneCislo(this, txtListokDospely, 0, 1000);
             return;
         }
 
-        if (overVyplneniePola(txtListokDieta) && overCiJeVPoliCislo(txtListokDieta)) {
+        if (verifikator.jeCeleAleboDesatinneCisloVRozsahu(txtListokDieta, 0, 1000)) {
             stredisko.setCenaListkaDieta(new BigDecimal(txtListokDieta.getText()));
         } else {
+            verifikator.hlaskaPrazdneAleboZleCeleAleboDesatinneCislo(this, txtListokDieta, 0, 1000);
             return;
         }
 
-        if (overVyplneniePola(txtListokStudent) && overCiJeVPoliCislo(txtListokStudent)) {
+        if (verifikator.jeCeleAleboDesatinneCisloVRozsahu(txtListokStudent, 0, 1000)) {
             stredisko.setCenaListkaStudent(new BigDecimal(txtListokStudent.getText()));
         } else {
+            verifikator.hlaskaPrazdneAleboZleCeleAleboDesatinneCislo(this, txtListokStudent, 0, 1000);
             return;
         }
 
         strediskaDao.uloz(stredisko);
         dispose();
     }//GEN-LAST:event_btnUlozActionPerformed
-
-    /**
-     * Overi, ci je dane pole vyplnene, ak nie, vyhodi o tom hlasku
-     *
-     * @param pole pole, ktore musi byt vyplnene
-     */
-    private boolean overVyplneniePola(javax.swing.JTextField pole) {
-        if (pole.getText().equals("")) {
-            String sprava = "Prosím vyplňte pole " + pole.getName();
-            String nadpis = "Chyba - nevyplnené pole";
-            JOptionPane.showMessageDialog(this, sprava, nadpis, ERROR_MESSAGE);
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * Overi, ci su v poli zadane pripustne znaky pre cislo
-     *
-     * @param pole
-     */
-    private boolean overCiJeVPoliCislo(javax.swing.JTextField pole) {
-        if (!pole.getText().matches("[0-9\\.]+")) {
-            String sprava = "Zadali ste nesprávny formát čísla v poli " + pole.getName();
-            String nadpis = "Chyba - nesprávny vstup";
-            JOptionPane.showMessageDialog(this, sprava, nadpis, ERROR_MESSAGE);
-            return false;
-        }
-        return true;
-    }
 
     /**
      * @param args the command line arguments

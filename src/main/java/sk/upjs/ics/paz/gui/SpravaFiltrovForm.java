@@ -151,7 +151,9 @@ public class SpravaFiltrovForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnZobrazDetailActionPerformed
 
     private void btnUpravActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpravActionPerformed
-        // TODO add your handling code here:
+        Filter vybranyFilter = dajVybranyFilter();
+        PridajUpravFilterForm pridajUpravFilterForm = new PridajUpravFilterForm(this, vybranyFilter);
+        pridajUpravFilterForm.setVisible(true);
     }//GEN-LAST:event_btnUpravActionPerformed
 
     private void btnOdstranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOdstranActionPerformed

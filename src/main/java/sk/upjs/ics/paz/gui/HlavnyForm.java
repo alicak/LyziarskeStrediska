@@ -15,9 +15,7 @@ public class HlavnyForm extends javax.swing.JFrame {
     private FiltreDao filtreDao;
 
     private final StrediskoTableModel strediskaTableModel = new StrediskoTableModel();
-    // je to aj model pre ComboBox, preto ho tu pouzijeme
     private final FiltreListAndComboBoxModel filtreListAndComboBoxModel = new FiltreListAndComboBoxModel();
-
     private final TableRowSorter strediskaRowSorter = new TableRowSorter(strediskaTableModel);
 
     private Pouzivatel pouzivatel = Factory.INSTANCE.getPouzivatel();
@@ -189,6 +187,7 @@ public class HlavnyForm extends javax.swing.JFrame {
         menuStredisko.add(menuitemPridaj);
 
         menuitemNajdiNajblizsie.setText("Nájdi najbližšie...");
+        menuitemNajdiNajblizsie.setEnabled(false);
         menuitemNajdiNajblizsie.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuitemNajdiNajblizsieActionPerformed(evt);

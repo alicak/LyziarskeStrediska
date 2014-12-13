@@ -1,8 +1,6 @@
 package sk.upjs.ics.paz.gui;
 
 import java.math.BigDecimal;
-import javax.swing.JOptionPane;
-import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import sk.upjs.ics.paz.dao.Factory;
 import sk.upjs.ics.paz.dao.FiltreDao;
 import sk.upjs.ics.paz.entity.Filter;
@@ -13,6 +11,7 @@ public class PridajUpravFilterForm extends javax.swing.JDialog {
     Filter filter;
     FiltreDao filtreDao = Factory.INSTANCE.getFiltreDao();
     Pouzivatel pouzivatel = Factory.INSTANCE.getPouzivatel();
+    VerifikatorVstupov verifikator = new VerifikatorVstupov();
 
     /**
      * Creates new form PridajUpravFilterForm
@@ -52,6 +51,7 @@ public class PridajUpravFilterForm extends javax.swing.JDialog {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         lblNazov = new javax.swing.JLabel();
         txtNazov = new javax.swing.JTextField();
@@ -88,11 +88,20 @@ public class PridajUpravFilterForm extends javax.swing.JDialog {
         lblNazov.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblNazov.setText("Názov filtra:");
 
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, txtNazov, org.jdesktop.beansbinding.ELProperty.create("Názov filtra"), txtNazov, org.jdesktop.beansbinding.BeanProperty.create("name"));
+        bindingGroup.addBinding(binding);
+
         lblMinVyskaSnehu.setText("Minimálna výška snehu:");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, txtMinVyskaSnehu, org.jdesktop.beansbinding.ELProperty.create("Minimálna výška snehu"), txtMinVyskaSnehu, org.jdesktop.beansbinding.BeanProperty.create("name"));
+        bindingGroup.addBinding(binding);
 
         lblCm.setText("cm");
 
         lblNazovObsahuje.setText("Názov strediska obsahuje:");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, lblNazovObsahuje, org.jdesktop.beansbinding.ELProperty.create("Názov strediska obsahuje"), txtNazovObsahuje, org.jdesktop.beansbinding.BeanProperty.create("name"));
+        bindingGroup.addBinding(binding);
 
         lblMinPodmienky.setText("Minimálne podmienky:");
 
@@ -100,9 +109,18 @@ public class PridajUpravFilterForm extends javax.swing.JDialog {
 
         lblMinPocetVlekov.setText("Minimálny počet vlekov v prevádzke:");
 
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, txtMinPocetVlekov, org.jdesktop.beansbinding.ELProperty.create("Minimálny počet vlekov v prevádzke"), txtMinPocetVlekov, org.jdesktop.beansbinding.BeanProperty.create("name"));
+        bindingGroup.addBinding(binding);
+
         lblMinPocetLanoviek.setText("Minimálny počet lanoviek v prevádzke:");
 
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, txtMinPocetLanoviek, org.jdesktop.beansbinding.ELProperty.create("Minimálny počet lanoviek v prevádzke"), txtMinPocetLanoviek, org.jdesktop.beansbinding.BeanProperty.create("name"));
+        bindingGroup.addBinding(binding);
+
         lblMinPocetTrati.setText("Minimálny počet tratí v prevádzke:");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, txtMinPocetTrati, org.jdesktop.beansbinding.ELProperty.create("Minimálny počet tratí v prevádzke"), txtMinPocetTrati, org.jdesktop.beansbinding.BeanProperty.create("name"));
+        bindingGroup.addBinding(binding);
 
         lblMaxCenyListkov.setText("Maximálne ceny lístkov");
 
@@ -111,6 +129,15 @@ public class PridajUpravFilterForm extends javax.swing.JDialog {
         lblMaxCenaListkaDieta.setText("Dieťa:");
 
         lblMaxCenaListkaStudent.setText("Študent:");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, txtMaxCenaListkaDospely, org.jdesktop.beansbinding.ELProperty.create("Maximálna cena lístka - dospelý"), txtMaxCenaListkaDospely, org.jdesktop.beansbinding.BeanProperty.create("name"));
+        bindingGroup.addBinding(binding);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, txtMaxCenaListkaDieta, org.jdesktop.beansbinding.ELProperty.create("Maximálna cena lístka - dieťa"), txtMaxCenaListkaDieta, org.jdesktop.beansbinding.BeanProperty.create("name"));
+        bindingGroup.addBinding(binding);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, txtMaxCenaListkaStudent, org.jdesktop.beansbinding.ELProperty.create("Maximálna cena lístka - študent"), txtMaxCenaListkaStudent, org.jdesktop.beansbinding.BeanProperty.create("name"));
+        bindingGroup.addBinding(binding);
 
         lblEuro1.setText("€");
 
@@ -157,7 +184,7 @@ public class PridajUpravFilterForm extends javax.swing.JDialog {
                                 .addComponent(cmbMinPodmienky, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblNazov)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtNazov, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,66 +285,72 @@ public class PridajUpravFilterForm extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
+        bindingGroup.bind();
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnUlozActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUlozActionPerformed
         filter.setMenoUzivatela(pouzivatel.getMeno());
 
-        if (overVyplneniePola(txtNazov)) {
+        if (verifikator.jeNeprazdneMaxDlzky(txtNazov, 30)) {
             filter.setNazov(txtNazov.getText());
         } else {
+            verifikator.hlaskaPrazdnyAleboDlhyString(this, txtNazov, 30);
             return;
         }
 
-        if (!txtNazovObsahuje.getText().equals("")) {
-            filter.setNazovObsahuje(txtNazovObsahuje.getText());
-        } else {
+        if (!verifikator.jeNeprazdny(txtNazovObsahuje)) {
             filter.setNazovObsahuje(null);
+        } else if (verifikator.jeMaxDlzky(txtNazovObsahuje, 30)) {
+            filter.setNazov(txtNazovObsahuje.getText());
+        } else {
+            verifikator.hlaskaDlhyString(this, txtNazovObsahuje, 30);
+            return;
         }
 
-        if (!txtMinVyskaSnehu.getText().equals("")) {
-            filter.setMinVyskaSnehu(new Integer(txtMinVyskaSnehu.getText()));
-        } else {
+        if (!verifikator.jeNeprazdny(txtMinVyskaSnehu)) {
             filter.setMinVyskaSnehu(0);
+        } else {
+            filter.setMinVyskaSnehu(Integer.valueOf(txtNazovObsahuje.getText()));
         }
 
         filter.setMinPodmienky(cmbMinPodmienky.getSelectedItem().toString());
 
-        if (!txtMinPocetVlekov.getText().equals("")) {
-            filter.setMinPocetVlekovVPrevadzke(new Integer(txtMinPocetVlekov.getText()));
-        } else {
+        if (!verifikator.jeNeprazdny(txtMinPocetVlekov)) {
             filter.setMinPocetVlekovVPrevadzke(0);
+        } else {
+            filter.setMinPocetVlekovVPrevadzke(Integer.valueOf(txtMinPocetVlekov.getText()));
         }
 
-        if (!txtMinPocetLanoviek.getText().equals("")) {
-            filter.setMinPocetLanoviekVPrevadzke(new Integer(txtMinPocetLanoviek.getText()));
-        } else {
+        if (!verifikator.jeNeprazdny(txtMinPocetLanoviek)) {
             filter.setMinPocetLanoviekVPrevadzke(0);
+        } else {
+            filter.setMinPocetLanoviekVPrevadzke(Integer.valueOf(txtMinPocetLanoviek.getText()));
         }
 
-        if (!txtMinPocetTrati.getText().equals("")) {
-            filter.setMinPocetTratiVPrevadzke(new Integer(txtMinPocetTrati.getText()));
-        } else {
+        if (!verifikator.jeNeprazdny(txtMinPocetTrati)) {
             filter.setMinPocetTratiVPrevadzke(0);
+        } else {
+            filter.setMinPocetTratiVPrevadzke(Integer.valueOf(txtMinPocetTrati.getText()));
         }
 
-        if (!txtMaxCenaListkaDospely.getText().equals("")) {
-            filter.setMaxCenaListkaDospely(new BigDecimal(txtMaxCenaListkaDospely.getText()));
-        } else {
+        if (!verifikator.jeNeprazdny(txtMaxCenaListkaDospely)) {
             filter.setMaxCenaListkaDospely(null);
+        } else {
+            filter.setMaxCenaListkaDospely(new BigDecimal(txtMaxCenaListkaDospely.getText()));
         }
 
-        if (!txtMaxCenaListkaDieta.getText().equals("")) {
-            filter.setMaxCenaListkaDieta(new BigDecimal(txtMaxCenaListkaDieta.getText()));
-        } else {
+        if (!verifikator.jeNeprazdny(txtMaxCenaListkaDieta)) {
             filter.setMaxCenaListkaDieta(null);
+        } else {
+            filter.setMaxCenaListkaDieta(new BigDecimal(txtMaxCenaListkaDieta.getText()));
         }
 
-        if (!txtMaxCenaListkaStudent.getText().equals("")) {
-            filter.setMaxCenaListkaStudent(new BigDecimal(txtMaxCenaListkaStudent.getText()));
-        } else {
+        if (!verifikator.jeNeprazdny(txtMaxCenaListkaStudent)) {
             filter.setMaxCenaListkaStudent(null);
+        } else {
+            filter.setMaxCenaListkaStudent(new BigDecimal(txtMaxCenaListkaStudent.getText()));
         }
 
         filter.setNutnostPozicatVystroj(chkDaSaPozicatVystroj.isSelected());
@@ -327,21 +360,6 @@ public class PridajUpravFilterForm extends javax.swing.JDialog {
         dispose();
 
     }//GEN-LAST:event_btnUlozActionPerformed
-
-    /**
-     * Overi, ci je dane pole vyplnene, ak nie, vyhodi o tom hlasku
-     *
-     * @param pole pole, ktore musi byt vyplnene
-     */
-    private boolean overVyplneniePola(javax.swing.JTextField pole) {
-        if (pole.getText().equals("")) {
-            String sprava = "Prosím vyplňte pole " + pole.getName();
-            String nadpis = "Chyba - nevyplnené pole";
-            JOptionPane.showMessageDialog(this, sprava, nadpis, ERROR_MESSAGE);
-            return false;
-        }
-        return true;
-    }
 
     /**
      * @param args the command line arguments
@@ -415,5 +433,6 @@ public class PridajUpravFilterForm extends javax.swing.JDialog {
     private javax.swing.JTextField txtMinVyskaSnehu;
     private javax.swing.JTextField txtNazov;
     private javax.swing.JTextField txtNazovObsahuje;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

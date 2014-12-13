@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
   </Properties>
@@ -51,7 +51,7 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="lblNazov" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="txtNazov" min="-2" pref="146" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -189,6 +189,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtNazov">
+      <BindingProperties>
+        <BindingProperty name="name" source="txtNazov" sourcePath="N&#xe1;zov filtra" target="txtNazov" targetPath="name" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblMinVyskaSnehu">
       <Properties>
@@ -196,6 +199,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtMinVyskaSnehu">
+      <BindingProperties>
+        <BindingProperty name="name" source="txtMinVyskaSnehu" sourcePath="Minim&#xe1;lna v&#xfd;&#x161;ka snehu" target="txtMinVyskaSnehu" targetPath="name" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblCm">
       <Properties>
@@ -208,6 +214,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtNazovObsahuje">
+      <BindingProperties>
+        <BindingProperty name="name" source="lblNazovObsahuje" sourcePath="N&#xe1;zov strediska obsahuje" target="txtNazovObsahuje" targetPath="name" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblMinPodmienky">
       <Properties>
@@ -234,6 +243,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtMinPocetVlekov">
+      <BindingProperties>
+        <BindingProperty name="name" source="txtMinPocetVlekov" sourcePath="Minim&#xe1;lny po&#x10d;et vlekov v prev&#xe1;dzke" target="txtMinPocetVlekov" targetPath="name" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblMinPocetLanoviek">
       <Properties>
@@ -241,6 +253,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtMinPocetLanoviek">
+      <BindingProperties>
+        <BindingProperty name="name" source="txtMinPocetLanoviek" sourcePath="Minim&#xe1;lny po&#x10d;et lanoviek v prev&#xe1;dzke" target="txtMinPocetLanoviek" targetPath="name" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblMinPocetTrati">
       <Properties>
@@ -248,6 +263,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtMinPocetTrati">
+      <BindingProperties>
+        <BindingProperty name="name" source="txtMinPocetTrati" sourcePath="Minim&#xe1;lny po&#x10d;et trat&#xed; v prev&#xe1;dzke" target="txtMinPocetTrati" targetPath="name" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblMaxCenyListkov">
       <Properties>
@@ -270,10 +288,19 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtMaxCenaListkaDospely">
+      <BindingProperties>
+        <BindingProperty name="name" source="txtMaxCenaListkaDospely" sourcePath="Maxim&#xe1;lna cena l&#xed;stka - dospel&#xfd;" target="txtMaxCenaListkaDospely" targetPath="name" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtMaxCenaListkaDieta">
+      <BindingProperties>
+        <BindingProperty name="name" source="txtMaxCenaListkaDieta" sourcePath="Maxim&#xe1;lna cena l&#xed;stka - die&#x165;a" target="txtMaxCenaListkaDieta" targetPath="name" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtMaxCenaListkaStudent">
+      <BindingProperties>
+        <BindingProperty name="name" source="txtMaxCenaListkaStudent" sourcePath="Maxim&#xe1;lna cena l&#xed;stka - &#x161;tudent" target="txtMaxCenaListkaStudent" targetPath="name" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblEuro1">
       <Properties>

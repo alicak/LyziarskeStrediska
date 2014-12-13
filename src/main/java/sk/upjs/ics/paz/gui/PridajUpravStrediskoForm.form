@@ -313,7 +313,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtPocetLanoviek">
       <BindingProperties>
-        <BindingProperty name="name" source="txtPocetLanoviekVPrevadzke" sourcePath="Po&#x10d;et lanoviek v prev&#xe1;dzke" target="txtPocetLanoviek" targetPath="name" updateStrategy="0" immediately="false"/>
+        <BindingProperty name="name" source="txtPocetLanoviek" sourcePath="Po&#x10d;et lanoviek" target="txtPocetLanoviek" targetPath="name" updateStrategy="0" immediately="false"/>
       </BindingProperties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblPocetTrati">
