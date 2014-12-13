@@ -106,7 +106,7 @@ public class PridajUpravFilterForm extends javax.swing.JDialog {
 
         lblMinPodmienky.setText("Minimálne podmienky:");
 
-        cmbMinPodmienky.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "nezadané", "výborné", "veľmi dobré", "dobré", "obmedzené", "nevyhovujúce" }));
+        cmbMinPodmienky.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "nezadané", "výborné", "veľmi dobré", "dobré", "obmedzené", "nevhodné" }));
 
         lblMinPocetVlekov.setText("Minimálny počet vlekov v prevádzke:");
 

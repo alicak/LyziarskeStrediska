@@ -24,7 +24,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="lblNazovObsahuje" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -38,6 +38,8 @@
                   <Component id="lblMaxCenaListkaStudent" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="lblMaxCenaListkaDieta" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="lblMaxCenaListkaDospely" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblDaSaUbytovat" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblDaSaPozicatVystroj" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="91" max="32767" attributes="0"/>
           </Group>
@@ -68,6 +70,10 @@
               <Component id="lblMinPocetLanoviek" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="lblMinPocetTrati" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="lblDaSaUbytovat" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="lblDaSaPozicatVystroj" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -130,6 +136,16 @@
           <Font name="Tahoma" size="11" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="N&#xe1;zov filtra:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblDaSaUbytovat">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Nutn&#xe1; mo&#x17e;nos&#x165; ubytovania:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblDaSaPozicatVystroj">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Nutn&#xe1; mo&#x17e;nos&#x165; zapo&#x17e;i&#x10d;ania v&#xfd;stroje:"/>
       </Properties>
     </Component>
   </SubComponents>

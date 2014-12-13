@@ -71,6 +71,18 @@ public class ZobrazDetailFiltraForm extends javax.swing.JDialog {
         } else {
             lblMinPocetTrati.setText("Minimálny počet tratí v prevádzke: - ");
         }
+
+        if (filter.isNutnostUbytovat()) {
+            lblDaSaUbytovat.setText("Nutnosť možnosti ubytovania: áno");
+        } else {
+            lblDaSaUbytovat.setText("Nutnosť možnosti ubytovania: - ");
+        }
+
+        if (filter.isNutnostPozicatVystroj()) {
+            lblDaSaPozicatVystroj.setText("Nutnosť možnosti požičania výstroje: áno");
+        } else {
+            lblDaSaPozicatVystroj.setText("Nutnosť možnosti požičania výstroje: - ");
+        }
     }
 
     /**
@@ -93,6 +105,8 @@ public class ZobrazDetailFiltraForm extends javax.swing.JDialog {
         lblNazovObsahuje = new javax.swing.JLabel();
         lblMinVyskaSnehu = new javax.swing.JLabel();
         lblNazov = new javax.swing.JLabel();
+        lblDaSaUbytovat = new javax.swing.JLabel();
+        lblDaSaPozicatVystroj = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -120,6 +134,10 @@ public class ZobrazDetailFiltraForm extends javax.swing.JDialog {
         lblNazov.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblNazov.setText("Názov filtra:");
 
+        lblDaSaUbytovat.setText("Nutná možnosť ubytovania:");
+
+        lblDaSaPozicatVystroj.setText("Nutná možnosť zapožičania výstroje:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -137,7 +155,9 @@ public class ZobrazDetailFiltraForm extends javax.swing.JDialog {
                     .addComponent(lblMaxCenyListkov)
                     .addComponent(lblMaxCenaListkaStudent)
                     .addComponent(lblMaxCenaListkaDieta)
-                    .addComponent(lblMaxCenaListkaDospely))
+                    .addComponent(lblMaxCenaListkaDospely)
+                    .addComponent(lblDaSaUbytovat)
+                    .addComponent(lblDaSaPozicatVystroj))
                 .addContainerGap(91, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -165,6 +185,10 @@ public class ZobrazDetailFiltraForm extends javax.swing.JDialog {
                 .addComponent(lblMinPocetLanoviek)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblMinPocetTrati)
+                .addGap(18, 18, 18)
+                .addComponent(lblDaSaUbytovat)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblDaSaPozicatVystroj)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -214,6 +238,8 @@ public class ZobrazDetailFiltraForm extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel lblDaSaPozicatVystroj;
+    private javax.swing.JLabel lblDaSaUbytovat;
     private javax.swing.JLabel lblMaxCenaListkaDieta;
     private javax.swing.JLabel lblMaxCenaListkaDospely;
     private javax.swing.JLabel lblMaxCenaListkaStudent;

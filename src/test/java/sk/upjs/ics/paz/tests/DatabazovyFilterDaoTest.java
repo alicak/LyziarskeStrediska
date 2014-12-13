@@ -50,7 +50,7 @@ public class DatabazovyFilterDaoTest {
     }
 
     /**
-     * Overim, ci dostanem vsetky strediska pre neprihlaseneho uzivatela
+     * Overim, ci dostanem vsetky filtre pre neprihlaseneho uzivatela
      */
     @Test
     public void dajVsetkyTestNeprihlaseny() {
@@ -58,11 +58,11 @@ public class DatabazovyFilterDaoTest {
         
         List<Filter> filtre = filtreDao.dajVsetky();
         
-        assertTrue(filtre.size() == 1);
+        assertTrue(filtre.size() == 3);
     }
 
     /**
-     * Overim, ci dostanem vsetky strediska pre prihlaseneho uzivatela
+     * Overim, ci dostanem vsetky filtre pre prihlaseneho uzivatela
      */
     @Test
     public void dajVsetkyTestPrihlaseny() {
@@ -74,7 +74,7 @@ public class DatabazovyFilterDaoTest {
     }
 
     /**
-     * Overim, ci dostanem vsetky strediska pre uzivatela, ktory nema ziaden
+     * Overim, ci dostanem vsetky filtre pre uzivatela, ktory nema ziaden
      * filter
      */
     @Test

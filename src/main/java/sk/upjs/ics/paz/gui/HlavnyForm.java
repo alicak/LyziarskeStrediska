@@ -4,6 +4,7 @@ import java.util.List;
 import sk.upjs.ics.paz.entity.*;
 import sk.upjs.ics.paz.dao.*;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableRowSorter;
@@ -522,9 +523,15 @@ public class HlavnyForm extends javax.swing.JFrame {
 
     /**
      * Zobrazi vyfiltrovany zoznam stredisk
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnFiltrujActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrujActionPerformed
+        if (cmbZoznamFiltrov.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(this, "Vyberte filter, podľa ktorého chcete filtrovať.", "Chyba", ERROR_MESSAGE);
+            return;
+        }
+
         // ziska nazov filtra zo zoznamu
         Filter vybranyFilter = filtreDao.dajPodlaNazvu(cmbZoznamFiltrov.getSelectedItem().toString());
         // podla neho vyfiltruje

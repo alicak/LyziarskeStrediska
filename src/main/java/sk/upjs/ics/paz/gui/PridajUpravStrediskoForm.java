@@ -130,7 +130,7 @@ public class PridajUpravStrediskoForm extends javax.swing.JDialog {
         org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, txtNazov, org.jdesktop.beansbinding.ELProperty.create("Názov"), txtNazov, org.jdesktop.beansbinding.BeanProperty.create("name"));
         bindingGroup.addBinding(binding);
 
-        cmbPodmienky.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "nezadané", "výborné", "veľmi dobré", "dobré", "obmedzené", "nevyhovujúce" }));
+        cmbPodmienky.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "nezadané", "výborné", "veľmi dobré", "dobré", "obmedzené", "nevhodné" }));
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, txtVyskaSnehu, org.jdesktop.beansbinding.ELProperty.create("Výška snehu"), txtVyskaSnehu, org.jdesktop.beansbinding.BeanProperty.create("name"));
         bindingGroup.addBinding(binding);

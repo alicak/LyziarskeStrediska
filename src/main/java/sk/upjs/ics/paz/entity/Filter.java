@@ -14,11 +14,9 @@ public class Filter {
     private String menoUzivatela;
 
     // nepovinne udaje
-    
     // ak nema nejaky udaj zadanu hodnotu, tak to bude 
     // defaultna hodnota novej premennej (kvoli nullom v databaze)
     // String - "", int - 0, BigDecimal - null
-    
     private String nazovObsahuje;
     private int minVyskaSnehu;
     private String minPodmienky;
@@ -184,8 +182,9 @@ public class Filter {
             vysledok = new ArrayList<>();
             Set<String> vyhovujuce = dajLepsiePodmienky(minPodmienky);
             for (Stredisko s : pomocny) {
-                if (vyhovujuce.contains(s.getPodmienky()));
-                vysledok.add(s);
+                if (vyhovujuce.contains(s.getPodmienky())) {
+                    vysledok.add(s);
+                }
             }
         }
 
@@ -259,7 +258,7 @@ public class Filter {
             }
         }
 
-        if (nutnostPozicatVystroj) {
+        if (nutnostUbytovat) {
             pomocny = new ArrayList<>(vysledok);
             vysledok = new ArrayList<>();
             for (Stredisko s : pomocny) {
@@ -280,18 +279,29 @@ public class Filter {
 
         if (podmienky.equals("výborné")) {
             vysledok.add("výborné");
+            return vysledok;
         } else if (podmienky.equals("veľmi dobré")) {
             vysledok.add("výborné");
             vysledok.add("veľmi dobré");
+            return vysledok;
         } else if (podmienky.equals("dobré")) {
             vysledok.add("výborné");
             vysledok.add("veľmi dobré");
             vysledok.add("dobré");
+            return vysledok;
         } else if (podmienky.equals("obmedzené")) {
             vysledok.add("výborné");
             vysledok.add("veľmi dobré");
             vysledok.add("dobré");
             vysledok.add("obmedzené");
+            return vysledok;
+        } else if (podmienky.equals("nevhodné")) {
+            vysledok.add("výborné");
+            vysledok.add("veľmi dobré");
+            vysledok.add("dobré");
+            vysledok.add("obmedzené");
+            vysledok.add("nevhodné");
+            return vysledok;
         }
 
         return vysledok;

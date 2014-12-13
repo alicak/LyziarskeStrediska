@@ -54,6 +54,9 @@ public class ZobrazDetailStrediskaForm extends javax.swing.JDialog {
 
         lblPozicanieVystroje.setText("možnosť požičania výstroje: " + dajAnoNie(stredisko.isDaSaPozicatVystroj()));
         lblUbytovanie.setText("možnosť ubytovania: " + dajAnoNie(stredisko.isDaSaUbytovat()));
+        
+        lblGpsSirka.setText("GPS šírka: " + stredisko.getGpsSirka());
+        lblGpsDlzka.setText("GPS dĺžka: " + stredisko.getGpsDlzka());
     }
 
     /**

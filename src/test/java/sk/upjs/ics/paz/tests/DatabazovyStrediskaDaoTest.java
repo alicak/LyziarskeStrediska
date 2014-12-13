@@ -60,7 +60,7 @@ public class DatabazovyStrediskaDaoTest {
 
         List<Stredisko> strediska = strediskaDao.dajVsetky();
 
-        assertEquals(strediska.size(), 2);
+        assertEquals(strediska.size(), 5);
     }
 
     /**
@@ -73,7 +73,7 @@ public class DatabazovyStrediskaDaoTest {
 
         List<Stredisko> strediska = strediskaDao.dajVsetky();
 
-        assertEquals(strediska.size(), 6);
+        assertEquals(strediska.size(), 4);
     }
 
     /**
@@ -87,13 +87,13 @@ public class DatabazovyStrediskaDaoTest {
 
         String menoStrediska = "";
         for (Stredisko stredisko : strediska) {
-            if (stredisko.getId() == 3) {
+            if (stredisko.getId() == 4) {
                 menoStrediska = stredisko.getNazov();
                 break;
             }
         }
 
-        assertTrue(menoStrediska.equals("Alfonz"));
+        assertTrue(menoStrediska.equals("Tatranská Lomnica"));
     }
 
     /**
@@ -103,12 +103,12 @@ public class DatabazovyStrediskaDaoTest {
     public void najdiStrediskaVOkruhuTestJedno() {
         strediskaDao = new DatabazovyStrediskaDao(pouzivatel, jdbcTemplate);
 
-        List<Stredisko> strediska = strediskaDao.najdiStrediskaVOkruhu(new BigDecimal("11.11"),
-                new BigDecimal("11.11"), 0);
+        List<Stredisko> strediska = strediskaDao.najdiStrediskaVOkruhu(new BigDecimal("48.87755900"),
+                new BigDecimal("19.23549000"), 0);
 
         assertTrue(strediska.size() == 1);
 
-        assertTrue(strediska.get(0).getNazov().equals("Nove"));
+        assertTrue(strediska.get(0).getNazov().equals("Donovaly"));
     }
 
     /**
@@ -118,9 +118,9 @@ public class DatabazovyStrediskaDaoTest {
     public void najdiStrediskaVOkruhuTestNekonecno() {
         strediskaDao = new DatabazovyStrediskaDao(pouzivatel, jdbcTemplate);
 
-        List<Stredisko> strediska = strediskaDao.najdiStrediskaVOkruhu(new BigDecimal("11.11"),
-                new BigDecimal("11.11"), Double.POSITIVE_INFINITY);
+        List<Stredisko> strediska = strediskaDao.najdiStrediskaVOkruhu(new BigDecimal("48.87755900"),
+                new BigDecimal("19.23549000"), Double.POSITIVE_INFINITY);
 
-        assertTrue(strediska.size() == 6);
+        assertTrue(strediska.size() == 4);
     }
 }
