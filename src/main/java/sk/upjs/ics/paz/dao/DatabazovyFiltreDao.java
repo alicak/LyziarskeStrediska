@@ -6,7 +6,7 @@ import java.util.Map;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
-import sk.ics.upjs.ics.paz.exceptions.NedostatocneOpravneniaNaOperaciuException;
+import sk.upjs.ics.paz.exceptions.NedostatocneOpravneniaNaOperaciuException;
 import sk.upjs.ics.paz.entity.*;
 
 public class DatabazovyFiltreDao implements FiltreDao {

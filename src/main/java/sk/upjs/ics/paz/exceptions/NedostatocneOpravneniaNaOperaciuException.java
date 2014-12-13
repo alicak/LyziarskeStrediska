@@ -1,4 +1,4 @@
-package sk.ics.upjs.ics.paz.exceptions;
+package sk.upjs.ics.paz.exceptions;
 
 public class NedostatocneOpravneniaNaOperaciuException extends RuntimeException {
 

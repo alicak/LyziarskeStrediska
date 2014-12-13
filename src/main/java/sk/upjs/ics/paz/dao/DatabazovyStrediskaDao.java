@@ -9,7 +9,7 @@ import java.util.Map;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
-import sk.ics.upjs.ics.paz.exceptions.NedostatocneOpravneniaNaOperaciuException;
+import sk.upjs.ics.paz.exceptions.NedostatocneOpravneniaNaOperaciuException;
 import sk.upjs.ics.paz.entity.Pouzivatel;
 import sk.upjs.ics.paz.entity.Stredisko;
 
