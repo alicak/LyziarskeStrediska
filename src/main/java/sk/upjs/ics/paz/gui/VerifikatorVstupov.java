@@ -121,35 +121,6 @@ public class VerifikatorVstupov {
         return Integer.valueOf(vPrevadzke.getText()) <= Integer.valueOf(vsetky.getText());
     }
 
-//    /**
-//     * Vrati, ci je zadane cislo cele (ci nie je string, desatinne)
-//     *
-//     * @param pole
-//     * @return true, ak je zadany string mozne prekonvertovat na cele cislo
-//     */
-//    public boolean jeVPoliCeleCislo(JTextField pole) {
-//        try {
-//            Integer.parseInt(pole.getText());
-//            return true;
-//        } catch (NumberFormatException e) {
-//            return false;
-//        }
-//    }
-//
-//    /**
-//     * Vrati, ci je zadane cislo cele (ci nie je string)
-//     *
-//     * @param pole
-//     * @return true, ak je zadany string mozne prekonvertovat na desatinne cislo
-//     */
-//    public boolean jeVPoliDesatinneCislo(JTextField pole) {
-//        try {
-//            Double.parseDouble(pole.getText());
-//            return true;
-//        } catch (NumberFormatException e) {
-//            return false;
-//        }
-//    }
     /**
      * Hlaska pre povinne cele cislo
      *
