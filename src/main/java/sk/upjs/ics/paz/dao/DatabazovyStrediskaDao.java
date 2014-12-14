@@ -116,6 +116,10 @@ public class DatabazovyStrediskaDao implements StrediskaDao {
      * @param stredisko stredisko, ktore chceme pridat
      */
     private void ulozNove(Stredisko stredisko) {
+        if (pouzivatel == null) {
+            throw new NedostatocneOpravneniaNaOperaciuException("Nie som prihlaseny a chcem ukladat.");
+        }
+
         Map<String, Object> hodnoty = new HashMap<>();
         hodnoty.put("nazov", stredisko.getNazov());
         hodnoty.put("vyskaSnehu", stredisko.getVyskaSnehu());

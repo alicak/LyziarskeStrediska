@@ -58,7 +58,7 @@ public class DatabazovyFilterDaoTest {
         
         List<Filter> filtre = filtreDao.dajVsetky();
         
-        assertTrue(filtre.size() == 3);
+        assertTrue(filtre.size() == 2);
     }
 
     /**

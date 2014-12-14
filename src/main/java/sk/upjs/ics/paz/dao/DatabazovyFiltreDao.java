@@ -106,6 +106,10 @@ public class DatabazovyFiltreDao implements FiltreDao {
      * @param filter filter, s ktorym narabame
      */
     private void ulozNovy(Filter filter) {
+        if (pouzivatel == null) {
+            throw new NedostatocneOpravneniaNaOperaciuException("Nie som prihlaseny a chcem ukladat.");
+        }
+        
         Map<String, Object> hodnoty = new HashMap<>();
         hodnoty.put("nazov", filter.getNazov());
         hodnoty.put("menoUzivatela", filter.getMenoUzivatela());
@@ -144,13 +148,15 @@ public class DatabazovyFiltreDao implements FiltreDao {
     }
 
     /**
-     * 
+     *
      * @param nazov nazov filtra
      * @return filter s tym nazvom
      */
     @Override
     public Filter dajPodlaNazvu(String nazov) {
-        String sql = "SELECT * FROM Filtre WHERE nazov = ?";
-        return jdbcTemplate.queryForObject(sql, new Object[]{nazov}, mapovac);
+        // musime dat do podmienky aj meno uzivatela, lebo ak si daju
+        // dvaja ten isty nazov, hadze to vynimku
+        String sql = "SELECT * FROM Filtre WHERE nazov = ? AND menoUzivatela = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{nazov, menoPouzivatela}, mapovac);
     }
 }
