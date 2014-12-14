@@ -393,6 +393,7 @@ public class HlavnyForm extends javax.swing.JFrame {
         if (tlacidlo == JOptionPane.YES_OPTION) {
             strediskaDao.odstran(vybraneStredisko);
             zobrazujemNajblizsie = false;
+            Factory.INSTANCE.setVlastnyZoznam(null);
             aktualizujZoznamStredisk();
         }
     }//GEN-LAST:event_btnOdstranActionPerformed
@@ -437,6 +438,7 @@ public class HlavnyForm extends javax.swing.JFrame {
 
             // aktualizuju sa zobrazene data
             zobrazujemNajblizsie = false;
+            Factory.INSTANCE.setVlastnyZoznam(null);
             aktualizujZoznamStredisk();
             aktualizujZoznamFiltrov();
         }
@@ -464,6 +466,7 @@ public class HlavnyForm extends javax.swing.JFrame {
 
         // aktualizuju sa zobrazene data
         zobrazujemNajblizsie = false;
+        Factory.INSTANCE.setVlastnyZoznam(null);
         aktualizujZoznamFiltrov();
         aktualizujZoznamStredisk();
     }
@@ -495,6 +498,7 @@ public class HlavnyForm extends javax.swing.JFrame {
 
     private void btnResetFiltraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetFiltraActionPerformed
         zobrazujemNajblizsie = false;
+        Factory.INSTANCE.setVlastnyZoznam(null);
         aktualizujZoznamStredisk();
         // zoznam filtrov aktualizujeme, aby nebol ziadny filter vybrany
         aktualizujZoznamFiltrov();
