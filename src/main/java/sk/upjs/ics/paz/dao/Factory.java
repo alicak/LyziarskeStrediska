@@ -1,8 +1,10 @@
 package sk.upjs.ics.paz.dao;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 import sk.upjs.ics.paz.entity.Pouzivatel;
+import sk.upjs.ics.paz.entity.Stredisko;
 import sk.upjs.ics.paz.gui.VerifikatorVstupov;
 
 public enum Factory {
@@ -15,6 +17,23 @@ public enum Factory {
     private PouzivateliaDao pouzivateliaDao;
     private Pouzivatel pouzivatel;
     private VerifikatorVstupov verifikator;
+    private List<Stredisko> vlastnyZoznam;
+
+    public PouzivateliaDao getPouzivateliaDao() {
+        return pouzivateliaDao;
+    }
+
+    public void setPouzivateliaDao(PouzivateliaDao pouzivateliaDao) {
+        this.pouzivateliaDao = pouzivateliaDao;
+    }
+
+    public List<Stredisko> getVlastnyZoznam() {
+        return vlastnyZoznam;
+    }
+
+    public void setVlastnyZoznam(List<Stredisko> vlastnyZoznam) {
+        this.vlastnyZoznam = vlastnyZoznam;
+    }
 
     // vrati pouzivatela
     public Pouzivatel getPouzivatel() {

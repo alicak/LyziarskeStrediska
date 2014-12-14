@@ -169,8 +169,9 @@ public class DatabazovyStrediskaDao implements StrediskaDao {
      */
     @Override
     public List<Stredisko> najdiStrediskaVOkruhu(BigDecimal sirka, BigDecimal dlzka, double okruh) {
-        List<Stredisko> vysledok = new ArrayList<>();
-        for (Stredisko s : dajVsetky()) {
+        List<Stredisko> vsetky = dajVsetky();
+        List<Stredisko> vysledok = new ArrayList<>(vsetky.size());
+        for (Stredisko s : vsetky) {
             if (vzdialenostMedziMiestami(sirka.doubleValue(),
                     dlzka.doubleValue(),
                     s.getGpsSirka().doubleValue(),

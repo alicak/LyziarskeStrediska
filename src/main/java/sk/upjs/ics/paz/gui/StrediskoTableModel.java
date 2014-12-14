@@ -67,13 +67,13 @@ public class StrediskoTableModel extends AbstractTableModel {
         zoznamStredisk = strediskaDao.dajVsetky();
         fireTableDataChanged();
     }
-    
+
     /**
      * Zobrazi v tabulke zoznam, ktory zadame
-     * @param zoznam 
+     *
+     * @param zoznam
      */
-    public void zobrazZadanyZoznam(List<Stredisko> zoznam)
-    {
+    public void zobrazZadanyZoznam(List<Stredisko> zoznam) {
         zoznamStredisk = zoznam;
         fireTableDataChanged();
     }
@@ -95,13 +95,12 @@ public class StrediskoTableModel extends AbstractTableModel {
     public Class<?> getColumnClass(int columnIndex) {
         return TYPY_STLPCOV[columnIndex];
     }
-    
+
     /**
      * @param riadok
      * @return stredisko na danom riadku
      */
-    public Stredisko dajPodlaCislaRiadka(int riadok)
-    {
+    public Stredisko dajPodlaCislaRiadka(int riadok) {
         return zoznamStredisk.get(riadok);
     }
 

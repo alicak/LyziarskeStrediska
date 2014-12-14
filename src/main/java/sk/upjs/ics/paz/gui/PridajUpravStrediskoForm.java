@@ -10,11 +10,11 @@ import java.math.BigDecimal;
 public class PridajUpravStrediskoForm extends javax.swing.JDialog {
 
     private Stredisko stredisko;
-    private Pouzivatel pouzivatel = Factory.INSTANCE.getPouzivatel();
-    private StrediskaDao strediskaDao = Factory.INSTANCE.getStrediskaDao();
-    private VerifikatorVstupov verifikator = Factory.INSTANCE.getVerifikator();
+    private final Pouzivatel pouzivatel = Factory.INSTANCE.getPouzivatel();
+    private final StrediskaDao strediskaDao = Factory.INSTANCE.getStrediskaDao();
+    private final VerifikatorVstupov verifikator = Factory.INSTANCE.getVerifikator();
 
-    private String nadpisChybovejHlasky = "Chyba - nesprávny vstup";
+    private final String nadpisChybovejHlasky = "Chyba - nesprávny vstup";
 
     /**
      * Creates new form PridajUpravStrediskoForm

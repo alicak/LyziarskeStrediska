@@ -145,6 +145,11 @@ public class DatabazovyPouzivateliaDao implements PouzivateliaDao {
         jdbcTemplate.execute("INSERT " + nazovTabulky + " SELECT * FROM strediska");
     }
 
+    /**
+     * Vráti, ci používateľ so zadaným menom existuje
+     * @param meno meno pouzivatela
+     * @return true, ak užívateľ existuje
+     */
     @Override
     public boolean existujePouzivatel(String meno) {
         String tabulka = null;

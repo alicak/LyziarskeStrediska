@@ -28,17 +28,18 @@ public class VerifikatorVstupov {
      * @param pole pole, ktore overujeme
      * @return true, ak je v nom desatinne cislo (musi mat desatinnu cast!)
      */
-    private boolean jeDesatinneCislo(JTextField pole) {
+    public boolean jeDesatinneCislo(JTextField pole) {
         // regularny vyraz - znamena 0 alebo 1 minus,
         // 1 alebo viac cislic, za tym bodku a za tym zase 1 alebo viac cislic
-        return pole.getText().matches("-?\\d+\\.\\d+");
+        return pole.getText().matches("-?\\d+\\.\\d+")
+                || pole.getText().matches("-?\\d+");
     }
 
     /**
      * @param pole pole, ktore overujeme
      * @return true, ak je v nom cele cislo
      */
-    private boolean jeCeleCislo(JTextField pole) {
+    public boolean jeCeleCislo(JTextField pole) {
         // regularny vyraz - znamena 0 alebo 1 minus
         // a za tym 1 alebo viac cislic
         return pole.getText().matches("-?\\d+");
@@ -120,36 +121,35 @@ public class VerifikatorVstupov {
         return Integer.valueOf(vPrevadzke.getText()) <= Integer.valueOf(vsetky.getText());
     }
 
-    /**
-     * Vrati, ci je zadane cislo cele (ci nie je string, desatinne)
-     *
-     * @param pole
-     * @return true, ak je zadany string mozne prekonvertovat na cele cislo
-     */
-    public boolean jeVPoliCeleCislo(JTextField pole) {
-        try {
-            Integer.parseInt(pole.getText());
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
-    /**
-     * Vrati, ci je zadane cislo cele (ci nie je string)
-     *
-     * @param pole
-     * @return true, ak je zadany string mozne prekonvertovat na desatinne cislo
-     */
-    public boolean jeVPoliDesatinneCislo(JTextField pole) {
-        try {
-            Double.parseDouble(pole.getText());
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
+//    /**
+//     * Vrati, ci je zadane cislo cele (ci nie je string, desatinne)
+//     *
+//     * @param pole
+//     * @return true, ak je zadany string mozne prekonvertovat na cele cislo
+//     */
+//    public boolean jeVPoliCeleCislo(JTextField pole) {
+//        try {
+//            Integer.parseInt(pole.getText());
+//            return true;
+//        } catch (NumberFormatException e) {
+//            return false;
+//        }
+//    }
+//
+//    /**
+//     * Vrati, ci je zadane cislo cele (ci nie je string)
+//     *
+//     * @param pole
+//     * @return true, ak je zadany string mozne prekonvertovat na desatinne cislo
+//     */
+//    public boolean jeVPoliDesatinneCislo(JTextField pole) {
+//        try {
+//            Double.parseDouble(pole.getText());
+//            return true;
+//        } catch (NumberFormatException e) {
+//            return false;
+//        }
+//    }
     /**
      * Hlaska pre povinne cele cislo
      *
@@ -162,7 +162,7 @@ public class VerifikatorVstupov {
                 + ".";
         JOptionPane.showMessageDialog(parent, sprava, NADPIS_CHYBOVEJ_HLASKY, ERROR_MESSAGE);
     }
-    
+
     /**
      * Hlaska pre povinne cele cislo
      *

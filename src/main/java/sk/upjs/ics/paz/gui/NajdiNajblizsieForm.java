@@ -1,16 +1,14 @@
 package sk.upjs.ics.paz.gui;
 
 import java.math.BigDecimal;
-import java.util.List;
 import sk.upjs.ics.paz.entity.Pouzivatel;
 import sk.upjs.ics.paz.dao.Factory;
 import sk.upjs.ics.paz.dao.StrediskaDao;
-import sk.upjs.ics.paz.entity.Stredisko;
 
 public class NajdiNajblizsieForm extends javax.swing.JDialog {
 
-    private Pouzivatel pouzivatel = Factory.INSTANCE.getPouzivatel();
-    private StrediskaDao strediskaDao = Factory.INSTANCE.getStrediskaDao();
+    private final Pouzivatel pouzivatel = Factory.INSTANCE.getPouzivatel();
+    private final StrediskaDao strediskaDao = Factory.INSTANCE.getStrediskaDao();
 
     /**
      * Creates new form NajdiNajblizsieForm
@@ -63,8 +61,14 @@ public class NajdiNajblizsieForm extends javax.swing.JDialog {
 
         lblDlzka.setText("Dĺžka:");
 
+        txtSirka.setName("Šírka"); // NOI18N
+
+        txtDlzka.setName("Dĺžka"); // NOI18N
+
         lblOkruh.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblOkruh.setText("V akom okruhu chcete vyhľadávať?");
+
+        txtOkruh.setName("Okruh"); // NOI18N
 
         lblKilometre.setText("kilometrov");
 
@@ -150,10 +154,43 @@ public class NajdiNajblizsieForm extends javax.swing.JDialog {
      * @param evt
      */
     private void btnNajdiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNajdiActionPerformed
+        if (!suPoliaDobre()) {
+            return;
+        }
+
         double okruh = Double.parseDouble(txtOkruh.getText());
-        List<Stredisko> zoznam = strediskaDao.najdiStrediskaVOkruhu(new BigDecimal(txtSirka.getText()),
-                new BigDecimal(txtDlzka.getText()), okruh);
+        Factory.INSTANCE.setVlastnyZoznam(strediskaDao.najdiStrediskaVOkruhu(new BigDecimal(txtSirka.getText()),
+                new BigDecimal(txtDlzka.getText()), okruh));
+        dispose();
     }//GEN-LAST:event_btnNajdiActionPerformed
+
+    private boolean suPoliaDobre() {
+        boolean poliaSuDobre = true;
+        VerifikatorVstupov verifikatorVstupov = new VerifikatorVstupov();
+        if (!verifikatorVstupov.jeNeprazdny(txtOkruh)) {
+            verifikatorVstupov.hlaskaPrazdnyAleboDlhyString(this, txtOkruh, 30);
+            return false;
+        } else if (!verifikatorVstupov.jeDesatinneCislo(txtOkruh)) {
+            verifikatorVstupov.hlaskaCisloNieJeVSpravnomFormate(this, txtOkruh);
+            return false;
+        }
+        if (!verifikatorVstupov.jeNeprazdny(txtSirka)) {
+            verifikatorVstupov.hlaskaPrazdnyAleboDlhyString(this, txtSirka, 30);
+            return false;
+        } else if (!verifikatorVstupov.jeDesatinneCislo(txtSirka)) {
+            verifikatorVstupov.hlaskaCisloNieJeVSpravnomFormate(this, txtSirka);
+            return false;
+        }
+        if (!verifikatorVstupov.jeNeprazdny(txtDlzka)) {
+            verifikatorVstupov.hlaskaPrazdnyAleboDlhyString(this, txtDlzka, 30);
+            return false;
+        } else if (!verifikatorVstupov.jeDesatinneCislo(txtDlzka)) {
+            verifikatorVstupov.hlaskaCisloNieJeVSpravnomFormate(this, txtDlzka);
+            return false;
+        }
+
+        return poliaSuDobre;
+    }
 
     /**
      * @param args the command line arguments

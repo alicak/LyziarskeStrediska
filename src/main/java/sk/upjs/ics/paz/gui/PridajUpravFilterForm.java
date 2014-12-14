@@ -362,7 +362,7 @@ public class PridajUpravFilterForm extends javax.swing.JDialog {
 
         if (!verifikator.jeNeprazdny(txtMinVyskaSnehu)) {
             filter.setMinVyskaSnehu(0);
-        } else if (verifikator.jeVPoliCeleCislo(txtMinVyskaSnehu)) {
+        } else if (verifikator.jeCeleCislo(txtMinVyskaSnehu)) {
             filter.setMinVyskaSnehu(Integer.valueOf(txtMinVyskaSnehu.getText()));
         } else {
             verifikator.hlaskaCisloNieJeVSpravnomFormate(this, txtMinVyskaSnehu);
@@ -373,7 +373,7 @@ public class PridajUpravFilterForm extends javax.swing.JDialog {
 
         if (!verifikator.jeNeprazdny(txtMinPocetVlekov)) {
             filter.setMinPocetVlekovVPrevadzke(0);
-        } else if (verifikator.jeVPoliCeleCislo(txtMinPocetVlekov)) {
+        } else if (verifikator.jeCeleCislo(txtMinPocetVlekov)) {
             filter.setMinPocetVlekovVPrevadzke(Integer.valueOf(txtMinPocetVlekov.getText()));
         } else {
             verifikator.hlaskaCisloNieJeVSpravnomFormate(this, txtMinPocetVlekov);
@@ -382,7 +382,7 @@ public class PridajUpravFilterForm extends javax.swing.JDialog {
 
         if (!verifikator.jeNeprazdny(txtMinPocetLanoviek)) {
             filter.setMinPocetLanoviekVPrevadzke(0);
-        } else if (verifikator.jeVPoliCeleCislo(txtMinPocetLanoviek)) {
+        } else if (verifikator.jeCeleCislo(txtMinPocetLanoviek)) {
             filter.setMinPocetLanoviekVPrevadzke(Integer.valueOf(txtMinPocetLanoviek.getText()));
         } else {
             verifikator.hlaskaCisloNieJeVSpravnomFormate(this, txtMinPocetLanoviek);
@@ -391,7 +391,7 @@ public class PridajUpravFilterForm extends javax.swing.JDialog {
 
         if (!verifikator.jeNeprazdny(txtMinPocetTrati)) {
             filter.setMinPocetTratiVPrevadzke(0);
-        } else if (verifikator.jeVPoliCeleCislo(txtMinPocetTrati)) {
+        } else if (verifikator.jeCeleCislo(txtMinPocetTrati)) {
             filter.setMinPocetTratiVPrevadzke(Integer.valueOf(txtMinPocetTrati.getText()));
         } else {
             verifikator.hlaskaCisloNieJeVSpravnomFormate(this, txtMinPocetTrati);
@@ -400,7 +400,7 @@ public class PridajUpravFilterForm extends javax.swing.JDialog {
 
         if (!verifikator.jeNeprazdny(txtMaxCenaListkaDospely)) {
             filter.setMaxCenaListkaDospely(null);
-        } else if (verifikator.jeVPoliDesatinneCislo(txtMaxCenaListkaDospely)) {
+        } else if (verifikator.jeCeleCislo(txtMaxCenaListkaDospely)) {
             filter.setMaxCenaListkaDospely(new BigDecimal(txtMaxCenaListkaDospely.getText()));
         } else {
             verifikator.hlaskaCisloNieJeVSpravnomFormate(this, txtMaxCenaListkaDospely);
@@ -409,7 +409,7 @@ public class PridajUpravFilterForm extends javax.swing.JDialog {
 
         if (!verifikator.jeNeprazdny(txtMaxCenaListkaDieta)) {
             filter.setMaxCenaListkaDieta(null);
-        } else if (verifikator.jeVPoliDesatinneCislo(txtMaxCenaListkaDieta)) {
+        } else if (verifikator.jeDesatinneCislo(txtMaxCenaListkaDieta)) {
             filter.setMaxCenaListkaDieta(new BigDecimal(txtMaxCenaListkaDieta.getText()));
         } else {
             verifikator.hlaskaCisloNieJeVSpravnomFormate(this, txtMaxCenaListkaDieta);
@@ -418,7 +418,7 @@ public class PridajUpravFilterForm extends javax.swing.JDialog {
 
         if (!verifikator.jeNeprazdny(txtMaxCenaListkaStudent)) {
             filter.setMaxCenaListkaStudent(null);
-        } else if (verifikator.jeVPoliDesatinneCislo(txtMaxCenaListkaStudent)) {
+        } else if (verifikator.jeDesatinneCislo(txtMaxCenaListkaStudent)) {
             filter.setMaxCenaListkaStudent(new BigDecimal(txtMaxCenaListkaStudent.getText()));
         } else {
             verifikator.hlaskaCisloNieJeVSpravnomFormate(this, txtMaxCenaListkaStudent);

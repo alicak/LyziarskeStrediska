@@ -109,8 +109,14 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtSirka">
+      <Properties>
+        <Property name="name" type="java.lang.String" value="&#x160;&#xed;rka" noResource="true"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtDlzka">
+      <Properties>
+        <Property name="name" type="java.lang.String" value="D&#x13a;&#x17e;ka" noResource="true"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblOkruh">
       <Properties>
@@ -121,6 +127,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtOkruh">
+      <Properties>
+        <Property name="name" type="java.lang.String" value="Okruh" noResource="true"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblKilometre">
       <Properties>

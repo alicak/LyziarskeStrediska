@@ -23,6 +23,8 @@ public class HlavnyForm extends javax.swing.JFrame {
 
     private Pouzivatel pouzivatel = Factory.INSTANCE.getPouzivatel();
 
+    private boolean zobrazujemNajblizsie = false;
+
     public HlavnyForm() {
         initComponents();
         // nastavi obrazok
@@ -118,7 +120,6 @@ public class HlavnyForm extends javax.swing.JFrame {
         });
 
         btnNajdiNajblizsie.setText("Nájdi najbližšie...");
-        btnNajdiNajblizsie.setEnabled(false);
         btnNajdiNajblizsie.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNajdiNajblizsieActionPerformed(evt);
@@ -330,7 +331,12 @@ public class HlavnyForm extends javax.swing.JFrame {
     private void btnNajdiNajblizsieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNajdiNajblizsieActionPerformed
         NajdiNajblizsieForm najdiNajblizsieForm = new NajdiNajblizsieForm(this, true);
         najdiNajblizsieForm.setVisible(true);
-        aktualizujZoznamStredisk();
+        if (Factory.INSTANCE.getVlastnyZoznam() != null) {
+            strediskaTableModel.zobrazZadanyZoznam(Factory.INSTANCE.getVlastnyZoznam());
+            zobrazujemNajblizsie = true;
+        } else {
+            aktualizujZoznamStredisk();
+        }
     }//GEN-LAST:event_btnNajdiNajblizsieActionPerformed
 
     /**
@@ -339,6 +345,8 @@ public class HlavnyForm extends javax.swing.JFrame {
     private void btnPridajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPridajActionPerformed
         PridajUpravStrediskoForm pridajUpravStrediskoForm = new PridajUpravStrediskoForm(this);
         pridajUpravStrediskoForm.setVisible(true);
+        zobrazujemNajblizsie = false;
+        Factory.INSTANCE.setVlastnyZoznam(null);
         aktualizujZoznamStredisk();
     }//GEN-LAST:event_btnPridajActionPerformed
 
@@ -359,7 +367,11 @@ public class HlavnyForm extends javax.swing.JFrame {
         Stredisko vybraneStredisko = dajStrediskoZTabulky();
         PridajUpravStrediskoForm pridajUpravStrediskoForm = new PridajUpravStrediskoForm(this, vybraneStredisko);
         pridajUpravStrediskoForm.setVisible(true);
-        aktualizujZoznamStredisk();
+        if (zobrazujemNajblizsie) {
+            strediskaTableModel.zobrazZadanyZoznam(Factory.INSTANCE.getVlastnyZoznam());
+        } else {
+            aktualizujZoznamStredisk();
+        }
     }//GEN-LAST:event_btnUpravActionPerformed
 
     /**
@@ -380,6 +392,7 @@ public class HlavnyForm extends javax.swing.JFrame {
 
         if (tlacidlo == JOptionPane.YES_OPTION) {
             strediskaDao.odstran(vybraneStredisko);
+            zobrazujemNajblizsie = false;
             aktualizujZoznamStredisk();
         }
     }//GEN-LAST:event_btnOdstranActionPerformed
@@ -423,6 +436,7 @@ public class HlavnyForm extends javax.swing.JFrame {
             menuitemPrihlasOdhlas.setText("Odhlás");
 
             // aktualizuju sa zobrazene data
+            zobrazujemNajblizsie = false;
             aktualizujZoznamStredisk();
             aktualizujZoznamFiltrov();
         }
@@ -449,6 +463,7 @@ public class HlavnyForm extends javax.swing.JFrame {
         menuitemPrihlasOdhlas.setText("Prihlás...");
 
         // aktualizuju sa zobrazene data
+        zobrazujemNajblizsie = false;
         aktualizujZoznamFiltrov();
         aktualizujZoznamStredisk();
     }
@@ -479,6 +494,7 @@ public class HlavnyForm extends javax.swing.JFrame {
     }//GEN-LAST:event_tabStrediskaMouseClicked
 
     private void btnResetFiltraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetFiltraActionPerformed
+        zobrazujemNajblizsie = false;
         aktualizujZoznamStredisk();
         // zoznam filtrov aktualizujeme, aby nebol ziadny filter vybrany
         aktualizujZoznamFiltrov();
