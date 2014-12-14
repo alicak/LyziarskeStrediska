@@ -13,7 +13,7 @@ import javax.swing.JTextField;
 public class VerifikatorVstupov {
 
     // nadpis, ktory budu mat vsetky chybove hlasky
-    private String nadpisChybovejHlasky = "Chyba - nesprávny vstup";
+    private final String NADPIS_CHYBOVEJ_HLASKY = "Chyba - nesprávny vstup";
 
     /**
      * @param pole pole, ktore overujeme
@@ -121,7 +121,51 @@ public class VerifikatorVstupov {
     }
 
     /**
+     * Vrati, ci je zadane cislo cele (ci nie je string, desatinne)
+     *
+     * @param pole
+     * @return true, ak je zadany string mozne prekonvertovat na cele cislo
+     */
+    public boolean jeVPoliCeleCislo(JTextField pole) {
+        try {
+            Integer.parseInt(pole.getText());
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    /**
+     * Vrati, ci je zadane cislo cele (ci nie je string)
+     *
+     * @param pole
+     * @return true, ak je zadany string mozne prekonvertovat na desatinne cislo
+     */
+    public boolean jeVPoliDesatinneCislo(JTextField pole) {
+        try {
+            Double.parseDouble(pole.getText());
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    /**
      * Hlaska pre povinne cele cislo
+     *
+     * @param parent rodic hlasky
+     * @param pole pole, ktore overujeme
+     */
+    public void hlaskaCisloNieJeVSpravnomFormate(JDialog parent, JTextField pole) {
+        String sprava = "Zadali ste nesprávny formát čísla v poli "
+                + pole.getName()
+                + ".";
+        JOptionPane.showMessageDialog(parent, sprava, NADPIS_CHYBOVEJ_HLASKY, ERROR_MESSAGE);
+    }
+    
+    /**
+     * Hlaska pre povinne cele cislo
+     *
      * @param parent rodic hlasky
      * @param pole pole, ktore overujeme
      * @param min min hodnota
@@ -135,11 +179,12 @@ public class VerifikatorVstupov {
                 + " až "
                 + max
                 + ".";
-        JOptionPane.showMessageDialog(parent, sprava, nadpisChybovejHlasky, ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(parent, sprava, NADPIS_CHYBOVEJ_HLASKY, ERROR_MESSAGE);
     }
 
     /**
      * Hlaska pre povinne cele alebo desatinne cislo
+     *
      * @param parent rodic hlasky
      * @param pole pole, ktore overujeme
      * @param min min hodnota
@@ -153,11 +198,12 @@ public class VerifikatorVstupov {
                 + " až "
                 + max
                 + ". \nAko oddeľovač desatinnej časti použite znak bodky.";
-        JOptionPane.showMessageDialog(parent, sprava, nadpisChybovejHlasky, ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(parent, sprava, NADPIS_CHYBOVEJ_HLASKY, ERROR_MESSAGE);
     }
 
     /**
      * Hlaska pre povinny string
+     *
      * @param parent rodic hlasky
      * @param pole pole, ktore overujeme
      * @param maxDlzka
@@ -168,14 +214,15 @@ public class VerifikatorVstupov {
                 + ". \nPole musí byť vyplnené a maximálna dĺžka reťazca je "
                 + maxDlzka
                 + ".";
-        JOptionPane.showMessageDialog(parent, sprava, nadpisChybovejHlasky, ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(parent, sprava, NADPIS_CHYBOVEJ_HLASKY, ERROR_MESSAGE);
     }
 
     /**
      * Hlaska pre nepovinny string
+     *
      * @param parent rodic hlasky
      * @param pole pole, ktore overujeme
-     * @param maxDlzka 
+     * @param maxDlzka
      */
     public void hlaskaDlhyString(JDialog parent, JTextField pole, int maxDlzka) {
         String sprava = "Zadali ste nesprávny reťazec v poli "
@@ -183,11 +230,12 @@ public class VerifikatorVstupov {
                 + ". \nMaximálna dĺžka reťazca je "
                 + maxDlzka
                 + ".";
-        JOptionPane.showMessageDialog(parent, sprava, nadpisChybovejHlasky, ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(parent, sprava, NADPIS_CHYBOVEJ_HLASKY, ERROR_MESSAGE);
     }
 
     /**
      * Hlaska pre viac vlekov/lanoviek/trati v prevadzke ako vsetkych
+     *
      * @param parent rodic hlasky
      * @param vPrevadzke pocet v prevadzke
      * @param vsetky pocet vsetkych
@@ -198,6 +246,7 @@ public class VerifikatorVstupov {
                 + " a "
                 + vsetky.getName()
                 + ".\nHodnota v prevádzke musí byť menšia alebo rovná hodnote všetky.";
-        JOptionPane.showMessageDialog(parent, sprava, nadpisChybovejHlasky, ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(parent, sprava, NADPIS_CHYBOVEJ_HLASKY, ERROR_MESSAGE);
     }
+
 }

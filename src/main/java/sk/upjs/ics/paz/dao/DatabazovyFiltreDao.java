@@ -80,7 +80,7 @@ public class DatabazovyFiltreDao implements FiltreDao {
                 + "maxCenaListkaDieta = ?,\n"
                 + "maxCenaListkaStudent = ?,\n"
                 + "daSaPozicatVystroj = ?,\n"
-                + "daSaUbytovat = ?,\n"
+                + "daSaUbytovat = ?\n"
                 + "WHERE id = ?";
 
         jdbcTemplate.update(sql, new Object[]{

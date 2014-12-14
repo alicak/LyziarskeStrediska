@@ -4,6 +4,7 @@ import sk.upjs.ics.paz.entity.Pouzivatel;
 import sk.upjs.ics.paz.dao.PouzivateliaDao;
 import sk.upjs.ics.paz.dao.Factory;
 import java.awt.Frame;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 public class PrihlasovanieForm extends javax.swing.JDialog {
@@ -49,6 +50,11 @@ public class PrihlasovanieForm extends javax.swing.JDialog {
                 btnStornoActionPerformed(evt);
             }
         });
+        btnStorno.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnStornoKeyPressed(evt);
+            }
+        });
 
         btnPrihlas.setText("Prihlás");
         btnPrihlas.addActionListener(new java.awt.event.ActionListener() {
@@ -56,10 +62,27 @@ public class PrihlasovanieForm extends javax.swing.JDialog {
                 btnPrihlasActionPerformed(evt);
             }
         });
+        btnPrihlas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnPrihlasKeyPressed(evt);
+            }
+        });
 
         lblMeno.setText("Meno:");
 
         lblHeslo.setText("Heslo:");
+
+        txtMeno.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtMenoKeyPressed(evt);
+            }
+        });
+
+        txtHeslo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtHesloKeyPressed(evt);
+            }
+        });
 
         lblLogo3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo male.png"))); // NOI18N
 
@@ -139,10 +162,34 @@ public class PrihlasovanieForm extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Zlé používateľské meno alebo heslo!");
             return;
         }
-        
+
         Factory.INSTANCE.setPouzivatel(pouzivatel);
         dispose();
     }//GEN-LAST:event_btnPrihlasActionPerformed
+
+    private void txtMenoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMenoKeyPressed
+        potvrd(evt);
+    }//GEN-LAST:event_txtMenoKeyPressed
+
+    private void txtHesloKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtHesloKeyPressed
+        potvrd(evt);
+    }//GEN-LAST:event_txtHesloKeyPressed
+
+    private void btnStornoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnStornoKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            btnStorno.doClick();
+        }
+    }//GEN-LAST:event_btnStornoKeyPressed
+
+    private void btnPrihlasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnPrihlasKeyPressed
+        potvrd(evt);
+    }//GEN-LAST:event_btnPrihlasKeyPressed
+
+    private void potvrd(java.awt.event.KeyEvent evt) {
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            btnPrihlas.doClick();
+        }
+    }
 
     /**
      * @param args the command line arguments

@@ -517,7 +517,7 @@ public class HlavnyForm extends javax.swing.JFrame {
      * Otvori okno so spravou filtrov
      */
     private void menuitemSpravaFiltrovActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuitemSpravaFiltrovActionPerformed
-        SpravaFiltrovForm spravaFiltrovForm = new SpravaFiltrovForm();
+        SpravaFiltrovForm spravaFiltrovForm = new SpravaFiltrovForm(this, true);
         spravaFiltrovForm.setVisible(true);
     }//GEN-LAST:event_menuitemSpravaFiltrovActionPerformed
 

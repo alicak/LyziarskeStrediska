@@ -148,7 +148,6 @@ public class Filter {
      * zoznamu, ale z toho, ktory presiel prvou podmienkou. Atd.
      *
      * @param zoznamStredisk zoznam, ktory filtrujeme
-     * @param filter filter, ktory pouzivame
      * @return zoznam, ktory je podmnozinou vstupneho zoznamu a vyhovuje
      * podmienkam filtra
      */
@@ -277,30 +276,31 @@ public class Filter {
     private Set<String> dajLepsiePodmienky(String podmienky) {
         Set<String> vysledok = new HashSet<>();
 
-        if (podmienky.equals("výborné")) {
-            vysledok.add("výborné");
-            return vysledok;
-        } else if (podmienky.equals("veľmi dobré")) {
-            vysledok.add("výborné");
-            vysledok.add("veľmi dobré");
-            return vysledok;
-        } else if (podmienky.equals("dobré")) {
-            vysledok.add("výborné");
-            vysledok.add("veľmi dobré");
-            vysledok.add("dobré");
-            return vysledok;
-        } else if (podmienky.equals("obmedzené")) {
-            vysledok.add("výborné");
-            vysledok.add("veľmi dobré");
-            vysledok.add("dobré");
-            vysledok.add("obmedzené");
-            return vysledok;
-        } else if (podmienky.equals("nevhodné")) {
-            vysledok.add("výborné");
-            vysledok.add("veľmi dobré");
-            vysledok.add("dobré");
-            vysledok.add("obmedzené");
-            vysledok.add("nevhodné");
+        switch (podmienky) {
+            case "výborné":
+                vysledok.add("výborné");
+                return vysledok;
+            case "veľmi dobré":
+                vysledok.add("výborné");
+                vysledok.add("veľmi dobré");
+                return vysledok;
+            case "dobré":
+                vysledok.add("výborné");
+                vysledok.add("veľmi dobré");
+                vysledok.add("dobré");
+                return vysledok;
+            case "obmedzené":
+                vysledok.add("výborné");
+                vysledok.add("veľmi dobré");
+                vysledok.add("dobré");
+                vysledok.add("obmedzené");
+                return vysledok;
+            case "nevhodné":
+                vysledok.add("výborné");
+                vysledok.add("veľmi dobré");
+                vysledok.add("dobré");
+                vysledok.add("obmedzené");
+                vysledok.add("nevhodné");
             return vysledok;
         }
 

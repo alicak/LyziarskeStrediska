@@ -8,19 +8,24 @@ import sk.upjs.ics.paz.dao.FiltreDao;
 import sk.upjs.ics.paz.entity.Filter;
 import sk.upjs.ics.paz.entity.Pouzivatel;
 
-public class SpravaFiltrovForm extends javax.swing.JFrame {
+public class SpravaFiltrovForm extends javax.swing.JDialog {
 
     FiltreListAndComboBoxModel filtreListAndComboBoxModel = new FiltreListAndComboBoxModel();
     FiltreDao filtreDao = Factory.INSTANCE.getFiltreDao();
     Pouzivatel pouzivatel = Factory.INSTANCE.getPouzivatel();
+    java.awt.Frame parent;
 
     /**
      * Creates new form SpravaFiltrovForm
+     *
+     * @param parent
+     * @param modal
      */
-    public SpravaFiltrovForm() {
+    public SpravaFiltrovForm(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
         aktualizujZoznamFiltrov();
-
+        this.parent = parent;
         // zaktivuje tlacitko pre prihlaseneho pouzivatela
         if (pouzivatel != null) {
             btnPridajNovy.setEnabled(true);
@@ -158,7 +163,7 @@ public class SpravaFiltrovForm extends javax.swing.JFrame {
      */
     private void btnZobrazDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZobrazDetailActionPerformed
         Filter vybranyFilter = dajVybranyFilter();
-        ZobrazDetailFiltraForm zobrazDetailFiltraForm = new ZobrazDetailFiltraForm(this, vybranyFilter);
+        ZobrazDetailFiltraForm zobrazDetailFiltraForm = new ZobrazDetailFiltraForm(parent, vybranyFilter);
         zobrazDetailFiltraForm.setVisible(true);
     }//GEN-LAST:event_btnZobrazDetailActionPerformed
 
@@ -169,8 +174,9 @@ public class SpravaFiltrovForm extends javax.swing.JFrame {
      */
     private void btnUpravActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpravActionPerformed
         Filter vybranyFilter = dajVybranyFilter();
-        PridajUpravFilterForm pridajUpravFilterForm = new PridajUpravFilterForm(this, vybranyFilter);
+        PridajUpravFilterForm pridajUpravFilterForm = new PridajUpravFilterForm(parent, vybranyFilter);
         pridajUpravFilterForm.setVisible(true);
+        aktualizujZoznamFiltrov();
     }//GEN-LAST:event_btnUpravActionPerformed
 
     /**
@@ -180,7 +186,6 @@ public class SpravaFiltrovForm extends javax.swing.JFrame {
      */
     private void btnOdstranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOdstranActionPerformed
         Filter vybranyFilter = dajVybranyFilter();
-
         int tlacidlo = JOptionPane.showConfirmDialog(
                 this,
                 "Naozaj chcete odstrániť vybraný filter?",
@@ -190,6 +195,7 @@ public class SpravaFiltrovForm extends javax.swing.JFrame {
 
         if (tlacidlo == JOptionPane.YES_OPTION) {
             filtreDao.odstran(vybranyFilter);
+            lstZoznamFiltrov.getSelectionModel().clearSelection();
             aktualizujZoznamFiltrov();
         }
     }//GEN-LAST:event_btnOdstranActionPerformed
@@ -200,7 +206,7 @@ public class SpravaFiltrovForm extends javax.swing.JFrame {
      * @param evt
      */
     private void btnPridajNovyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPridajNovyActionPerformed
-        PridajUpravFilterForm pridajUpravFilterForm = new PridajUpravFilterForm(this);
+        PridajUpravFilterForm pridajUpravFilterForm = new PridajUpravFilterForm(parent);
         pridajUpravFilterForm.setVisible(true);
         aktualizujZoznamFiltrov();
     }//GEN-LAST:event_btnPridajNovyActionPerformed
@@ -257,7 +263,14 @@ public class SpravaFiltrovForm extends javax.swing.JFrame {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SpravaFiltrovForm().setVisible(true);
+                SpravaFiltrovForm dialog = new SpravaFiltrovForm(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }

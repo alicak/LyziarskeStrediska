@@ -85,6 +85,7 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStornoActionPerformed"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="btnStornoKeyPressed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnPrihlas">
@@ -93,6 +94,7 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPrihlasActionPerformed"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="btnPrihlasKeyPressed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblMeno">
@@ -106,8 +108,14 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtMeno">
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtMenoKeyPressed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JPasswordField" name="txtHeslo">
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtHesloKeyPressed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblLogo3">
       <Properties>

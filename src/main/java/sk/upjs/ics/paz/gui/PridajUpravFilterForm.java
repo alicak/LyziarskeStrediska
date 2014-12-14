@@ -15,6 +15,9 @@ public class PridajUpravFilterForm extends javax.swing.JDialog {
 
     /**
      * Creates new form PridajUpravFilterForm
+     *
+     * @param parent
+     * @param modal
      */
     public PridajUpravFilterForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -39,8 +42,42 @@ public class PridajUpravFilterForm extends javax.swing.JDialog {
      * @param filter filter, ktory upravujeme
      */
     public PridajUpravFilterForm(java.awt.Frame parent, Filter filter) {
+        this(parent, true);
         this.filter = filter;
         this.setTitle("Úprava filtra");
+
+        vyplnPolia(filter);
+    }
+
+    /**
+     * Vyplni hodnoty podla filtra
+     * @param filter filter podla ktoreho vyplnujem
+     */
+    private void vyplnPolia(Filter filter) {
+        txtNazov.setText(filter.getNazov());
+        txtNazovObsahuje.setText(filter.getNazovObsahuje());
+        txtMinVyskaSnehu.setText("" + filter.getMinVyskaSnehu());
+        cmbMinPodmienky.setSelectedItem(filter.getMinPodmienky());
+        if (filter.getMaxCenaListkaDospely() == null) {
+            txtMaxCenaListkaDospely.setText("");
+        } else {
+            txtMaxCenaListkaDospely.setText(filter.getMaxCenaListkaDieta().toString());
+        }
+        if (filter.getMaxCenaListkaDieta() == null) {
+            txtMaxCenaListkaDieta.setText("");
+        } else {
+            txtMaxCenaListkaDieta.setText(filter.getMaxCenaListkaDieta().toString());
+        }
+        if (filter.getMaxCenaListkaStudent() == null) {
+            txtMaxCenaListkaStudent.setText("");
+        } else {
+            txtMaxCenaListkaStudent.setText(filter.getMaxCenaListkaStudent().toString());
+        }
+        txtMinPocetVlekov.setText("" + filter.getMinPocetVlekovVPrevadzke());
+        txtMinPocetLanoviek.setText("" + filter.getMinPocetLanoviekVPrevadzke());
+        txtMinPocetTrati.setText("" + filter.getMinPocetTratiVPrevadzke());
+        chkDaSaPozicatVystroj.setSelected(filter.isNutnostPozicatVystroj());
+        chkDaSaUbytovat.setSelected(filter.isNutnostUbytovat());
     }
 
     /**
@@ -151,6 +188,11 @@ public class PridajUpravFilterForm extends javax.swing.JDialog {
         chkDaSaUbytovat.setText("nutná možnosť ubytovania");
 
         btnStorno.setText("Storno");
+        btnStorno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStornoActionPerformed(evt);
+            }
+        });
 
         btnUloz.setText("Ulož");
         btnUloz.addActionListener(new java.awt.event.ActionListener() {
@@ -299,6 +341,7 @@ public class PridajUpravFilterForm extends javax.swing.JDialog {
      * @param evt
      */
     private void btnUlozActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUlozActionPerformed
+
         filter.setMenoUzivatela(pouzivatel.getMeno());
 
         if (verifikator.jeNeprazdneMaxDlzky(txtNazov, 30)) {
@@ -319,46 +362,67 @@ public class PridajUpravFilterForm extends javax.swing.JDialog {
 
         if (!verifikator.jeNeprazdny(txtMinVyskaSnehu)) {
             filter.setMinVyskaSnehu(0);
+        } else if (verifikator.jeVPoliCeleCislo(txtMinVyskaSnehu)) {
+            filter.setMinVyskaSnehu(Integer.valueOf(txtMinVyskaSnehu.getText()));
         } else {
-            filter.setMinVyskaSnehu(Integer.valueOf(txtNazovObsahuje.getText()));
+            verifikator.hlaskaCisloNieJeVSpravnomFormate(this, txtMinVyskaSnehu);
+            return;
         }
 
         filter.setMinPodmienky(cmbMinPodmienky.getSelectedItem().toString());
 
         if (!verifikator.jeNeprazdny(txtMinPocetVlekov)) {
             filter.setMinPocetVlekovVPrevadzke(0);
-        } else {
+        } else if (verifikator.jeVPoliCeleCislo(txtMinPocetVlekov)) {
             filter.setMinPocetVlekovVPrevadzke(Integer.valueOf(txtMinPocetVlekov.getText()));
+        } else {
+            verifikator.hlaskaCisloNieJeVSpravnomFormate(this, txtMinPocetVlekov);
+            return;
         }
 
         if (!verifikator.jeNeprazdny(txtMinPocetLanoviek)) {
             filter.setMinPocetLanoviekVPrevadzke(0);
-        } else {
+        } else if (verifikator.jeVPoliCeleCislo(txtMinPocetLanoviek)) {
             filter.setMinPocetLanoviekVPrevadzke(Integer.valueOf(txtMinPocetLanoviek.getText()));
+        } else {
+            verifikator.hlaskaCisloNieJeVSpravnomFormate(this, txtMinPocetLanoviek);
+            return;
         }
 
         if (!verifikator.jeNeprazdny(txtMinPocetTrati)) {
             filter.setMinPocetTratiVPrevadzke(0);
-        } else {
+        } else if (verifikator.jeVPoliCeleCislo(txtMinPocetTrati)) {
             filter.setMinPocetTratiVPrevadzke(Integer.valueOf(txtMinPocetTrati.getText()));
+        } else {
+            verifikator.hlaskaCisloNieJeVSpravnomFormate(this, txtMinPocetTrati);
+            return;
         }
 
         if (!verifikator.jeNeprazdny(txtMaxCenaListkaDospely)) {
             filter.setMaxCenaListkaDospely(null);
-        } else {
+        } else if (verifikator.jeVPoliDesatinneCislo(txtMaxCenaListkaDospely)) {
             filter.setMaxCenaListkaDospely(new BigDecimal(txtMaxCenaListkaDospely.getText()));
+        } else {
+            verifikator.hlaskaCisloNieJeVSpravnomFormate(this, txtMaxCenaListkaDospely);
+            return;
         }
 
         if (!verifikator.jeNeprazdny(txtMaxCenaListkaDieta)) {
             filter.setMaxCenaListkaDieta(null);
-        } else {
+        } else if (verifikator.jeVPoliDesatinneCislo(txtMaxCenaListkaDieta)) {
             filter.setMaxCenaListkaDieta(new BigDecimal(txtMaxCenaListkaDieta.getText()));
+        } else {
+            verifikator.hlaskaCisloNieJeVSpravnomFormate(this, txtMaxCenaListkaDieta);
+            return;
         }
 
         if (!verifikator.jeNeprazdny(txtMaxCenaListkaStudent)) {
             filter.setMaxCenaListkaStudent(null);
-        } else {
+        } else if (verifikator.jeVPoliDesatinneCislo(txtMaxCenaListkaStudent)) {
             filter.setMaxCenaListkaStudent(new BigDecimal(txtMaxCenaListkaStudent.getText()));
+        } else {
+            verifikator.hlaskaCisloNieJeVSpravnomFormate(this, txtMaxCenaListkaStudent);
+            return;
         }
 
         filter.setNutnostPozicatVystroj(chkDaSaPozicatVystroj.isSelected());
@@ -367,6 +431,10 @@ public class PridajUpravFilterForm extends javax.swing.JDialog {
         filtreDao.uloz(filter);
         dispose();
     }//GEN-LAST:event_btnUlozActionPerformed
+
+    private void btnStornoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStornoActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnStornoActionPerformed
 
     /**
      * @param args the command line arguments
