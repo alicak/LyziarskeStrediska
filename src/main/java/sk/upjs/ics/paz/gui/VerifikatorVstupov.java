@@ -46,14 +46,6 @@ public class VerifikatorVstupov {
     }
 
     /**
-     * @param pole pole, ktore overujeme
-     * @return true, ak je v nom cele alebo desatinne cislo
-     */
-    private boolean jeCeleAleboDesatinneCislo(JTextField pole) {
-        return jeDesatinneCislo(pole) || jeCeleCislo(pole);
-    }
-
-    /**
      *
      * @param pole pole, ktore overujeme
      * @param min minimalna hodnota
@@ -77,7 +69,7 @@ public class VerifikatorVstupov {
      * (vratane)
      */
     public boolean jeCeleAleboDesatinneCisloVRozsahu(JTextField pole, double min, double max) {
-        if (!jeCeleAleboDesatinneCislo(pole)) {
+        if (!jeDesatinneCislo(pole)) {
             return false;
         }
         double hodnota = Double.valueOf(pole.getText());

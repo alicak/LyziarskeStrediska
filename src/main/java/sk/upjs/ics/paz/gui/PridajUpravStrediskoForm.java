@@ -1,6 +1,5 @@
 package sk.upjs.ics.paz.gui;
 
-import sk.upjs.ics.paz.entity.Pouzivatel;
 import sk.upjs.ics.paz.entity.Stredisko;
 import sk.upjs.ics.paz.dao.StrediskaDao;
 import sk.upjs.ics.paz.dao.Factory;
@@ -10,11 +9,8 @@ import java.math.BigDecimal;
 public class PridajUpravStrediskoForm extends javax.swing.JDialog {
 
     private Stredisko stredisko;
-    private final Pouzivatel pouzivatel = Factory.INSTANCE.getPouzivatel();
     private final StrediskaDao strediskaDao = Factory.INSTANCE.getStrediskaDao();
     private final VerifikatorVstupov verifikator = Factory.INSTANCE.getVerifikator();
-
-    private final String nadpisChybovejHlasky = "Chyba - nesprávny vstup";
 
     /**
      * Creates new form PridajUpravStrediskoForm

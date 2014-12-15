@@ -56,7 +56,7 @@ public class PridajUpravFilterForm extends javax.swing.JDialog {
     private void vyplnPolia(Filter filter) {
         txtNazov.setText(filter.getNazov());
         txtNazovObsahuje.setText(filter.getNazovObsahuje());
-        txtMinVyskaSnehu.setText("" + filter.getMinVyskaSnehu());
+        txtMinVyskaSnehu.setText(Integer.toString(filter.getMinVyskaSnehu()));
         cmbMinPodmienky.setSelectedItem(filter.getMinPodmienky());
         if (filter.getMaxCenaListkaDospely() == null) {
             txtMaxCenaListkaDospely.setText("");
@@ -73,9 +73,9 @@ public class PridajUpravFilterForm extends javax.swing.JDialog {
         } else {
             txtMaxCenaListkaStudent.setText(filter.getMaxCenaListkaStudent().toString());
         }
-        txtMinPocetVlekov.setText("" + filter.getMinPocetVlekovVPrevadzke());
-        txtMinPocetLanoviek.setText("" + filter.getMinPocetLanoviekVPrevadzke());
-        txtMinPocetTrati.setText("" + filter.getMinPocetTratiVPrevadzke());
+        txtMinPocetVlekov.setText(Integer.toString(filter.getMinPocetVlekovVPrevadzke()));
+        txtMinPocetLanoviek.setText(Integer.toString(filter.getMinPocetLanoviekVPrevadzke()));
+        txtMinPocetTrati.setText(Integer.toString(filter.getMinPocetTratiVPrevadzke()));
         chkDaSaPozicatVystroj.setSelected(filter.isNutnostPozicatVystroj());
         chkDaSaUbytovat.setSelected(filter.isNutnostUbytovat());
     }
