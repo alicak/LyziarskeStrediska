@@ -3,7 +3,6 @@ package sk.upjs.ics.paz.gui;
 import sk.upjs.ics.paz.entity.Stredisko;
 import sk.upjs.ics.paz.dao.StrediskaDao;
 import sk.upjs.ics.paz.dao.Factory;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -17,7 +16,7 @@ public class StrediskoTableModel extends AbstractTableModel {
     private static final String[] NAZVY_STLPCOV = {"Názov", "Výška snehu", "Podmienky"};
     private static final Class[] TYPY_STLPCOV = {
         String.class,
-        BigDecimal.class,
+        Integer.class,
         String.class
     };
     private StrediskaDao strediskaDao = Factory.INSTANCE.getStrediskaDao();

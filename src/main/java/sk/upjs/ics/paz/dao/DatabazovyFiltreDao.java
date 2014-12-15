@@ -21,6 +21,9 @@ public class DatabazovyFiltreDao implements FiltreDao {
     public DatabazovyFiltreDao(Pouzivatel pouzivatel, JdbcTemplate jdbcTemplate) {
         this.pouzivatel = pouzivatel;
         this.jdbcTemplate = jdbcTemplate;
+        // zabezpeci, aby mapovac nemal problem s tym, ze z databazy dostane
+        // null hodnoty - potom premennej nastavi jej default hodnotu
+        // (null pre BigDecimal, 0 pre int, atd.)
         mapovac.setPrimitivesDefaultedForNullValue(true);
 
         // ak pouzivatel nie je prihlaseny, tak sa mu zobrazuju 
