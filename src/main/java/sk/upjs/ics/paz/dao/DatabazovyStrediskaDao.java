@@ -141,7 +141,7 @@ public class DatabazovyStrediskaDao implements StrediskaDao {
         SimpleJdbcInsert insert = new SimpleJdbcInsert(jdbcTemplate);
 
         insert.setTableName(tabulkaSKtorouPracujem);
-        // tu sa zabezpeci, aby sa stredisku ulozilo id a by sme ho dostali spat
+        // tu sa zabezpeci, aby sa stredisku ulozilo id a aby sme ho dostali spat
         insert.setGeneratedKeyName("id");
         Number id = insert.executeAndReturnKey(hodnoty);
         stredisko.setId(id.longValue());
